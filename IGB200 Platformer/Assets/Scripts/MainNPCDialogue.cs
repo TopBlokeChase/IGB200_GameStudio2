@@ -7,9 +7,16 @@ using UnityEngine.UI;
 public class MainNPCDialogue : MonoBehaviour
 {
     public TMP_Text dialogueText;
-    public TMP_Text choiceText;
-    public GameObject dialogueChoicePanel;
     public GameObject mainDialoguePanel;
+
+    public GameObject playerImagePanel;
+    public GameObject npcImagePanel;
+
+    public Image playerImage;
+    public Image npcImage;
+
+    [SerializeField] private float frameSizeWhenTalking;
+    [SerializeField] private Color frameColorWhenNotTalking;
 
 
     [System.Serializable]
@@ -17,8 +24,7 @@ public class MainNPCDialogue : MonoBehaviour
     {
         [TextArea]
         public string dialogue;
-        public bool hasChoice;
-        public string choiceText;
+        public bool isPlayerDialogue;
     }
 
     [SerializeField] private bool receivedIntroDialogue;
@@ -43,13 +49,15 @@ public class MainNPCDialogue : MonoBehaviour
     private bool isDelaying;
     private bool needsDelay;
 
+    private Vector3 initialFrameScale = new Vector3(1, 1, 1);
+    private Color initialFrameColor = new Color(255, 255, 255, 255);
+
 
     // Start is called before the first frame update
     void Start()
     {
         mainNPCInteract = this.gameObject.GetComponent<MainNPCInteract>();
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-        choicePanelRectTransform = dialogueChoicePanel.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -128,15 +136,21 @@ public class MainNPCDialogue : MonoBehaviour
                 {
                     dialogueText.text = dialogueToRead[i].dialogue;
 
-                    if (dialogueToRead[i].hasChoice)
+                    if (dialogueToRead[i].isPlayerDialogue)
                     {
-                        choiceText.text = dialogueToRead[i].choiceText;
-                        dialogueChoicePanel.SetActive(true);
-                        LayoutRebuilder.ForceRebuildLayoutImmediate(choicePanelRectTransform);
+                        // make player's UI frame bigger/highlighted && decrease NPC frame size
+                        playerImagePanel.GetComponent<RectTransform>().localScale = new Vector3(frameSizeWhenTalking, frameSizeWhenTalking, frameSizeWhenTalking);
+                        npcImagePanel.GetComponent<RectTransform>().localScale = initialFrameScale;
+                        playerImage.color = initialFrameColor;
+                        npcImage.color = frameColorWhenNotTalking;
                     }
                     else
                     {
-                        dialogueChoicePanel.SetActive(false);
+                        // make NPC's UI frame bigger/highlighted && decrease player frame size
+                        playerImagePanel.GetComponent<RectTransform>().localScale = initialFrameScale;
+                        npcImagePanel.GetComponent<RectTransform>().localScale = new Vector3(frameSizeWhenTalking, frameSizeWhenTalking, frameSizeWhenTalking);
+                        playerImage.color = frameColorWhenNotTalking;
+                        npcImage.color = initialFrameColor;
                     }
                 }
             }
