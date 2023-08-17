@@ -571,6 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInteracting: 0
+  isLookingLeft: 0
   jumpHeight: 17
   movementSpeed: 7
   playerSprite: {fileID: 501859769}
@@ -763,7 +764,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NOTE: This script was attached to the sprite object rather than the parent due
     to needing access to the public method for animation events.
+  canThrowHammer: 1
   attackDamage: 25
+  hammerPrefab: {fileID: 1487377390198834152, guid: 4ed52aa04b3f097429ea9ff32df51b54, type: 3}
+  hammerThrowPoint: {fileID: 0}
   playerAnimator: {fileID: 501859770}
   attackPoint: {fileID: 1615901115}
   attackRadius: 0.5
@@ -2141,7 +2145,7 @@ GameObject:
   - component: {fileID: 1500570012}
   m_Layer: 3
   m_Name: Boss_Test
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

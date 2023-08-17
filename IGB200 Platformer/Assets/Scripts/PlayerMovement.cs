@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public bool isInteracting;
+    public bool isLookingLeft;
 
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private float movementSpeed = 15f;
@@ -77,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
             playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             playerAnimator.SetBool("isRunning", true);
+            isLookingLeft = true;
         }
         else if (directionInput > 0)
         {
@@ -84,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 0);
             playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             playerAnimator.SetBool("isRunning", true);
+            isLookingLeft = false;
         }
         else if (directionInput == 0)
         {

@@ -10,7 +10,10 @@ public class PlayerCombat : MonoBehaviour
         "rather than the parent due to needing access to the methods for " +
         "animation events, which cannot be accessed from the parent.";
 
+    public bool canThrowHammer = true;
     [SerializeField] private int attackDamage = 25;
+    [SerializeField] private GameObject hammerPrefab;
+    [SerializeField] private GameObject hammerThrowPoint;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject attackPoint;
     [SerializeField] private float attackRadius;
@@ -37,6 +40,32 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             playerAnimator.SetTrigger("Attack");
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            HammerThrow();
+        }
+    }
+
+    private void HammerThrow()
+    {
+        if (canThrowHammer)
+        {
+            canThrowHammer = false;
+            GameObject hammer = Instantiate(hammerPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
+
+            bool playerLookingLeft;
+            if (playerMovement.isLookingLeft)
+            {
+                playerLookingLeft = true;
+            }
+            else
+            {
+                playerLookingLeft = false;
+            }
+
+            hammer.GetComponent<HammerThrow>().InitialiseData(this.gameObject, this, playerLookingLeft);
         }
     }
 
