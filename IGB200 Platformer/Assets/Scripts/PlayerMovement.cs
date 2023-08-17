@@ -7,14 +7,19 @@ public class PlayerMovement : MonoBehaviour
     public bool isInteracting;
     public bool isLookingLeft;
 
+    [SerializeField] private LayerMask ground;
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private float movementSpeed = 15f;
+    [SerializeField] private float addForceUnlockConstraintTime = 3f;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator playerAnimator;
 
     private bool isGrounded;
     private Rigidbody2D playerRigidbody;
     private float directionInput;
+
+    [SerializeField] private bool hasAddedForce;
+    private float forceTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +30,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            CheckDirectionInput();
-            CheckGrounded();
-            CheckPlayerInput();
+        CheckAddedForce();
+        CheckDirectionInput();
+        CheckGrounded();
+        CheckPlayerInput();
     }
 
     // Check player inputs other than 'axis' input. E.g., jump, interact etc.
@@ -45,9 +51,10 @@ public class PlayerMovement : MonoBehaviour
     // Check if player is grounded via velocity check
     private void CheckGrounded()
     {
-        if (playerRigidbody.velocity.y >= -0.1f && playerRigidbody.velocity.y <= 0.1f)
-        {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, ground);
 
+        if (hit.collider != null)
+        {
             isGrounded = true;
             playerAnimator.SetBool("isJumping", false);
         }
@@ -70,7 +77,10 @@ public class PlayerMovement : MonoBehaviour
             directionInput = 0;
         }
 
-        playerRigidbody.velocity = new Vector2(directionInput * movementSpeed, playerRigidbody.velocity.y);
+        if (!hasAddedForce)
+        {
+            playerRigidbody.velocity = new Vector2(directionInput * movementSpeed, playerRigidbody.velocity.y);
+        }
 
         if (directionInput < 0)
         {
@@ -90,8 +100,49 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (directionInput == 0)
         {
-            playerRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-            playerAnimator.SetBool("isRunning", false);
+            if (hasAddedForce)
+            {
+                playerAnimator.SetBool("isRunning", false);
+            }
+            else
+            {
+                playerRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                playerAnimator.SetBool("isRunning", false);
+            }
         }
+    }
+
+    // Need to do this check so we can unlock the X Axis movement constraint to apply the force
+    private void CheckAddedForce()
+    {
+        if (hasAddedForce)
+        {
+            forceTimer += Time.deltaTime;
+
+            if (forceTimer >= addForceUnlockConstraintTime)
+            {
+                hasAddedForce = false;
+                forceTimer = 0;
+            }
+        }
+    }
+
+    public void AddForce(float forceToAdd)
+    {
+        float forceToAddX;
+
+        if (!isLookingLeft)
+        {
+            forceToAddX = forceToAdd * -1;
+        }
+        else
+        {
+            forceToAddX = forceToAdd;
+        }
+
+        playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        hasAddedForce = true;
+        playerRigidbody.velocity = Vector3.zero;
+        playerRigidbody.velocity += new Vector2(forceToAddX, forceToAdd / 2);
     }
 }
