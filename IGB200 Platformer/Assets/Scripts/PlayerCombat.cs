@@ -11,15 +11,25 @@ public class PlayerCombat : MonoBehaviour
         "animation events, which cannot be accessed from the parent.";
 
     public bool canThrowHammer = true;
-    [SerializeField] private int attackDamage = 25;
+
+    [SerializeField] private Health health;
+    [SerializeField] private GameObject playerHealthPanel;
+
+    [SerializeField] private int attackDamage = 1;
+    [SerializeField] private int hammerThrowDamage = 1;
+
     [SerializeField] private GameObject hammerPrefab;
     [SerializeField] private GameObject hammerThrowPoint;
+
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject attackPoint;
     [SerializeField] private float attackRadius;
+
     [SerializeField] private LayerMask enemyLayerMask;
 
     private PlayerMovement playerMovement;
+
+    private GameObject currentBoss;   
 
     private void Start()
     {
@@ -65,7 +75,7 @@ public class PlayerCombat : MonoBehaviour
                 playerLookingLeft = false;
             }
 
-            hammer.GetComponent<HammerThrow>().InitialiseData(this.gameObject, this, playerLookingLeft);
+            hammer.GetComponent<HammerThrow>().InitialiseData(this.gameObject, this, playerLookingLeft, hammerThrowDamage);
         }
     }
 
@@ -75,7 +85,7 @@ public class PlayerCombat : MonoBehaviour
 
         foreach(Collider2D enemy in enemies)
         {
-            enemy.GetComponent<Enemy>().DealDamage(attackDamage);
+            enemy.GetComponent<Health>().DealDamage(attackDamage);
         }
     }
 
@@ -83,5 +93,21 @@ public class PlayerCombat : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRadius);
+    }
+
+    public void SetCurrentBoss(GameObject currentBoss)
+    {
+        health.ResetHealth();
+        this.currentBoss = currentBoss;
+    }
+
+    public void EnablePlayerHealthPanel()
+    {
+        playerHealthPanel.SetActive(true);
+    }
+
+    public void DisablePlayerHealthPanel()
+    {
+        playerHealthPanel.SetActive(false);
     }
 }

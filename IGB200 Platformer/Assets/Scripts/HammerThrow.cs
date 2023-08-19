@@ -10,6 +10,7 @@ public class HammerThrow : MonoBehaviour
     [SerializeField] private float hammerReturnSpeed = 1f;
     [SerializeField] private float hammerThrowMaxSeconds = 1.5f;
 
+    private int damageAmount;
     private float hammerThrowCurrentSeconds = 0;
     private Vector3 endPosition;
     private bool endPositionCollected;
@@ -36,11 +37,12 @@ public class HammerThrow : MonoBehaviour
         Move();
     }
 
-    public void InitialiseData(GameObject player, PlayerCombat playerCombat, bool throwLeft)
+    public void InitialiseData(GameObject player, PlayerCombat playerCombat, bool throwLeft, int damageAmount)
     {
         this.player = player;
         this.playerCombat = playerCombat;
         this.throwLeft = throwLeft;
+        this.damageAmount = damageAmount;
     }
 
     private void Rotate()
@@ -104,6 +106,7 @@ public class HammerThrow : MonoBehaviour
             if (collision.gameObject.tag == "Enemy")
             {
                 Debug.Log("enemy hit!");
+                collision.gameObject.GetComponent<Health>().DealDamage(damageAmount);
             }
             else
             {

@@ -5,40 +5,66 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private GameObject normalCamera;
+    [SerializeField] private GameObject bossCamera;
+    [SerializeField] private GameObject bossHealthPanel;
 
-    [SerializeField] private int maxHealth = 100;
+    
+    [SerializeField] private Health health;
     [SerializeField] private GameObject linkedNPC;
 
-    private int currentHealth;
+    
+    private GameObject player;
+    private GameObject bossTrigger;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void DealDamage(int damage)
-    {
-        if (currentHealth <= damage)
-        {
-            currentHealth = 0;
-            Die();
-        }
-        else
-        {
-            currentHealth -= damage;
-        }
-    }
-
-    private void Die()
+    public void Die()
     {
         linkedNPC.GetComponent<MainNPCDialogue>().SetBossDefeated();
+        EndBossFight();
         Destroy(this.gameObject);
+    }
+
+    private void EndBossFight()
+    {
+        //reset the camera and anything else needed before destroying this gameobject
+        bossCamera.SetActive(false);
+        player.GetComponentInChildren<PlayerCombat>().DisablePlayerHealthPanel();
+    }
+
+    public void InitiateBossFight(GameObject bossTrigger)
+    {
+        this.bossTrigger = bossTrigger;
+        bossCamera.SetActive(true);
+        bossHealthPanel.SetActive(true);
+
+        // get component in children due to combat script being on sprite in player child
+        player.GetComponentInChildren<PlayerCombat>().SetCurrentBoss(gameObject);
+        player.GetComponentInChildren<PlayerCombat>().EnablePlayerHealthPanel();
+    }
+
+    public void ResetBossFight()
+    {
+        health.ResetHealth();
+        bossCamera.SetActive(false);
+
+        //reset boss state back to initial (when implemented)
+
+        bossTrigger.SetActive(true);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            player.GetComponent<PlayerMovement>().AddForce(15);
+            player.GetComponentInChildren<Health>().DealDamage(1);
+        }
     }
 }
