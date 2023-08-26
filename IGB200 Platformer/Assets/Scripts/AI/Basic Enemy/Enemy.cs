@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Health health;
     [SerializeField] private GameObject linkedNPC;
 
+    [TextArea]
+    public string playerSpawnNote = "If this enemy is a boss, use an empty gameobject to determine player spawn on death/lose";
+    [SerializeField] private GameObject playerSpawnPoint;
+
+
     
     private GameObject player;
     private GameObject bossTrigger;
@@ -57,6 +62,8 @@ public class Enemy : MonoBehaviour
         //reset boss state back to initial (when implemented)
 
         bossTrigger.SetActive(true);
+        bossHealthPanel.SetActive(false);
+        player.GetComponentInChildren<PlayerCombat>().DisablePlayerHealthPanel();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -66,5 +73,10 @@ public class Enemy : MonoBehaviour
             player.GetComponent<PlayerMovement>().AddForce(15);
             player.GetComponentInChildren<Health>().DealDamage(1);
         }
+    }
+
+    public Transform PlayerSpawnPos()
+    {
+        return playerSpawnPoint.transform;
     }
 }

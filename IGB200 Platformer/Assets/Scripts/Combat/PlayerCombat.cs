@@ -14,6 +14,7 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] private Health health;
     [SerializeField] private GameObject playerHealthPanel;
+    [SerializeField] private GameObject retryMenuCanvas;
 
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private int hammerThrowDamage = 1;
@@ -109,5 +110,25 @@ public class PlayerCombat : MonoBehaviour
     public void DisablePlayerHealthPanel()
     {
         playerHealthPanel.SetActive(false);
+    }
+
+    public void Die()
+    {
+        retryMenuCanvas.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void RetryBossFight()
+    {
+        //reset timescale
+        Time.timeScale = 1;
+        //disable retryMenu
+        retryMenuCanvas.SetActive(false);
+        //set player back to spawn point
+        this.transform.parent.transform.position = currentBoss.GetComponent<Enemy>().PlayerSpawnPos().position;
+        //reset player health
+        health.ResetHealth();
+        //reset boss health & trigger
+        currentBoss.GetComponent<Enemy>().ResetBossFight();
     }
 }

@@ -63,6 +63,11 @@ public class EnemyBasicAI : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     private void OnDrawGizmos()
     {
         float labelOffsetY = 1f;
