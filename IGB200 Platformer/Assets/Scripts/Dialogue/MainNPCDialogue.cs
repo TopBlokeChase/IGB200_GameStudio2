@@ -57,6 +57,7 @@ public class MainNPCDialogue : MonoBehaviour
 
     private bool isDelaying;
     private bool needsDelay;
+    private bool isInDialogue;
 
     private Vector3 initialFrameScale = new Vector3(1, 1, 1);
     private Color initialFrameColor = new Color(255, 255, 255, 255);
@@ -81,7 +82,10 @@ public class MainNPCDialogue : MonoBehaviour
         }       
         else
         {
-            CheckInput();
+            if (isInDialogue)
+            {
+                CheckInput();
+            }
         }
     }
 
@@ -168,6 +172,7 @@ public class MainNPCDialogue : MonoBehaviour
 
     public void InitiateDialogue()
     {
+        isInDialogue = true;
         needsDelay = true;
         isDelaying = false;
         mainDialoguePanel.SetActive(true);
@@ -225,6 +230,7 @@ public class MainNPCDialogue : MonoBehaviour
         mainNPCInteract.HasStoppedInteracting();
         needsDelay = false;
         isDelaying = false;
+        isInDialogue = false;
     }
 
     IEnumerator DelayInput()

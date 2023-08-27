@@ -68,6 +68,8 @@ public class EnemyBasicAI : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         float labelOffsetY = 1f;
@@ -76,10 +78,11 @@ public class EnemyBasicAI : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(pointA.transform.position, 1);
-        Handles.Label(labelAPos, "Point A");
+        UnityEditor.Handles.Label(labelAPos, "Point A");
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(pointB.transform.position, 1);
-        Handles.Label(labelBPos, "Point B");
+        UnityEditor.Handles.Label(labelBPos, "Point B");
     }
+#endif
 }
