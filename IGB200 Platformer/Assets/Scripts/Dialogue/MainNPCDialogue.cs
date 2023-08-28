@@ -37,6 +37,15 @@ public class MainNPCDialogue : MonoBehaviour
     [SerializeField] private List<dialogueNode> bossDefeatDialogue = new List<dialogueNode>();
     [SerializeField] private List<dialogueNode> afterBossDefeatDialogue = new List<dialogueNode>();
 
+    [TextArea]
+    [SerializeField] private List<string> sideNPCDialogueBeforeBossMEN = new List<string>();
+    [TextArea]
+    [SerializeField] private List<string> sideNPCDialogueAfterBossMEN = new List<string>();
+    [TextArea]
+    [SerializeField] private List<string> sideNPCDialogueBeforeBossWOMEN = new List<string>();
+    [TextArea]
+    [SerializeField] private List<string> sideNPCDialogueAfterBossWOMEN = new List<string>();
+
     private bool readFirstDialogueNode;
     private int dialogueCounter = 0;
     private List<dialogueNode> dialogueToRead;
@@ -48,6 +57,7 @@ public class MainNPCDialogue : MonoBehaviour
 
     private bool isDelaying;
     private bool needsDelay;
+    private bool isInDialogue;
 
     private Vector3 initialFrameScale = new Vector3(1, 1, 1);
     private Color initialFrameColor = new Color(255, 255, 255, 255);
@@ -72,7 +82,10 @@ public class MainNPCDialogue : MonoBehaviour
         }       
         else
         {
-            CheckInput();
+            if (isInDialogue)
+            {
+                CheckInput();
+            }
         }
     }
 
@@ -159,6 +172,7 @@ public class MainNPCDialogue : MonoBehaviour
 
     public void InitiateDialogue()
     {
+        isInDialogue = true;
         needsDelay = true;
         isDelaying = false;
         mainDialoguePanel.SetActive(true);
@@ -172,6 +186,41 @@ public class MainNPCDialogue : MonoBehaviour
         hasDefeatedBoss = true;
     }
 
+    public bool GetBossDefeated()
+    {
+        return hasDefeatedBoss;
+    }
+
+    public string GetSideDialogueToDisplay(bool isFemale)
+    {
+        if (hasDefeatedBoss)
+        {
+            if (isFemale)
+            {
+                int randNum = Random.Range(0, sideNPCDialogueAfterBossWOMEN.Count);
+                return sideNPCDialogueAfterBossWOMEN[randNum];
+            }
+            else
+            {
+                int randNum = Random.Range(0, sideNPCDialogueAfterBossMEN.Count);
+                return sideNPCDialogueAfterBossMEN[randNum];
+            }
+        }
+        else
+        {
+            if (isFemale)
+            {
+                int randNum = Random.Range(0, sideNPCDialogueBeforeBossWOMEN.Count);
+                return sideNPCDialogueBeforeBossWOMEN[randNum];
+            }
+            else
+            {
+                int randNum = Random.Range(0, sideNPCDialogueBeforeBossMEN.Count);
+                return sideNPCDialogueBeforeBossMEN[randNum];
+            }
+        }
+    }
+
     private void ExitDialogue()
     {
         mainDialoguePanel.SetActive(false);
@@ -181,6 +230,7 @@ public class MainNPCDialogue : MonoBehaviour
         mainNPCInteract.HasStoppedInteracting();
         needsDelay = false;
         isDelaying = false;
+        isInDialogue = false;
     }
 
     IEnumerator DelayInput()

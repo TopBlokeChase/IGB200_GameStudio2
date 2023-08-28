@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] private int maxHealth;
 
+    [SerializeField] private bool isBasicEnemy;
     [SerializeField] private Image[] hearts;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
@@ -25,24 +26,27 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < hearts.Length; i++)
+        if (!isBasicEnemy)
         {
-            if (i < health)
+            for (int i = 0; i < hearts.Length; i++)
             {
-                hearts[i].sprite = fullHeart;
-            }
-            else
-            {
-                hearts[i].sprite = emptyHeart;
-            }
+                if (i < health)
+                {
+                    hearts[i].sprite = fullHeart;
+                }
+                else
+                {
+                    hearts[i].sprite = emptyHeart;
+                }
 
-            if (i < numberOfHearts)
-            {
-                hearts[i].enabled = true;
-            }
-            else
-            {
-                hearts[i].enabled = false;
+                if (i < numberOfHearts)
+                {
+                    hearts[i].enabled = true;
+                }
+                else
+                {
+                    hearts[i].enabled = false;
+                }
             }
         }
     }
@@ -60,18 +64,23 @@ public class Health : MonoBehaviour
         numberOfHearts = health;
     }
 
-
     public void DealDamage(int damage)
     {
         if (health <= damage)
         {
             if (this.gameObject.tag == "Player")
             {
-                //call the player's reset conditions
+                this.gameObject.GetComponent<PlayerCombat>().Die();
             }
-            else
+
+            if (this.gameObject.tag == "EnemyBasic")
             {
-                //must be an enemy, so
+                this.gameObject.GetComponent<EnemyBasicAI>().Die();
+            }
+
+            if (this.gameObject.tag == "Enemy")
+            {
+                //must be an boss enemy, so
                 this.gameObject.GetComponent<Enemy>().Die();
             }
         }

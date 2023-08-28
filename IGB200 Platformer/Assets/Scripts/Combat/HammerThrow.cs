@@ -103,14 +103,15 @@ public class HammerThrow : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            if (collision.gameObject.tag == "Enemy")
+            if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBasic")
             {
                 Debug.Log("enemy hit!");
                 collision.gameObject.GetComponent<Health>().DealDamage(damageAmount);
             }
-            else
+            
+            if (collision.gameObject.tag == "NPC")
             {
-                Debug.Log("something hit!");
+                return;
             }
 
             hasHitSomething = true;
