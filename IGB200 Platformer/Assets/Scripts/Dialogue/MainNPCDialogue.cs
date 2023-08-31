@@ -91,7 +91,7 @@ public class MainNPCDialogue : MonoBehaviour
 
     private void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.anyKeyDown)
         {
             if (readFirstDialogueNode)
             {
