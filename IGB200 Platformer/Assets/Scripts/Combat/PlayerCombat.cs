@@ -29,12 +29,16 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private LayerMask enemyLayerMask;
 
     private PlayerMovement playerMovement;
+    private GameObject player;
+    private Rigidbody2D playerRB;
 
-    private GameObject currentBoss;   
+    private GameObject currentBoss;
 
     private void Start()
     {
         playerMovement = this.gameObject.GetComponentInParent<PlayerMovement>();
+        player = playerMovement.gameObject;
+        playerRB = player.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -125,7 +129,8 @@ public class PlayerCombat : MonoBehaviour
         //disable retryMenu
         retryMenuCanvas.SetActive(false);
         //set player back to spawn point
-        this.transform.parent.transform.position = currentBoss.GetComponent<Enemy>().PlayerSpawnPos().position;
+        playerRB.velocity = Vector2.zero;
+        player.transform.position = currentBoss.GetComponent<Enemy>().PlayerSpawnPos().position;
         //reset player health
         health.ResetHealth();
         //reset boss health & trigger
