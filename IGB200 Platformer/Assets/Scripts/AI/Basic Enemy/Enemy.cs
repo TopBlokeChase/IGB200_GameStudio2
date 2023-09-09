@@ -35,15 +35,22 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         linkedNPC.GetComponent<MainNPCDialogue>().SetBossDefeated();
-        EndBossFight();
-        Destroy(this.gameObject);
+        this.gameObject.GetComponent<BossDialogue>().SetBossDefeated();
+        this.gameObject.GetComponent<BossDialogue>().InitiateDialogue();
+        DisableHealthUI();
+        bossScript.enabled = false;
     }
 
-    private void EndBossFight()
+    public void DisableHealthUI()
+    {
+        bossHealthPanel.SetActive(false);
+        player.GetComponentInChildren<PlayerCombat>().DisablePlayerHealthPanel();
+    }
+
+    public void EndBossFight()
     {
         //reset the camera and anything else needed before destroying this gameobject
         bossCamera.SetActive(false);
-        player.GetComponentInChildren<PlayerCombat>().DisablePlayerHealthPanel();
         postProcessVolume.SetActive(false);
 
         foreach(Transform child in linkedSideNPCS.transform)
@@ -53,6 +60,8 @@ public class Enemy : MonoBehaviour
                 child.gameObject.GetComponent<SideNPCDialogue>().SetNotEffected();
             }
         }
+
+        this.transform.parent.gameObject.SetActive(false);
     }
 
     public void InitiateBossFight(GameObject bossTrigger)

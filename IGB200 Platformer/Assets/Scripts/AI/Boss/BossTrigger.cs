@@ -10,8 +10,13 @@ public class BossTrigger : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            bossGameObject.GetComponent<Enemy>().InitiateBossFight(gameObject);
-            gameObject.SetActive(false);
+            bossGameObject.GetComponent<BossDialogue>().InitiateDialogue();
         }
+    }
+
+    public void ActivateBossTrigger()
+    {
+        bossGameObject.GetComponent<Enemy>().InitiateBossFight(gameObject);
+        gameObject.SetActive(false);
     }
 }
