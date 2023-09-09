@@ -114,6 +114,11 @@ public class HammerThrow : MonoBehaviour
                 return;
             }
 
+            if (collision.gameObject.tag == null)
+            {
+                return;
+            }
+
             hasHitSomething = true;
         }
     }

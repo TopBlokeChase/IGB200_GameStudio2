@@ -8,6 +8,8 @@ TagManager:
   - PlayerHealthPanel
   - NPC
   - EnemyBasic
+  - Terrain
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
+  - Terrain
+  - post process
   - 
   - 
   - 

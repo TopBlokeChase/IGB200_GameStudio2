@@ -6,6 +6,9 @@ using Unity.VisualScripting;
 
 public class SideNPCDialogue : MonoBehaviour
 {
+    [SerializeField] private Sprite spriteEffected;
+    [SerializeField] private Sprite spriteNotEffected;
+    [SerializeField] private GameObject spriteObject;
     [SerializeField] private bool isFemale;
     [SerializeField] private float displayTime;
     [SerializeField] private GameObject speechBubble;
@@ -20,6 +23,7 @@ public class SideNPCDialogue : MonoBehaviour
     private void Start()
     {
         mainNPCDialogue = linkedNPC.GetComponent<MainNPCDialogue>();
+        spriteObject.GetComponent<SpriteRenderer>().sprite = spriteEffected;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -55,5 +59,8 @@ public class SideNPCDialogue : MonoBehaviour
             speechText.text = mainNPCDialogue.GetSideDialogueToDisplay(isFemale);
     }
 
-    
+    public void SetNotEffected()
+    {
+        spriteObject.GetComponent<SpriteRenderer>().sprite = spriteNotEffected;
+    }
 }

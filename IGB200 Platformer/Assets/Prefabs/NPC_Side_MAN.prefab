@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3c335e5150eae4791ffb8b8910e701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteEffected: {fileID: 0}
+  spriteNotEffected: {fileID: 0}
+  spriteObject: {fileID: 8321474632661623565}
   isFemale: 0
   displayTime: 5
   speechBubble: {fileID: 5705019533757915219}

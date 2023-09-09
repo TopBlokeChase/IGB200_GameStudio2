@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private MonoBehaviour bossScript;
+    [SerializeField] private GameObject postProcessVolume;
     [SerializeField] private GameObject normalCamera;
     [SerializeField] private GameObject bossCamera;
     [SerializeField] private GameObject bossHealthPanel;
@@ -12,6 +14,7 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] private Health health;
     [SerializeField] private GameObject linkedNPC;
+    [SerializeField] private GameObject linkedSideNPCS;
 
     [TextArea]
     public string playerSpawnNote = "If this enemy is a boss, use an empty gameobject to determine player spawn on death/lose";
@@ -41,10 +44,20 @@ public class Enemy : MonoBehaviour
         //reset the camera and anything else needed before destroying this gameobject
         bossCamera.SetActive(false);
         player.GetComponentInChildren<PlayerCombat>().DisablePlayerHealthPanel();
+        postProcessVolume.SetActive(false);
+
+        foreach(Transform child in linkedSideNPCS.transform)
+        {
+            if (child.gameObject.GetComponent<SideNPCDialogue>() != null)
+            {
+                child.gameObject.GetComponent<SideNPCDialogue>().SetNotEffected();
+            }
+        }
     }
 
     public void InitiateBossFight(GameObject bossTrigger)
     {
+        bossScript.enabled = true;
         this.bossTrigger = bossTrigger;
         bossCamera.SetActive(true);
         bossHealthPanel.SetActive(true);
@@ -56,6 +69,7 @@ public class Enemy : MonoBehaviour
 
     public void ResetBossFight()
     {
+        bossScript.enabled = false;
         health.ResetHealth();
         bossCamera.SetActive(false);
 
