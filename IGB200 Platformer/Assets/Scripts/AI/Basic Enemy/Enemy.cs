@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private GameObject entryGate;
     [SerializeField] private MonoBehaviour bossScript;
     [SerializeField] private GameObject postProcessVolume;
     [SerializeField] private GameObject normalCamera;
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
     public void EndBossFight()
     {
         //reset the camera and anything else needed before destroying this gameobject
+        entryGate.GetComponent<Gate>().OpenGate();
         bossCamera.SetActive(false);
         postProcessVolume.SetActive(false);
 
@@ -66,6 +68,7 @@ public class Enemy : MonoBehaviour
 
     public void InitiateBossFight(GameObject bossTrigger)
     {
+        entryGate.GetComponent<Gate>().CloseGate();
         bossScript.enabled = true;
         this.bossTrigger = bossTrigger;
         bossCamera.SetActive(true);
@@ -78,6 +81,7 @@ public class Enemy : MonoBehaviour
 
     public void ResetBossFight()
     {
+        entryGate.GetComponent<Gate>().OpenGate();
         bossScript.enabled = false;
         health.ResetHealth();
         bossCamera.SetActive(false);

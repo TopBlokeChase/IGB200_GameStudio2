@@ -35,6 +35,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3796196196014216367, guid: 4b180f5914537684180fdc5625540056, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3796196196048876132, guid: 4b180f5914537684180fdc5625540056, type: 3}
       propertyPath: m_text
       value: Paused

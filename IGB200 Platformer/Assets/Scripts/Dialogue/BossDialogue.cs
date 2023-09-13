@@ -158,6 +158,11 @@ public class BossDialogue : MonoBehaviour
         return hasDefeatedBoss;
     }
 
+    public void ResetBossDialogue()
+    {
+
+    }
+
     private void ExitDialogue()
     {
         mainDialoguePanel.SetActive(false);

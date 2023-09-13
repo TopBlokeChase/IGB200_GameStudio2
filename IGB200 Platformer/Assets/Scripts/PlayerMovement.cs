@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isLookingLeft;
 
     [SerializeField] private LayerMask ground;
+    [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private float movementSpeed = 15f;
     [SerializeField] private float addForceUnlockConstraintTime = 3f;
@@ -20,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private bool hasAddedForce;
     private float forceTimer;
+
+    private float coyoteTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Check if player is grounded via velocity check
+    // Check if player is grounded via raycast
     private void CheckGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, ground);
@@ -57,11 +60,21 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
             playerAnimator.SetBool("isJumping", false);
+            coyoteTimer = 0;
         }
         else
         {
-            isGrounded = false;
-            playerAnimator.SetBool("isJumping", true);
+            coyoteTimer += Time.deltaTime;
+
+            if (coyoteTimer <= coyoteTime)
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                isGrounded = false;
+                playerAnimator.SetBool("isJumping", true);
+            }
         }
     }
 

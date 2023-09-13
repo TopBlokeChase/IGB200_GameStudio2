@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MainNPCDialogue : MonoBehaviour
 {
+    [SerializeField] private GameObject entryGate;
     public TMP_Text dialogueText;
     public GameObject mainDialoguePanel;
 
@@ -132,6 +133,7 @@ public class MainNPCDialogue : MonoBehaviour
         {
             dialogueToRead = introDialogue;
             receivedIntroDialogue = true;
+            entryGate.GetComponent<Gate>().EnableGateTrigger();
         }      
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    [SerializeField] private GameObject colliders;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float stopTime = 1.5f;
     private Quaternion startRotation;
@@ -30,6 +31,7 @@ public class MovingPlatform : MonoBehaviour
         locked = true;
         currentRotation = transform.rotation;
         StartCoroutine(RotateToStart());
+        colliders.SetActive(false);
     }
 
 
