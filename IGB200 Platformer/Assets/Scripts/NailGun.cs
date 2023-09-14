@@ -58,7 +58,7 @@ public class NailGun : MonoBehaviour
     {
         RotateToCursor();
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, distance, terrain);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, distance);
 
         if (hit.collider != null)
         {

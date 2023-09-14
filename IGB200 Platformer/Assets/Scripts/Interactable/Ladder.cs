@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class Ladder : MonoBehaviour
 {
+    [SerializeField] private bool isPlayerPlacedLadder;
+    [SerializeField] private GameObject playerLadderFloor;
     [SerializeField] private float climbSpeed = 5f;
     [SerializeField] private GameObject pointA;
     [SerializeField] private GameObject pointB;
-    [SerializeField] private GameObject pointC;
+    //[SerializeField] private GameObject pointC;
     [SerializeField] private GameObject UIInteractCanvas;
 
     private GameObject pointToMoveTo;
@@ -81,21 +84,6 @@ public class Ladder : MonoBehaviour
                 }
                 else
                 {
-                    pointToMoveTo = pointC;
-                }
-            }
-
-            if (pointToMoveTo == pointC)
-            {
-                //need to move to point a and then c afterwards
-                Vector3 dir = (pointToMoveTo.transform.position - player.transform.position).normalized;
-
-                if (player.transform.position != pointToMoveTo.transform.position)
-                {
-                    player.transform.position = Vector3.MoveTowards(player.transform.position, pointToMoveTo.transform.position, climbSpeed * Time.deltaTime);
-                }
-                else
-                {
                     isClimbing = false;
                     hasSnappedToInitialPoint = false;
                     //enable player input
@@ -103,6 +91,25 @@ public class Ladder : MonoBehaviour
                     player.GetComponent<PlayerMovement>().isInteracting = false;
                 }
             }
+
+            //if (pointToMoveTo == pointC)
+            //{
+            //    //need to move to point a and then c afterwards
+            //    Vector3 dir = (pointToMoveTo.transform.position - player.transform.position).normalized;
+
+            //    if (player.transform.position != pointToMoveTo.transform.position)
+            //    {
+            //        player.transform.position = Vector3.MoveTowards(player.transform.position, pointToMoveTo.transform.position, climbSpeed * Time.deltaTime);
+            //    }
+            //    else
+            //    {
+            //        isClimbing = false;
+            //        hasSnappedToInitialPoint = false;
+            //        //enable player input
+            //        playerRB.bodyType = RigidbodyType2D.Dynamic;
+            //        player.GetComponent<PlayerMovement>().isInteracting = false;
+            //    }
+            //}
         }
     }
 
@@ -124,7 +131,7 @@ public class Ladder : MonoBehaviour
     public void EnableInteractUI(Transform pointToSetPosTo)
     {
         UIInteractCanvas.SetActive(true);
-        UIInteractCanvas.transform.position = pointToSetPosTo.position;
+        UIInteractCanvas.transform.position = new Vector3(pointToSetPosTo.position.x, pointToSetPosTo.position.y + 1f, pointToSetPosTo.position.z);
     }
 
     public void DisableInteractUI()
@@ -132,25 +139,43 @@ public class Ladder : MonoBehaviour
         UIInteractCanvas.SetActive(false);
     }
 
+    public void SetPointATriggerPos(Vector3 pointToSetPosTo)
+    {
+        pointA.transform.position = pointToSetPosTo;
+    }
+
+    public void SetPointBTriggerPos(Vector3 pointToSetPosTo)
+    {
+        pointB.transform.position = pointToSetPosTo;
+    }
+
+    public void SetFloorPositionPlayerLadder(Vector3 pointToSetPosTo)
+    {
+        playerLadderFloor.transform.position = pointToSetPosTo;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        float labelOffsetY = 1f;
-        Vector3 labelAPos = new Vector3(pointA.transform.position.x, pointA.transform.position.y - labelOffsetY, pointA.transform.position.z);
-        Vector3 labelBPos = new Vector3(pointB.transform.position.x, pointB.transform.position.y - labelOffsetY, pointB.transform.position.z);
-        Vector3 labelCPos = new Vector3(pointC.transform.position.x, pointC.transform.position.y - labelOffsetY, pointC.transform.position.z);
+        if (!isPlayerPlacedLadder)
+        {
+            float labelOffsetY = 1f;
+            Vector3 labelAPos = new Vector3(pointA.transform.position.x, pointA.transform.position.y - labelOffsetY, pointA.transform.position.z);
+            Vector3 labelBPos = new Vector3(pointB.transform.position.x, pointB.transform.position.y - labelOffsetY, pointB.transform.position.z);
+            //Vector3 labelCPos = new Vector3(pointC.transform.position.x, pointC.transform.position.y - labelOffsetY, pointC.transform.position.z);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(pointA.transform.position, 1);
-        UnityEditor.Handles.Label(labelAPos, "Point A");
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(pointA.transform.position, 1);
+            UnityEditor.Handles.Label(labelAPos, "Point A");
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(pointB.transform.position, 1);
-        UnityEditor.Handles.Label(labelBPos, "Point B");
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(pointB.transform.position, 1);
+            UnityEditor.Handles.Label(labelBPos, "Point B");
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(pointC.transform.position, 1);
-        UnityEditor.Handles.Label(labelCPos, "Point C");
+            //Gizmos.color = Color.red;
+            //Gizmos.DrawWireSphere(pointC.transform.position, 1);
+            //UnityEditor.Handles.Label(labelCPos, "Point C");
+        }
     }
 #endif
 }

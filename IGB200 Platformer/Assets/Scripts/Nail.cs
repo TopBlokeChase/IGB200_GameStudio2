@@ -37,5 +37,17 @@ public class Nail : MonoBehaviour
             //transform.localScale = Vector3.one;
             hasHit = true;
         }
+
+        if (collision.tag == "Button")
+        {
+            collision.transform.parent.GetComponentInChildren<ElevatorPlatform>().MovePlatform();
+            hasHit = true;
+        }
+
+        if (collision.tag == "Glass")
+        {
+            collision.gameObject.GetComponent<GlassTrigger>().GlassShatter();
+            Destroy(this.gameObject);
+        }
     }
 }

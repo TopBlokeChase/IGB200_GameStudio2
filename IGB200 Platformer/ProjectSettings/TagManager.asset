@@ -10,6 +10,8 @@ TagManager:
   - EnemyBasic
   - Terrain
   - MovingPlatform
+  - Button
+  - Glass
   layers:
   - Default
   - TransparentFX
