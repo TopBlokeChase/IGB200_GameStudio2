@@ -12,6 +12,9 @@ public class BossDialogue : MonoBehaviour
     public GameObject playerImagePanel;
     public GameObject bossImagePanel;
 
+    public TMP_Text playerName;
+    public TMP_Text bossName;
+
     public Image playerImage;
     public Image bossImage;
 
@@ -25,6 +28,7 @@ public class BossDialogue : MonoBehaviour
         [TextArea]
         public string dialogue;
         public bool isPlayerDialogue;
+        public bool bossLeavesAtThisPoint;
     }
 
     [SerializeField] private bool hasDefeatedBoss;
@@ -75,17 +79,22 @@ public class BossDialogue : MonoBehaviour
 
     private void CheckInput()
     {
+        if (!readFirstDialogueNode)
+        {
+            dialogueCounter = 0;
+            readFirstDialogueNode = true;
+        }
+
         if (Input.anyKeyDown)
         {
-            if (readFirstDialogueNode)
+            if (dialogueText.GetComponent<TeleType>().GetHasFinished())
             {
                 dialogueCounter++;
                 DisplayNewDialogue();
             }
             else
             {
-                dialogueCounter = 0;
-                readFirstDialogueNode = true;
+                dialogueText.GetComponent<TeleType>().RevealAllEarly();
             }
         }
     }
@@ -115,6 +124,7 @@ public class BossDialogue : MonoBehaviour
                 if (i == dialogueCounter)
                 {
                     dialogueText.text = dialogueToRead[i].dialogue;
+                    dialogueText.GetComponent<TeleType>().RevealText(dialogueToRead[i].dialogue.Length);
 
                     if (dialogueToRead[i].isPlayerDialogue)
                     {
@@ -123,6 +133,8 @@ public class BossDialogue : MonoBehaviour
                         bossImagePanel.GetComponent<RectTransform>().localScale = initialFrameScale;
                         playerImage.color = initialFrameColor;
                         bossImage.color = frameColorWhenNotTalking;
+                        playerName.color = Color.white;
+                        bossName.color = frameColorWhenNotTalking;
                     }
                     else
                     {
@@ -131,6 +143,15 @@ public class BossDialogue : MonoBehaviour
                         bossImagePanel.GetComponent<RectTransform>().localScale = new Vector3(frameSizeWhenTalking, frameSizeWhenTalking, frameSizeWhenTalking);
                         playerImage.color = frameColorWhenNotTalking;
                         bossImage.color = initialFrameColor;
+                        playerName.color = frameColorWhenNotTalking;
+                        bossName.color = Color.white;
+                    }
+
+                    if (dialogueToRead[i].bossLeavesAtThisPoint)
+                    {
+                        gameObject.GetComponent<Enemy>().BossLeave();
+                        bossImagePanel.SetActive(false);
+                        bossName.transform.parent.gameObject.SetActive(false);
                     }
                 }
             }

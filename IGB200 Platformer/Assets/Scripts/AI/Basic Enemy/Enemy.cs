@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float bossLeaveSpeed;
     [SerializeField] private GameObject entryGate;
     [SerializeField] private MonoBehaviour bossScript;
     [SerializeField] private GameObject postProcessVolume;
@@ -25,11 +26,22 @@ public class Enemy : MonoBehaviour
     
     private GameObject player;
     private GameObject bossTrigger;
+    private Vector3 bossLeavePosition;
+    private bool bossLeaving;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        bossLeavePosition = transform.position + new Vector3(0, 20, 0);
+    }
+
+    private void Update()
+    {
+        if (bossLeaving)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, bossLeavePosition, bossLeaveSpeed * Time.deltaTime);
+        }
     }
 
 
@@ -92,6 +104,12 @@ public class Enemy : MonoBehaviour
         bossHealthPanel.SetActive(false);
         player.GetComponentInChildren<PlayerCombat>().DisablePlayerHealthPanel();
     }
+
+    public void BossLeave()
+    {
+        bossLeaving = true;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class MainNPCDialogue : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class MainNPCDialogue : MonoBehaviour
 
     public GameObject playerImagePanel;
     public GameObject npcImagePanel;
+
+    public TMP_Text playerName;
+    public TMP_Text npcName;
 
     public Image playerImage;
     public Image npcImage;
@@ -59,6 +63,7 @@ public class MainNPCDialogue : MonoBehaviour
     private bool isDelaying;
     private bool needsDelay;
     private bool isInDialogue;
+    private bool isRevealingText;
 
     private Vector3 initialFrameScale = new Vector3(1, 1, 1);
     private Color initialFrameColor = new Color(255, 255, 255, 255);
@@ -80,7 +85,7 @@ public class MainNPCDialogue : MonoBehaviour
             {
                 StartCoroutine(DelayInput());
             }
-        }       
+        }
         else
         {
             if (isInDialogue)
@@ -92,18 +97,23 @@ public class MainNPCDialogue : MonoBehaviour
 
     private void CheckInput()
     {
+        if (!readFirstDialogueNode)
+        {
+            dialogueCounter = 0;
+            readFirstDialogueNode = true;
+        }
+
         if (Input.anyKeyDown)
         {
-            if (readFirstDialogueNode)
-            {
-                dialogueCounter++;
-                DisplayNewDialogue();
-            }
-            else
-            {
-                dialogueCounter = 0;
-                readFirstDialogueNode = true;
-            }
+                if (dialogueText.GetComponent<TeleType>().GetHasFinished())
+                {
+                    dialogueCounter++;
+                    DisplayNewDialogue();
+                }
+                else
+                {
+                    dialogueText.GetComponent<TeleType>().RevealAllEarly();
+                }
         }
     }
 
@@ -134,7 +144,7 @@ public class MainNPCDialogue : MonoBehaviour
             dialogueToRead = introDialogue;
             receivedIntroDialogue = true;
             entryGate.GetComponent<Gate>().EnableGateTrigger();
-        }      
+        }
     }
 
     private void DisplayNewDialogue()
@@ -150,6 +160,7 @@ public class MainNPCDialogue : MonoBehaviour
                 if (i == dialogueCounter)
                 {
                     dialogueText.text = dialogueToRead[i].dialogue;
+                    dialogueText.GetComponent<TeleType>().RevealText(dialogueToRead[i].dialogue.Length);
 
                     if (dialogueToRead[i].isPlayerDialogue)
                     {
@@ -158,6 +169,8 @@ public class MainNPCDialogue : MonoBehaviour
                         npcImagePanel.GetComponent<RectTransform>().localScale = initialFrameScale;
                         playerImage.color = initialFrameColor;
                         npcImage.color = frameColorWhenNotTalking;
+                        playerName.color = Color.white;
+                        npcName.color = frameColorWhenNotTalking;
                     }
                     else
                     {
@@ -166,8 +179,10 @@ public class MainNPCDialogue : MonoBehaviour
                         npcImagePanel.GetComponent<RectTransform>().localScale = new Vector3(frameSizeWhenTalking, frameSizeWhenTalking, frameSizeWhenTalking);
                         playerImage.color = frameColorWhenNotTalking;
                         npcImage.color = initialFrameColor;
+                        playerName.color = frameColorWhenNotTalking;
+                        npcName.color = Color.white;
                     }
-                }
+                }              
             }
         }
     }
