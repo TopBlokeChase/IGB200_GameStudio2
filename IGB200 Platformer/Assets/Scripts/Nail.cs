@@ -49,5 +49,11 @@ public class Nail : MonoBehaviour
             collision.gameObject.GetComponent<GlassTrigger>().GlassShatter();
             Destroy(this.gameObject);
         }
+
+        if (collision.tag == "BrokenLadder")
+        {
+            collision.gameObject.GetComponent<BrokenLadder>().RemoveNailCount();
+            Destroy(this.gameObject);
+        }
     }
 }

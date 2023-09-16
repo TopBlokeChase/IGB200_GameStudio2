@@ -12,6 +12,7 @@ TagManager:
   - MovingPlatform
   - Button
   - Glass
+  - BrokenLadder
   layers:
   - Default
   - TransparentFX

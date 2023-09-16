@@ -34,6 +34,8 @@ public class PlayerCombat : MonoBehaviour
 
     private GameObject currentBoss;
 
+    private bool hasNoteOfCourage;
+
     private void Start()
     {
         playerMovement = this.gameObject.GetComponentInParent<PlayerMovement>();
@@ -135,5 +137,16 @@ public class PlayerCombat : MonoBehaviour
         health.ResetHealth();
         //reset boss health & trigger
         currentBoss.GetComponent<Enemy>().ResetBossFight();
+    }
+
+    public bool HasNoteOfCourage()
+    {
+        return hasNoteOfCourage;
+    }
+
+    public void SetHasNoteOfCourage(bool hasNoteOfCourage, int shieldAmount = 0)
+    {
+        this.hasNoteOfCourage = hasNoteOfCourage;
+        health.SetShield(shieldAmount);
     }
 }

@@ -19,14 +19,20 @@ public class LadderTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ladder.EnableInteractUI(this.gameObject.transform);
-        readyToClimb = true;
+        if (collision.gameObject.tag == "Player")
+        {
+            ladder.EnableInteractUI(this.gameObject.transform);
+            readyToClimb = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        ladder.DisableInteractUI();
-        readyToClimb = false;
+        if (collision.gameObject.tag == "Player")
+        {
+            ladder.DisableInteractUI();
+            readyToClimb = false;
+        }
     }
 
     // Update is called once per frame

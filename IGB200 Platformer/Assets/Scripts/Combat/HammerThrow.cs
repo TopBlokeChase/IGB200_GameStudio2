@@ -161,6 +161,11 @@ public class HammerThrow : MonoBehaviour
                 return;
             }
 
+            if (collision.gameObject.tag == "BrokenLadder")
+            {
+                collision.gameObject.GetComponent<BrokenLadder>().RemoveHammerCount();
+            }
+
             if (collision.gameObject.tag == null)
             {
                 return;

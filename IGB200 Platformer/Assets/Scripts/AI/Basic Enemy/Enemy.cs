@@ -67,7 +67,12 @@ public class Enemy : MonoBehaviour
         bossCamera.SetActive(false);
         postProcessVolume.SetActive(false);
 
-        foreach(Transform child in linkedSideNPCS.transform)
+        if (player.GetComponentInChildren<PlayerCombat>().HasNoteOfCourage())
+        {
+            player.GetComponentInChildren<PlayerCombat>().SetHasNoteOfCourage(false);
+        }
+
+        foreach (Transform child in linkedSideNPCS.transform)
         {
             if (child.gameObject.GetComponent<SideNPCDialogue>() != null)
             {
@@ -84,6 +89,7 @@ public class Enemy : MonoBehaviour
         bossScript.enabled = true;
         this.bossTrigger = bossTrigger;
         bossCamera.SetActive(true);
+        health.ResetHealth();
         bossHealthPanel.SetActive(true);
 
         // get component in children due to combat script being on sprite in player child
