@@ -8,27 +8,50 @@ public class Boss_GenderEquality : MonoBehaviour
     [SerializeField] private GameObject sprite;
     [SerializeField] private GameObject flyingDisc;
     [SerializeField] private GameObject slamCollider;
+    [SerializeField] private GameObject laserBeam;
     [SerializeField] private GameObject bossCamera;
-    [SerializeField] private float cameraShakeAmount;
-    [SerializeField] private float cameraShakeDuration;
+
+    [SerializeField] private float slamCameraShakeAmount;
+    [SerializeField] private float slamCameraShakeDuration;
+
+    [SerializeField] private float laserCameraShakeAmount;
+    [SerializeField] private float laserCameraShakeDuration;
+
     [SerializeField] private LayerMask ground;
+
     [SerializeField] private float movementSpeed;
+    [SerializeField] private float moveAbovePlayerSpeed;
+
     [SerializeField] private float stateChangeTime = 5f;
+
     [SerializeField] private float slamSizeChangeDuration;
     [SerializeField] private float slamAttackDownDuration;
     [SerializeField] private float slamAttackRestDuration;
     [SerializeField] private float slamAttackReturnDuration;
+
+    [SerializeField] private float laserAttackBeamLength;
+    [SerializeField] private float laserAttackAngleAmount;
+    [SerializeField] private float laserAttackMoveIntoPosSpeed;
+    [SerializeField] private float laserAttackBeamStartSpeed;
+    [SerializeField] private float laserAttackRotateDelay;
+    [SerializeField] private float laserAttackRotateSpeed;
+    [SerializeField] private float laserAttackBeamRetractSpeed;
+    [SerializeField] private float laserAttackRotateBackSpeed;
 
     private string state;
 
     private bool needsToChase;
     private bool isBusy;
 
+    private bool isMovingAbovePlayer;
+
     private float stateChangeTimer;
     private float originalHeight;
     private BossChaseDistance bossChaseDistance;
 
     private GameObject player;
+
+    private bool bossFacingLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +76,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
     void PickRandomState()
     {
-        int randomNumber = Random.Range(1, 3);
+        int randomNumber = Random.Range(1, 4);
 
         // 1 - slamAttack, 2 - shootAttack
 
@@ -68,11 +91,17 @@ public class Boss_GenderEquality : MonoBehaviour
             isBusy = true;
             ShootAttack();
         }
+
+        if (randomNumber == 3)
+        {
+            isBusy = true;
+            LaserAttack();
+        }
     }
 
 
     void SlamAttack()
-    {
+    {     
         StartCoroutine(SlamAttackCoroutine());
     }
 
@@ -83,23 +112,53 @@ public class Boss_GenderEquality : MonoBehaviour
         isBusy = false;
     }
 
+    void LaserAttack()
+    {
+        StartCoroutine(LaserAttackCoroutine());
+    }
+
     void ChasePlayer()
     {
-        if (bossChaseDistance.PlayerInRange() == false)
+        if (player.transform.position.x > transform.position.x)
+        {
+            bossFacingLeft = false;
+            sprite.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            bossFacingLeft = true;
+            sprite.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+        if (bossChaseDistance.PlayerInRange() == false && !isMovingAbovePlayer)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, movementSpeed * Time.deltaTime);
         }
     }
 
+    public void ResetAll()
+    {
+        StopAllCoroutines();
+        isBusy = false;
+        slamCollider.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
     IEnumerator SlamAttackCoroutine()
     {
-        Vector3 startingPosition = transform.position;
         float timer = 0;
+        Vector3 startingPosition = transform.position;
+        Vector3 abovePlayerPos = player.transform.position;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, ground);
-        Debug.DrawRay(transform.position, Vector2.down, Color.yellow);
+        while (timer < moveAbovePlayerSpeed)
+        {
+            transform.position = Vector2.Lerp(startingPosition, new Vector3(abovePlayerPos.x, originalHeight, abovePlayerPos.z), timer / moveAbovePlayerSpeed);
+            timer += Time.deltaTime;
+            yield return null;           
+        }
 
-        Vector3 slamPosition = hit.point + new Vector2(0, GetComponent<Renderer>().bounds.size.y / 2);
+
+        timer = 0;
+        startingPosition = transform.position;
 
         while (timer < slamSizeChangeDuration)
         {
@@ -109,7 +168,12 @@ public class Boss_GenderEquality : MonoBehaviour
         }
 
         timer = 0;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, ground);
+        Debug.DrawRay(transform.position, Vector2.down, Color.yellow);
+       
         slamCollider.GetComponent<BoxCollider2D>().enabled = true;
+
+        Vector3 slamPosition = hit.point + new Vector2(0, GetComponent<Renderer>().bounds.size.y / 2);
 
         while (timer < slamAttackDownDuration)
         {
@@ -120,7 +184,7 @@ public class Boss_GenderEquality : MonoBehaviour
         }
 
         timer = 0;
-        bossCamera.GetComponent<CameraShake>().ShakeCamera(cameraShakeAmount, cameraShakeDuration);
+        bossCamera.GetComponent<CameraShake>().ShakeCamera(slamCameraShakeAmount, slamCameraShakeDuration);
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
 
 
@@ -140,6 +204,98 @@ public class Boss_GenderEquality : MonoBehaviour
             yield return null;
         }
 
+        stateChangeTimer = 0;
+        isBusy = false;
+
+        yield return null;
+    }
+
+    IEnumerator LaserAttackCoroutine()
+    {
+        float timer = 0;
+
+        Vector3 startingPosition = transform.position;
+        Vector3 posToMove = new Vector3(startingPosition.x, originalHeight, startingPosition.z);
+
+        while (timer < laserAttackMoveIntoPosSpeed)
+        {
+            transform.position = Vector2.Lerp(startingPosition, posToMove, timer / laserAttackMoveIntoPosSpeed);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        laserBeam.SetActive(true);
+
+        Vector3 beamEndPos = beamEndPos = new Vector3(laserAttackBeamLength, 0, 0); 
+
+        if (bossFacingLeft)
+        {
+            laserBeam.transform.rotation = Quaternion.Euler(0,0,0);
+        }
+        else
+        {         
+            laserBeam.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        while (timer < laserAttackBeamStartSpeed)
+        {
+            laserBeam.GetComponent<LineRenderer>().SetPosition(1, Vector3.Lerp(Vector3.zero, beamEndPos, timer / laserAttackBeamStartSpeed));
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        while (timer < laserAttackRotateDelay)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        Vector3 startAngle = transform.eulerAngles;
+        Vector3 angleToRotateTo;
+
+        if (bossFacingLeft)
+        {
+            angleToRotateTo = new Vector3(startAngle.x, startAngle.y, laserAttackAngleAmount);
+        }
+        else
+        {
+            angleToRotateTo = new Vector3(startAngle.x, startAngle.y, laserAttackAngleAmount * -1);
+        }
+
+        bossCamera.GetComponent<CameraShake>().ShakeCamera(laserCameraShakeAmount, laserCameraShakeDuration);
+
+        while (timer < laserAttackRotateSpeed)
+        {
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(startAngle), Quaternion.Euler(angleToRotateTo), timer / laserAttackRotateSpeed);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        while (timer < laserAttackBeamRetractSpeed)
+        {
+            laserBeam.GetComponent<LineRenderer>().SetPosition(1, Vector3.Lerp(beamEndPos, Vector3.zero, timer / laserAttackBeamRetractSpeed));
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+        laserBeam.SetActive(false);
+
+        while (timer < laserAttackRotateBackSpeed)
+        {
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(angleToRotateTo), Quaternion.Euler(startAngle), timer / laserAttackRotateBackSpeed);          
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        
         stateChangeTimer = 0;
         isBusy = false;
 

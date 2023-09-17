@@ -26,12 +26,14 @@ public class Enemy : MonoBehaviour
     
     private GameObject player;
     private GameObject bossTrigger;
+    private Vector3 bossStartPosition;
     private Vector3 bossLeavePosition;
     private bool bossLeaving;
 
     // Start is called before the first frame update
     void Start()
     {
+        bossStartPosition = transform.position;
         player = GameObject.FindGameObjectWithTag("Player");
         bossLeavePosition = transform.position + new Vector3(0, 20, 0);
     }
@@ -100,7 +102,9 @@ public class Enemy : MonoBehaviour
     public void ResetBossFight()
     {
         entryGate.GetComponent<Gate>().OpenGate();
+        bossScript.Invoke("ResetAll", 0);
         bossScript.enabled = false;
+        transform.position = bossStartPosition;
         health.ResetHealth();
         bossCamera.SetActive(false);
 
