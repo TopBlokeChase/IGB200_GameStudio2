@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
         this.gameObject.GetComponent<BossDialogue>().SetBossDefeated();
         this.gameObject.GetComponent<BossDialogue>().InitiateDialogue();
         DisableHealthUI();
-        bossScript.enabled = false;
+        bossScript.Invoke("SetBusy", 0);
     }
 
     public void DisableHealthUI()
@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
     public void InitiateBossFight(GameObject bossTrigger)
     {
         entryGate.GetComponent<Gate>().CloseGate();
-        bossScript.enabled = true;
+        bossScript.Invoke("ResetAll", 0);
         this.bossTrigger = bossTrigger;
         bossCamera.SetActive(true);
         health.ResetHealth();

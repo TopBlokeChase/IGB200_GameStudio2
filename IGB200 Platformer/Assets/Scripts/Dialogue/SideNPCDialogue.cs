@@ -82,5 +82,6 @@ public class SideNPCDialogue : MonoBehaviour
     public void SetNotEffected()
     {
         spriteObject.GetComponent<SpriteRenderer>().sprite = spriteNotEffected;
+        sideNPCParticleSwirl.gameObject.SetActive(false);
     }
 }

@@ -19,12 +19,15 @@ public class Boss_GenderEquality : MonoBehaviour
 
     [SerializeField] private LayerMask ground;
 
+    //[SerializeField] private float idleBobAmount;
+    //[SerializeField] private float idleBobSpeed;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float moveAbovePlayerSpeed;
 
     [SerializeField] private float stateChangeTime = 5f;
 
     [SerializeField] private float slamSizeChangeDuration;
+    [SerializeField] private float slamSizeChangeEndAmount;
     [SerializeField] private float slamAttackDownDuration;
     [SerializeField] private float slamAttackRestDuration;
     [SerializeField] private float slamAttackReturnDuration;
@@ -52,17 +55,27 @@ public class Boss_GenderEquality : MonoBehaviour
     private GameObject player;
 
     private bool bossFacingLeft;
+
+    private Animator animator;
+
+    //private bool canIdle;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         originalHeight = transform.position.y;
         bossChaseDistance = GetComponentInChildren<BossChaseDistance>();
+
+        //canIdle = true;
+        isBusy = true;
+
+        animator = sprite.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {      
         if (!isBusy)
         {
             ChasePlayer();
@@ -72,6 +85,11 @@ public class Boss_GenderEquality : MonoBehaviour
                 PickRandomState();
             }
         }
+
+        //if (canIdle)
+        //{
+        //    IdleAnimation();
+        //}
     }
 
     void PickRandomState()
@@ -83,25 +101,35 @@ public class Boss_GenderEquality : MonoBehaviour
         if (randomNumber == 1)
         {
             isBusy = true;
+            //canIdle = false;
             SlamAttack();
         }
 
         if (randomNumber == 2)
         {
             isBusy = true;
+            //canIdle = true;
             ShootAttack();
         }
 
         if (randomNumber == 3)
         {
             isBusy = true;
+            //canIdle = false;
             LaserAttack();
-        }
+        }     
     }
+
+    //void IdleAnimation()
+    //{
+    //    float yAxis = Mathf.PingPong(Time.time * idleBobSpeed, 1) * idleBobAmount - idleBobAmount / 2;
+    //    transform.position = new Vector3(transform.position.x, transform.position.y + yAxis, transform.position.z);
+    //}
 
 
     void SlamAttack()
-    {     
+    {
+        animator.SetBool("SlamAttack", true);
         StartCoroutine(SlamAttackCoroutine());
     }
 
@@ -114,6 +142,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
     void LaserAttack()
     {
+        animator.SetBool("LaserBeam", true);
         StartCoroutine(LaserAttackCoroutine());
     }
 
@@ -136,19 +165,29 @@ public class Boss_GenderEquality : MonoBehaviour
         }
     }
 
+    public void SetBusy()
+    {
+        StopAllCoroutines();
+        isBusy = true;
+        //canIdle = true;
+    }
+
     public void ResetAll()
     {
         StopAllCoroutines();
         isBusy = false;
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
         laserBeam.SetActive(false);
+        //canIdle = true;
     }
 
     IEnumerator SlamAttackCoroutine()
-    {
+    {       
         float timer = 0;
         Vector3 startingPosition = transform.position;
         Vector3 abovePlayerPos = player.transform.position;
+
+        Vector3 startingScale = sprite.transform.localScale;
 
         while (timer < moveAbovePlayerSpeed)
         {
@@ -163,7 +202,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         while (timer < slamSizeChangeDuration)
         {
-            sprite.transform.localScale = Vector2.Lerp(Vector3.one, new Vector3 (1.5f, 1.5f, 1.5f), timer / slamSizeChangeDuration);
+            sprite.transform.localScale = Vector2.Lerp(startingScale, new Vector3 (slamSizeChangeEndAmount, slamSizeChangeEndAmount, slamSizeChangeEndAmount), timer / slamSizeChangeDuration);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -179,7 +218,7 @@ public class Boss_GenderEquality : MonoBehaviour
         while (timer < slamAttackDownDuration)
         {
             transform.position = Vector2.Lerp(startingPosition, slamPosition, timer / slamAttackDownDuration);
-            sprite.transform.localScale = Vector2.Lerp(new Vector3(1.5f, 1.5f, 1.5f), Vector3.one, timer / slamAttackDownDuration);
+            sprite.transform.localScale = Vector2.Lerp(new Vector3(slamSizeChangeEndAmount, slamSizeChangeEndAmount, slamSizeChangeEndAmount), startingScale, timer / slamAttackDownDuration);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -207,12 +246,14 @@ public class Boss_GenderEquality : MonoBehaviour
 
         stateChangeTimer = 0;
         isBusy = false;
+        //canIdle = true;
 
+        animator.SetBool("SlamAttack", false);
         yield return null;
     }
 
     IEnumerator LaserAttackCoroutine()
-    {
+    {       
         float timer = 0;
 
         Vector3 startingPosition = transform.position;
@@ -299,7 +340,9 @@ public class Boss_GenderEquality : MonoBehaviour
         
         stateChangeTimer = 0;
         isBusy = false;
+        //canIdle = true;
 
+        animator.SetBool("LaserBeam", false);
         yield return null;
     }
 }
