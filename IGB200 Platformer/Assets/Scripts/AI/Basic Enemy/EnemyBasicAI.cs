@@ -59,7 +59,7 @@ public class EnemyBasicAI : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("colliding with player!");
-            collision.gameObject.GetComponent<PlayerMovement>().AddForce(forceOnTouch);
+            collision.gameObject.GetComponent<PlayerMovement>().AddForce(forceOnTouch, this.gameObject);
         }
     }
 

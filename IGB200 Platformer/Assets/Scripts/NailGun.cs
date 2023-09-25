@@ -34,19 +34,21 @@ public class NailGun : MonoBehaviour
             if (!playerMovement.isInteracting)
             {
                 playerMovement.isInteracting = true;
-                isAiming = true;             
-            }
-            else
-            {
-                playerMovement.isInteracting = false;
-                isAiming = false;
-            }
+                isAiming = true;              
+            }    
+        }
+
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            playerMovement.isInteracting = false;
+            isAiming = false;
+            Shoot();
         }
 
         if (isAiming)
         {
             lr.enabled = true;
-            AimAndShoot();
+            Aim();
         }
         else
         {
@@ -54,7 +56,7 @@ public class NailGun : MonoBehaviour
         }
     }
 
-    private void AimAndShoot()
+    private void Aim()
     {
         RotateToCursor();
 
@@ -73,13 +75,13 @@ public class NailGun : MonoBehaviour
             lr.SetPosition(0, Vector3.zero);
             lr.SetPosition(1, new Vector3(distance, 0, 0));
         }
+    }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(nailPrefab, transform.position, transform.rotation);
-            playerMovement.isInteracting = false;
-            isAiming = false;
-        }
+    private void Shoot()
+    {
+        Instantiate(nailPrefab, transform.position, transform.rotation);
+        playerMovement.isInteracting = false;
+        isAiming = false;
     }
 
     private void RotateToCursor()

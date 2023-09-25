@@ -46,7 +46,7 @@ public class FlyingDisc : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.GetComponent<PlayerMovement>().AddForce(15);
+            player.GetComponent<PlayerMovement>().AddForce(15, this.gameObject);
             player.GetComponentInChildren<Health>().DealDamage(1);
             Destroy(this.gameObject);
         }

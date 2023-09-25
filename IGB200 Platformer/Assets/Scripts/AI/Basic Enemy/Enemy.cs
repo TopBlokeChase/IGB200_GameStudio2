@@ -67,7 +67,6 @@ public class Enemy : MonoBehaviour
         //reset the camera and anything else needed before destroying this gameobject
         entryGate.GetComponent<Gate>().OpenGate();
         bossCamera.SetActive(false);
-        postProcessVolume.SetActive(false);
 
         if (player.GetComponentInChildren<PlayerCombat>().HasNoteOfCourage())
         {
@@ -118,6 +117,7 @@ public class Enemy : MonoBehaviour
     public void BossLeave()
     {
         bossLeaving = true;
+        postProcessVolume.GetComponent<PostProcessHandler>().StopPostEffectAndDisable();
     }
 
 
@@ -125,7 +125,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.GetComponent<PlayerMovement>().AddForce(15);
+            player.GetComponent<PlayerMovement>().AddForce(15, this.gameObject);
             player.GetComponentInChildren<Health>().DealDamage(1);
         }
     }

@@ -28,7 +28,7 @@ public class LaserBeam : MonoBehaviour
         {
             if (readyToDamage)
             {
-                collision.gameObject.GetComponent<PlayerMovement>().AddForce(7.5f);
+                collision.gameObject.GetComponent<PlayerMovement>().AddForce(7.5f, this.gameObject);
                 collision.gameObject.GetComponentInChildren<Health>().DealDamage(1);
                 readyToDamage = false;
                 timer = 0;

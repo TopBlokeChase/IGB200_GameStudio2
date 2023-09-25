@@ -22,7 +22,7 @@ public class DamageCollider : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                collision.gameObject.GetComponent<PlayerMovement>().AddForce(15);
+                collision.gameObject.GetComponent<PlayerMovement>().AddForce(15, this.gameObject);
                 collision.gameObject.GetComponentInChildren<Health>().DealDamage(1);
                 timer = 0;
             }

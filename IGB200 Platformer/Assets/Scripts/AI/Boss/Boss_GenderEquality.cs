@@ -141,6 +141,7 @@ public class Boss_GenderEquality : MonoBehaviour
         StopAllCoroutines();
         isBusy = false;
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
+        laserBeam.SetActive(false);
     }
 
     IEnumerator SlamAttackCoroutine()

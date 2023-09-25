@@ -140,17 +140,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void AddForce(float forceToAdd)
+    public void AddForce(float forceToAdd, GameObject forceObject)
     {
         float forceToAddX;
 
-        if (!isLookingLeft)
-        {
-            forceToAddX = forceToAdd * -1;
-        }
-        else
+        if (forceObject.transform.position.x < this.transform.position.x)
         {
             forceToAddX = forceToAdd;
+        }
+        else
+        {           
+            forceToAddX = forceToAdd * -1;
         }
 
         playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;

@@ -5,6 +5,8 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class PostProcessHandler : MonoBehaviour
 {
+    [SerializeField] private float enterExitEffectTime;
+    [SerializeField] private float enterExitEffectIntensityMultiplier;
     [SerializeField] private float saturationIntensity;
     [SerializeField] private float lensDistortionIntensity;
     [SerializeField] private float lensDistortionTime;
@@ -14,6 +16,8 @@ public class PostProcessHandler : MonoBehaviour
     private ColorGrading _ColorGrading;
 
     private float timer;
+    private float enterExitTimer;
+
     private float minDistortionValue;
     private float maxDistortionValue;
 
@@ -45,5 +49,101 @@ public class PostProcessHandler : MonoBehaviour
             maxDistortionValue = minDistortionValue;
             minDistortionValue = temp;
         }
+
+        if (enterExitTimer < enterExitEffectTime)
+        {
+
+        }
+    }
+
+    public void StartEnterEffect()
+    {
+        StartCoroutine(EnterEffect());
+    }
+
+    public void StartExitEffect()
+    {
+        StartCoroutine(ExitEffect());
+    }
+
+    public void StopPostEffectAndDisable()
+    {
+        StartCoroutine(DisableEffect());
+    }
+
+    IEnumerator EnterEffect()
+    {
+        float timer = 0;
+
+        float intensity = saturationIntensity * enterExitEffectIntensityMultiplier;
+
+        while (timer < enterExitEffectTime)
+        {
+            _ColorGrading.saturation.value = Mathf.Lerp(saturationIntensity, intensity, timer / enterExitEffectTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        while (timer < enterExitEffectTime)
+        {
+            _ColorGrading.saturation.value = Mathf.Lerp(intensity, saturationIntensity, timer / enterExitEffectTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
+    }
+
+    IEnumerator ExitEffect()
+    {
+        float timer = 0;
+
+        float intensity = saturationIntensity * enterExitEffectIntensityMultiplier;
+
+        while (timer < enterExitEffectTime)
+        {
+            _ColorGrading.saturation.value = Mathf.Lerp(saturationIntensity, intensity, timer / enterExitEffectTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        while (timer < enterExitEffectTime)
+        {
+            _ColorGrading.saturation.value = Mathf.Lerp(intensity, 0, timer / enterExitEffectTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
+    }
+
+    IEnumerator DisableEffect()
+    {
+        float timer = 0;
+
+        float intensity = saturationIntensity * enterExitEffectIntensityMultiplier;
+
+        while (timer < enterExitEffectTime)
+        {
+            _ColorGrading.saturation.value = Mathf.Lerp(saturationIntensity, intensity, timer / enterExitEffectTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        while (timer < enterExitEffectTime)
+        {
+            _ColorGrading.saturation.value = Mathf.Lerp(intensity, 0, timer / enterExitEffectTime);
+            processVolume.weight = Mathf.Lerp(1, 0, timer / enterExitEffectTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
     }
 }

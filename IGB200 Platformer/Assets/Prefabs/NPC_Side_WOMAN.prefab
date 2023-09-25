@@ -344,6 +344,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 424629143910116832}
+  - {fileID: 5767971692240688356}
   - {fileID: 1759530639939313875}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -360,6 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3c335e5150eae4791ffb8b8910e701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateParticleSwirl: 1
+  swirlingParticleMaterial: {fileID: 0}
   spriteEffected: {fileID: 0}
   spriteNotEffected: {fileID: 0}
   spriteObject: {fileID: 9005654689601184023}
@@ -592,7 +595,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2678475737903036245}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4950587655051693670
 SpriteRenderer:
@@ -646,3 +649,73 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &5316643291291432074
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2678475737903036245}
+    m_Modifications:
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587937149475695609, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587937149475695609, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1762189419
+      objectReference: {fileID: 0}
+    - target: {fileID: 7785067886266269773, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_Name
+      value: NPCParticleSwirl
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+--- !u!4 &5767971692240688356 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1856452086533742702, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+  m_PrefabInstance: {fileID: 5316643291291432074}
+  m_PrefabAsset: {fileID: 0}

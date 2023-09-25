@@ -5,6 +5,9 @@ using UnityEngine;
 public class Nail : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float deathTimer = 10f;
+
+    private float timer;
 
     private bool hasHit;
     // Start is called before the first frame update
@@ -19,6 +22,15 @@ public class Nail : MonoBehaviour
         if (!hasHit)
         {
             transform.Translate(transform.right * speed * Time.deltaTime, Space.World);
+        }
+        else
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= deathTimer)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
