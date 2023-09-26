@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
+    [SerializeField] private bool addForce = true;
+
     private float timer = 2;
     // Start is called before the first frame update
     void Start()
@@ -16,13 +18,16 @@ public class DamageCollider : MonoBehaviour
     {
         timer += Time.deltaTime;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (timer > 1)
         {
             if (collision.gameObject.tag == "Player")
             {
-                collision.gameObject.GetComponent<PlayerMovement>().AddForce(15, this.gameObject);
+                if (addForce)
+                {
+                    collision.gameObject.GetComponent<PlayerMovement>().AddForce(15, this.gameObject);
+                }
                 collision.gameObject.GetComponentInChildren<Health>().DealDamage(1);
                 timer = 0;
             }

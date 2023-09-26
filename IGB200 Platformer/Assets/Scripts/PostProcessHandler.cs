@@ -10,10 +10,12 @@ public class PostProcessHandler : MonoBehaviour
     [SerializeField] private float saturationIntensity;
     [SerializeField] private float lensDistortionIntensity;
     [SerializeField] private float lensDistortionTime;
+    [SerializeField] private float bloomLerpTime;
 
     private PostProcessVolume processVolume;
     private LensDistortion _LensDistortion;
     private ColorGrading _ColorGrading;
+    private Bloom _Bloom;
 
     private float timer;
     private float enterExitTimer;
@@ -27,6 +29,7 @@ public class PostProcessHandler : MonoBehaviour
         processVolume = GetComponent<PostProcessVolume>();
         processVolume.profile.TryGetSettings(out _LensDistortion);
         processVolume.profile.TryGetSettings(out _ColorGrading);
+        processVolume.profile.TryGetSettings(out _Bloom);
         minDistortionValue = -lensDistortionIntensity;
         maxDistortionValue = lensDistortionIntensity;
     }
@@ -64,6 +67,15 @@ public class PostProcessHandler : MonoBehaviour
     public void StartExitEffect()
     {
         StartCoroutine(ExitEffect());
+    }
+    public void StartBloomEffect(float amount)
+    {
+        StartCoroutine(ActivateBloom(amount));
+    }
+
+    public void StopBloomEffect(float amount)
+    {
+        StartCoroutine(DeactivateBloom(amount));
     }
 
     public void StopPostEffectAndDisable()
@@ -145,5 +157,29 @@ public class PostProcessHandler : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    IEnumerator ActivateBloom(float amount)
+    {
+        float timer = 0;
+
+        while (timer < bloomLerpTime)
+        {
+            _Bloom.intensity.value = Mathf.Lerp(0, amount, timer / bloomLerpTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator DeactivateBloom(float amount)
+    {
+        float timer = 0;
+
+        while (timer < bloomLerpTime)
+        {
+            _Bloom.intensity.value = Mathf.Lerp(amount, 0, timer / bloomLerpTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 }

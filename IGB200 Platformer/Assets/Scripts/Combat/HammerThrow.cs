@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class HammerThrow : MonoBehaviour
 {
+    [Header("Sounds")]
+    [SerializeField] private GameObject hitSoundSource;
+    [SerializeField] private GameObject throwSoundSource;
+    [SerializeField] private List<AudioClip> terrainHitSounds = new List<AudioClip>();
+    [SerializeField] private List<AudioClip> throwSounds = new List<AudioClip>();
+
+    [Header("References & Settings")]
     [SerializeField] private GameObject hammerTrail;
     [SerializeField] private GameObject hammer;
     [SerializeField] private float hammerArcHeight = 1f;
@@ -40,6 +47,9 @@ public class HammerThrow : MonoBehaviour
         hammerTrailObject.GetComponent<HammerThrowTrail>().SetHammerToFollow(this.gameObject);
         startPosition = this.gameObject.transform.position;
         endPosition = endThrowPoint.transform.position;
+
+        throwSoundSource.GetComponent<AudioSource>().clip = (PickSound(throwSounds));
+        throwSoundSource.GetComponent<AudioSource>().Play();
     }
 
     // Update is called once per frame
@@ -125,6 +135,7 @@ public class HammerThrow : MonoBehaviour
     {
         if (endPositionCollected)
         {
+            currentlyReturning = true;
             Vector3 midpoint = (endPosition + startPosition) / 2;
             midpoint -= new Vector3(0, hammerArcHeight, 0);
 
@@ -155,23 +166,39 @@ public class HammerThrow : MonoBehaviour
                 Debug.Log("enemy hit!");
                 collision.gameObject.GetComponent<Health>().DealDamage(damageAmount);
             }
-            
+            else
             if (collision.gameObject.tag == "NPC")
             {
                 return;
             }
-
+            else
             if (collision.gameObject.tag == "BrokenLadder")
             {
                 collision.gameObject.GetComponent<BrokenLadder>().RemoveHammerCount();
             }
-
+            else
             if (collision.gameObject.tag == null)
             {
                 return;
             }
-
-            hasHitSomething = true;
+            else
+            {
+                // must have hit terrain
+                hasHitSomething = true;
+                if (!currentlyReturning)
+                {
+                    hitSoundSource.GetComponent<AudioSource>().clip = (PickSound(terrainHitSounds));
+                    hitSoundSource.GetComponent<AudioSource>().Play();
+                }
+            }
         }
+    }
+
+    private AudioClip PickSound(List<AudioClip> audioClips)
+    {
+        int randomNumber = Random.Range(0, audioClips.Count);
+
+        return audioClips[randomNumber];
+
     }
 }

@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
         this.gameObject.GetComponent<BossDialogue>().SetBossDefeated();
         this.gameObject.GetComponent<BossDialogue>().InitiateDialogue();
         DisableHealthUI();
-        bossScript.Invoke("SetBusy", 0);
+        bossScript.Invoke("EndFight", 0);
     }
 
     public void DisableHealthUI()
@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
     public void InitiateBossFight(GameObject bossTrigger)
     {
         entryGate.GetComponent<Gate>().CloseGate();
-        bossScript.Invoke("ResetAll", 0);
+        bossScript.Invoke("SetNotBusy", 0);  
         this.bossTrigger = bossTrigger;
         bossCamera.SetActive(true);
         health.ResetHealth();
@@ -102,7 +102,6 @@ public class Enemy : MonoBehaviour
     {
         entryGate.GetComponent<Gate>().OpenGate();
         bossScript.Invoke("ResetAll", 0);
-        bossScript.enabled = false;
         transform.position = bossStartPosition;
         health.ResetHealth();
         bossCamera.SetActive(false);
@@ -118,6 +117,18 @@ public class Enemy : MonoBehaviour
     {
         bossLeaving = true;
         postProcessVolume.GetComponent<PostProcessHandler>().StopPostEffectAndDisable();
+    }
+
+    public void Bloom(float amount, bool activate)
+    {
+        if (activate)
+        {
+            postProcessVolume.GetComponent<PostProcessHandler>().StartBloomEffect(amount);
+        }
+        else
+        {
+            postProcessVolume.GetComponent<PostProcessHandler>().StopBloomEffect(amount);
+        }
     }
 
 

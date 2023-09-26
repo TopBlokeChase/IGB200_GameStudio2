@@ -19,6 +19,8 @@ public class Health : MonoBehaviour
     private int health;
     private int numberOfHearts;
 
+    private bool isInvulnerable;
+
     private void Start()
     {
         health = maxHealth;
@@ -28,6 +30,11 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void SetInvulnerable(bool isInvulnerable)
+    {
+        this.isInvulnerable = isInvulnerable;
     }
 
     public void ResetHealth()
@@ -51,6 +58,11 @@ public class Health : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        if (isInvulnerable)
+        {
+            return;
+        }
+
         if (health <= damage)
         {
             if (this.gameObject.tag == "Player")

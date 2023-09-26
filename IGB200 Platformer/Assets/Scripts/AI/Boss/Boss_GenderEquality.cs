@@ -1,37 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss_GenderEquality : MonoBehaviour
-{   
+{
+    public enum BossType
+    {
+        GenderEquality,
+        Harassment,
+        MentalHealth
+    }
+
+    [Header("BossType & References")]
+    [SerializeField] private BossType bossType;
     [SerializeField] private GameObject sprite;
     [SerializeField] private GameObject flyingDisc;
+    [SerializeField] private GameObject brokenGround;
+    [SerializeField] private GameObject hotFloor;
     [SerializeField] private GameObject slamCollider;
     [SerializeField] private GameObject laserBeam;
     [SerializeField] private GameObject bossCamera;
 
+    [Header("Slam Camera Shake Settings")]
     [SerializeField] private float slamCameraShakeAmount;
     [SerializeField] private float slamCameraShakeDuration;
 
+    [Header("Laser Camera Shake Settings")]
     [SerializeField] private float laserCameraShakeAmount;
     [SerializeField] private float laserCameraShakeDuration;
+
+    [Header("Hot Ground Camera Shake Settings")]
+    [SerializeField] private float hotCameraShakeAmount;
+    [SerializeField] private float hotCameraShakeDuration;
 
     [SerializeField] private LayerMask ground;
 
     //[SerializeField] private float idleBobAmount;
     //[SerializeField] private float idleBobSpeed;
+    [Header("Boss Movement Speed")]
     [SerializeField] private float movementSpeed;
-    [SerializeField] private float moveAbovePlayerSpeed;
 
+    [Header("Boss State Settings")]
     [SerializeField] private float stateChangeTime = 5f;
 
+    [Header("Slam Attack Settings")]
+    [SerializeField] private float moveAbovePlayerSpeed;
     [SerializeField] private float slamSizeChangeDuration;
     [SerializeField] private float slamSizeChangeEndAmount;
     [SerializeField] private float slamAttackDownDuration;
     [SerializeField] private float slamAttackRestDuration;
     [SerializeField] private float slamAttackReturnDuration;
 
+    [Header("Laser Attack Settings")]
     [SerializeField] private float laserAttackBeamLength;
     [SerializeField] private float laserAttackAngleAmount;
     [SerializeField] private float laserAttackMoveIntoPosSpeed;
@@ -41,6 +63,16 @@ public class Boss_GenderEquality : MonoBehaviour
     [SerializeField] private float laserAttackBeamRetractSpeed;
     [SerializeField] private float laserAttackRotateBackSpeed;
 
+    [Header("Hot Ground Attack Settings")]
+    [SerializeField] private float bloomAmount = 25f;
+    [SerializeField] private float hotSizeChangeDuration;
+    [SerializeField] private float hotSizeChangeEndAmount;
+    [SerializeField] private float hotAttackDownDuration;
+    [SerializeField] private float hotAttackRestDuration;
+    [SerializeField] private float hotAttackAfterSizeRestDuration;
+    [SerializeField] private float hotAttackReturnDuration;
+    [SerializeField] private float hotAttackPivotOffset;
+
     private string state;
 
     private bool needsToChase;
@@ -49,7 +81,11 @@ public class Boss_GenderEquality : MonoBehaviour
     private bool isMovingAbovePlayer;
 
     private float stateChangeTimer;
+
+    private Vector3 originalPosition;
     private float originalHeight;
+    private Vector3 spriteOriginalSize;
+
     private BossChaseDistance bossChaseDistance;
 
     private GameObject player;
@@ -58,13 +94,17 @@ public class Boss_GenderEquality : MonoBehaviour
 
     private Animator animator;
 
+    private GameObject brokenFloor;
+
     //private bool canIdle;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        originalPosition = transform.position;
         originalHeight = transform.position.y;
+        spriteOriginalSize = sprite.transform.localScale;
         bossChaseDistance = GetComponentInChildren<BossChaseDistance>();
 
         //canIdle = true;
@@ -94,7 +134,23 @@ public class Boss_GenderEquality : MonoBehaviour
 
     void PickRandomState()
     {
-        int randomNumber = Random.Range(1, 4);
+        int randomNumber = 0;
+
+        if (bossType == BossType.GenderEquality)
+        {
+            randomNumber = Random.Range(1, 4);
+        }
+
+        if(bossType == BossType.Harassment)
+        {
+            randomNumber = Random.Range(1, 5);
+        }
+
+        if (bossType == BossType.MentalHealth)
+        {
+            randomNumber = Random.Range(1, 5);
+        }
+        
 
         // 1 - slamAttack, 2 - shootAttack
 
@@ -117,7 +173,14 @@ public class Boss_GenderEquality : MonoBehaviour
             isBusy = true;
             //canIdle = false;
             LaserAttack();
-        }     
+        }
+
+        if (randomNumber == 4)
+        {
+            isBusy = true;
+            //canIdle = false;
+            HotGroundAttack();
+        }
     }
 
     //void IdleAnimation()
@@ -146,6 +209,12 @@ public class Boss_GenderEquality : MonoBehaviour
         StartCoroutine(LaserAttackCoroutine());
     }
 
+    void HotGroundAttack()
+    {
+        animator.SetBool("LaserBeam", true);
+        StartCoroutine(HotGroundAttackCoroutine());
+    }
+
     void ChasePlayer()
     {
         if (player.transform.position.x > transform.position.x)
@@ -172,13 +241,96 @@ public class Boss_GenderEquality : MonoBehaviour
         //canIdle = true;
     }
 
-    public void ResetAll()
+    public void SetNotBusy()
     {
         StopAllCoroutines();
         isBusy = false;
+        //canIdle = true;
+    }
+
+    public void ResetAll()
+    {
+        StopAllCoroutines();
+
+        isBusy = true;
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
         laserBeam.SetActive(false);
+
+        animator.SetBool("LaserBeam", false);
+        animator.SetBool("SlamAttack", false);
+
+        transform.position = originalPosition;
+        sprite.transform.localScale = spriteOriginalSize;
+        sprite.GetComponent<SpriteRenderer>().flipX = false;
+
+        if (bossType == BossType.Harassment)
+        {
+            this.gameObject.GetComponent<Enemy>().Bloom(bloomAmount, false);
+            hotFloor.GetComponent<Boss_HotFloor>().DeActivate();
+
+            if (brokenFloor != null)
+            {
+                Destroy(brokenFloor);
+            }
+        }
         //canIdle = true;
+    }
+
+    // Moves boss to original height and idles animation again
+    public void EndFight()
+    {
+        StopAllCoroutines();
+
+        isBusy = true;
+        animator.SetBool("LaserBeam", false);
+        animator.SetBool("SlamAttack", false);
+
+        slamCollider.GetComponent<BoxCollider2D>().enabled = false;
+        laserBeam.SetActive(false);
+
+        if (bossType == BossType.Harassment)
+        {
+            this.gameObject.GetComponent<Enemy>().Bloom(bloomAmount, false);
+            hotFloor.GetComponent<Boss_HotFloor>().DeActivate();
+
+            if (brokenFloor != null)
+            {
+                Destroy(brokenFloor);
+            }
+        }
+    
+        //face boss towards player one final time
+        if (player.transform.position.x > transform.position.x)
+        {
+            bossFacingLeft = false;
+            sprite.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            bossFacingLeft = true;
+            sprite.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+        StartCoroutine(MoveToOriginalHeight());
+    }
+
+    IEnumerator MoveToOriginalHeight()
+    {
+        float timer = 0;
+
+        Vector3 startingPosition = transform.position;
+        Vector3 posToMove = new Vector3(startingPosition.x, originalHeight, startingPosition.z);
+
+        Vector3 startAngle = transform.eulerAngles;
+        Vector3 endAngle = Vector3.zero;
+
+        while (timer < laserAttackMoveIntoPosSpeed)
+        {
+            transform.position = Vector2.Lerp(startingPosition, posToMove, timer / laserAttackMoveIntoPosSpeed);
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(startAngle), Quaternion.Euler(endAngle), timer / laserAttackMoveIntoPosSpeed);
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 
     IEnumerator SlamAttackCoroutine()
@@ -259,9 +411,22 @@ public class Boss_GenderEquality : MonoBehaviour
         Vector3 startingPosition = transform.position;
         Vector3 posToMove = new Vector3(startingPosition.x, originalHeight, startingPosition.z);
 
+        Vector3 startAngle = transform.eulerAngles;
+        Vector3 angleToRotateTo;
+
+        if (bossFacingLeft)
+        {
+            angleToRotateTo = new Vector3(startAngle.x, startAngle.y, startAngle.z + -20);
+        }
+        else
+        {
+            angleToRotateTo = new Vector3(startAngle.x, startAngle.y, startAngle.z + 20);
+        }
+
         while (timer < laserAttackMoveIntoPosSpeed)
         {
             transform.position = Vector2.Lerp(startingPosition, posToMove, timer / laserAttackMoveIntoPosSpeed);
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(startAngle), Quaternion.Euler(angleToRotateTo), timer / laserAttackMoveIntoPosSpeed);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -274,11 +439,11 @@ public class Boss_GenderEquality : MonoBehaviour
 
         if (bossFacingLeft)
         {
-            laserBeam.transform.rotation = Quaternion.Euler(0,0,0);
+            laserBeam.transform.rotation = Quaternion.Euler(0,0, -20);
         }
         else
         {         
-            laserBeam.transform.rotation = Quaternion.Euler(0, 180, 0);
+            laserBeam.transform.rotation = Quaternion.Euler(0, 180, -20);
         }
 
         while (timer < laserAttackBeamStartSpeed)
@@ -298,8 +463,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         timer = 0;
 
-        Vector3 startAngle = transform.eulerAngles;
-        Vector3 angleToRotateTo;
+        Vector3 currentAngle = transform.eulerAngles;
 
         if (bossFacingLeft)
         {
@@ -314,7 +478,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         while (timer < laserAttackRotateSpeed)
         {
-            transform.rotation = Quaternion.Lerp(Quaternion.Euler(startAngle), Quaternion.Euler(angleToRotateTo), timer / laserAttackRotateSpeed);
+            transform.rotation = Quaternion.Lerp(Quaternion.Euler(currentAngle), Quaternion.Euler(angleToRotateTo), timer / laserAttackRotateSpeed);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -343,6 +507,89 @@ public class Boss_GenderEquality : MonoBehaviour
         //canIdle = true;
 
         animator.SetBool("LaserBeam", false);
+        yield return null;
+    }
+
+    IEnumerator HotGroundAttackCoroutine()
+    {
+        float timer = 0;
+        Vector3 startingPosition = transform.position;
+
+        Vector3 startingScale = sprite.transform.localScale;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, ground);
+        Debug.DrawRay(transform.position, Vector2.down, Color.yellow);
+
+        Vector3 slamPosition = hit.point + new Vector2(0, GetComponent<Renderer>().bounds.size.y / 2);
+
+        bossCamera.GetComponent<CameraShake>().ShakeCamera(hotCameraShakeAmount, hotCameraShakeDuration);
+
+        while (timer < hotAttackDownDuration)
+        {
+            transform.position = Vector2.Lerp(startingPosition, slamPosition, timer / hotAttackDownDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        brokenFloor = Instantiate(brokenGround, transform.position, Quaternion.identity);
+        
+        timer = 0;
+
+        while (timer < hotAttackRestDuration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        this.gameObject.GetComponent<Enemy>().Bloom(bloomAmount, true);
+        hotFloor.GetComponent<Boss_HotFloor>().Activate();
+
+        while (timer < hotSizeChangeDuration)
+        {
+            sprite.transform.localScale = Vector2.Lerp(startingScale, new Vector3(hotSizeChangeEndAmount, hotSizeChangeEndAmount, hotSizeChangeEndAmount), timer / hotSizeChangeDuration);
+            transform.position = Vector2.Lerp(slamPosition, new Vector2(slamPosition.x, slamPosition.y + hotAttackPivotOffset), timer / hotSizeChangeDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        this.gameObject.GetComponent<Enemy>().Bloom(bloomAmount, false);
+        hotFloor.GetComponent<Boss_HotFloor>().DeActivate();
+
+
+
+        while (timer < hotAttackAfterSizeRestDuration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0;
+
+        foreach(Transform child in brokenFloor.transform)
+        {
+            child.gameObject.GetComponentInChildren<Platform_BrokenFloor>().Finish();
+        }
+
+        Vector3 currentScale = sprite.transform.localScale;
+        Vector3 currentPos = transform.position;
+
+        while (timer < hotAttackReturnDuration)
+        {
+            transform.position = Vector2.Lerp(currentPos, new Vector2(startingPosition.x, originalHeight), timer / hotAttackReturnDuration);
+            sprite.transform.localScale = Vector2.Lerp(currentScale, startingScale, timer / hotAttackReturnDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }       
+       
+        stateChangeTimer = 0;
+        isBusy = false;
+        //canIdle = true;
+
+        animator.SetBool("SlamAttack", false);
         yield return null;
     }
 }

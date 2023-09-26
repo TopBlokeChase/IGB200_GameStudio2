@@ -19,6 +19,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private int attackDamage = 1;
     [SerializeField] private int hammerThrowDamage = 1;
 
+    [SerializeField] private float meleeAttackCooldown = 1f;
+
     [SerializeField] private GameObject hammerPrefab;
     [SerializeField] private GameObject hammerThrowPoint;
 
@@ -36,11 +38,14 @@ public class PlayerCombat : MonoBehaviour
 
     private bool hasNoteOfCourage;
 
+    private float meleeAttackTimer;
+
     private void Start()
     {
         playerMovement = this.gameObject.GetComponentInParent<PlayerMovement>();
         player = playerMovement.gameObject;
         playerRB = player.GetComponent<Rigidbody2D>();
+        health.SetInvulnerable(true);
     }
 
     // Update is called once per frame
@@ -54,9 +59,15 @@ public class PlayerCombat : MonoBehaviour
 
     private void CheckInput()
     {
+        meleeAttackTimer += Time.deltaTime;
+
         if (Input.GetButtonDown("Fire1"))
         {
-            playerAnimator.SetTrigger("Attack");
+            if (meleeAttackTimer > meleeAttackCooldown)
+            {
+                playerAnimator.SetTrigger("Attack");
+                meleeAttackTimer = 0f;
+            }
         }
 
         if (Input.GetButtonDown("Fire2"))
@@ -92,7 +103,10 @@ public class PlayerCombat : MonoBehaviour
 
         foreach(Collider2D enemy in enemies)
         {
-            enemy.GetComponent<Health>().DealDamage(attackDamage);
+            if (enemy.TryGetComponent<Health>(out  Health health))
+            {
+                health.DealDamage(attackDamage);
+            }
         }
     }
 
@@ -110,11 +124,13 @@ public class PlayerCombat : MonoBehaviour
 
     public void EnablePlayerHealthPanel()
     {
+        health.SetInvulnerable(false);
         playerHealthPanel.SetActive(true);
     }
 
     public void DisablePlayerHealthPanel()
     {
+        health.SetInvulnerable(true);
         playerHealthPanel.SetActive(false);
     }
 
@@ -135,6 +151,7 @@ public class PlayerCombat : MonoBehaviour
         player.transform.position = currentBoss.GetComponent<Enemy>().PlayerSpawnPos().position;
         //reset player health
         health.ResetHealth();
+        health.SetInvulnerable(true);
         //reset boss health & trigger
         currentBoss.GetComponent<Enemy>().ResetBossFight();
     }
