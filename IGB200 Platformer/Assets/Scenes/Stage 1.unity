@@ -20724,6 +20724,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraTrigger_ClimbPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 5583098952314012741, guid: 80400d359885eb841bdbb5b1258bc942, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5583098952314012741, guid: 80400d359885eb841bdbb5b1258bc942, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 5583098952314012760, guid: 80400d359885eb841bdbb5b1258bc942, type: 3}
       propertyPath: m_RootOrder
       value: 37
