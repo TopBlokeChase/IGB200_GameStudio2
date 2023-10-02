@@ -40,8 +40,11 @@ public class PlayerCombat : MonoBehaviour
 
     private float meleeAttackTimer;
 
+    private PlayerSounds playerSounds;
+
     private void Start()
     {
+        playerSounds = this.gameObject.GetComponent<PlayerSounds>();
         playerMovement = this.gameObject.GetComponentInParent<PlayerMovement>();
         player = playerMovement.gameObject;
         playerRB = player.GetComponent<Rigidbody2D>();
@@ -100,6 +103,8 @@ public class PlayerCombat : MonoBehaviour
     private void Attack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, enemyLayerMask);
+
+        playerSounds.PlayAttackGrunt();
 
         foreach(Collider2D enemy in enemies)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,9 +25,12 @@ public class PlayerMovement : MonoBehaviour
 
     private float coyoteTimer;
 
+    private PlayerSounds playerSounds;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerSounds = GetComponentInChildren<PlayerSounds>();
         playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -46,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump") && !isInteracting)
             {
+                playerSounds.PlayJumpGrunt();
                 GetComponent<Rigidbody2D>().velocity = new Vector2(playerRigidbody.velocity.x, jumpHeight);
             }
         }
@@ -157,5 +162,7 @@ public class PlayerMovement : MonoBehaviour
         hasAddedForce = true;
         playerRigidbody.velocity = Vector3.zero;
         playerRigidbody.velocity += new Vector2(forceToAddX, forceToAdd / 2);
+
+        playerSounds.PlayHurt();
     }
 }

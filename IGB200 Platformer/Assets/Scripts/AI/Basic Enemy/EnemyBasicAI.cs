@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class EnemyBasicAI : MonoBehaviour
 {
+    [Header("Sounds")]
+    [SerializeField] private AudioSource deathSoundSource;
+
+    [Header("References & Settings")]
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private float forceOnTouch = 10f;
@@ -65,6 +69,17 @@ public class EnemyBasicAI : MonoBehaviour
 
     public void Die()
     {
+        deathSoundSource.Play();
+
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        StartCoroutine(Delay(deathSoundSource.clip.length));      
+    }
+
+    IEnumerator Delay(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+
         this.gameObject.SetActive(false);
     }
 

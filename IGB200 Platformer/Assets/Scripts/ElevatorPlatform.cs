@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ElevatorPlatform : MonoBehaviour
 {
+    [SerializeField] private AudioSource startStopSoundSource;
+    [SerializeField] private AudioSource loopingSoundSource;
     [SerializeField] private bool movesAutomatically;
     [SerializeField] private float elevatorSpeed = 5f;
     [SerializeField] private GameObject endPoint;
@@ -35,6 +37,9 @@ public class ElevatorPlatform : MonoBehaviour
                 }
                 else
                 {
+                    startStopSoundSource.Play();
+                    loopingSoundSource.Stop();
+
                     if (!movesAutomatically)
                     {
                         atEndPostion = true;
@@ -54,6 +59,9 @@ public class ElevatorPlatform : MonoBehaviour
                 }
                 else
                 {
+                    startStopSoundSource.Play();
+                    loopingSoundSource.Stop();
+
                     if (!movesAutomatically)
                     {
                         atEndPostion = false;
@@ -87,6 +95,8 @@ public class ElevatorPlatform : MonoBehaviour
 
     public void MovePlatform()
     {
+        startStopSoundSource.Play();
+        loopingSoundSource.Play();
         moving =  true;
     }
 

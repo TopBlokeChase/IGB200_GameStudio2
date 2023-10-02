@@ -165,6 +165,7 @@ public class HammerThrow : MonoBehaviour
             {
                 Debug.Log("enemy hit!");
                 collision.gameObject.GetComponent<Health>().DealDamage(damageAmount);
+                hasHitSomething = true;
             }
             else
             if (collision.gameObject.tag == "NPC")
@@ -175,6 +176,7 @@ public class HammerThrow : MonoBehaviour
             if (collision.gameObject.tag == "BrokenLadder")
             {
                 collision.gameObject.GetComponent<BrokenLadder>().RemoveHammerCount();
+                hasHitSomething = true;
             }
             else
             if (collision.gameObject.tag == null)

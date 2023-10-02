@@ -13,12 +13,16 @@ public class NoteOfCourage : MonoBehaviour
     [SerializeField] private string buffName;
     [SerializeField] private int shieldAmount;
 
+    [SerializeField] private GameObject noteSprite;
     [SerializeField] private GameObject noteInteractUI;
     [SerializeField] private GameObject noteTextUI;
     [SerializeField] private TMP_Text noteTitleText;
     [SerializeField] private TMP_Text noteBodyText;
     [SerializeField] private GameObject statusEffectUI;
     [SerializeField] private float statusEffectUIPosOffset;
+
+    [SerializeField] private AudioSource soundLooping;
+    [SerializeField] private AudioSource soundPickup;
 
     private GameObject player;
 
@@ -70,6 +74,23 @@ public class NoteOfCourage : MonoBehaviour
         note.GetComponent<PlayerStatusUI>().InitiateText(buffName, shieldAmount);
         note.GetComponent<PlayerStatusUI>().InitialisePosition(player, statusEffectUIPosOffset);
         Time.timeScale = 1;
+
+        soundLooping.Stop();
+
+        
+        soundPickup.Play();
+        noteInteractUI.SetActive(false);
+        noteTextUI.SetActive(false);
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        noteSprite.SetActive(false);
+
+        StartCoroutine(Delay(soundPickup.clip.length));
+    }
+
+    IEnumerator Delay(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+
         Destroy(transform.root.gameObject);
     }
 }
