@@ -12,9 +12,14 @@ public class CameraClamp : MonoBehaviour
     [SerializeField] private bool followX; // If true, will track the player left and right
     [SerializeField] private bool followY; // If true, will track the player up and down
 
+    [SerializeField] private float xOffset; // Offsets the camera on the x axis
+    [SerializeField] private float yOffset; // Offsets the camera on the y axis
+
     private Vector2 triggerSize; // Size of the BoxCollider2D on the trigger
     private Vector2 xClamp; // Min and max x position of the camera
     private Vector2 yClamp; // Min and max y position of the camera
+
+
 
     private Vector3 position;
 
@@ -40,13 +45,13 @@ public class CameraClamp : MonoBehaviour
         Vector3 position = new Vector3(cameraTrigger.transform.position.x, cameraTrigger.transform.position.x, -10);
         if (followX)
         {
-            position.x = Mathf.Clamp(player.transform.position.x,
+            position.x = Mathf.Clamp(player.transform.position.x + xOffset,
                                 xClamp.x, xClamp.y);
         }
 
         if (followY)
         {
-            position.y = Mathf.Clamp(player.transform.position.y,
+            position.y = Mathf.Clamp(player.transform.position.y + yOffset,
                                 yClamp.x, yClamp.y);
         }
         this.transform.position = position;
