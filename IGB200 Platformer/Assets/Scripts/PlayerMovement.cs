@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float coyoteTimer;
 
+    private float pressedJumpTime = 0.27f;
+    private float pressedJumpTimer;
+
     private PlayerSounds playerSounds;
 
     // Start is called before the first frame update
@@ -38,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isJumping);
+        Debug.Log(isGrounded);
         CheckAddedForce();
         CheckDirectionInput();
         CheckGrounded();
@@ -55,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = true;
                 playerSounds.PlayJumpGrunt();
                 GetComponent<Rigidbody2D>().velocity = new Vector2(playerRigidbody.velocity.x, jumpHeight);
+                pressedJumpTimer = 0;
             }
         }
     }
@@ -65,10 +69,11 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, ground);
 
         if (hit.collider != null)
-        {         
+        {
             isGrounded = true;
             playerAnimator.SetBool("isJumping", false);
             coyoteTimer = 0;
+            
         }
         else
         {
@@ -83,6 +88,19 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = false;
                 isGrounded = false;
                 playerAnimator.SetBool("isJumping", true);
+            }
+        }
+
+        if (isGrounded)
+        {
+            pressedJumpTimer += Time.deltaTime;
+            if (pressedJumpTimer <= pressedJumpTime)
+            {
+                isJumping = true;
+            }
+            else
+            {
+                isJumping = false;
             }
         }
     }
