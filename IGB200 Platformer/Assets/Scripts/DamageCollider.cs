@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageCollider : MonoBehaviour
 {
     [SerializeField] private bool addForce = true;
+    [SerializeField] private float forceAmount = 15f;
 
     private float timer = 2;
     // Start is called before the first frame update
@@ -26,7 +27,7 @@ public class DamageCollider : MonoBehaviour
             {
                 if (addForce)
                 {
-                    collision.gameObject.GetComponent<PlayerMovement>().AddForce(15, this.gameObject);
+                    collision.gameObject.GetComponent<PlayerMovement>().AddForce(forceAmount, this.gameObject);
                 }
                 collision.gameObject.GetComponentInChildren<Health>().DealDamage(1);
                 timer = 0;

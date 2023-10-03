@@ -13,13 +13,17 @@ public class NailGun : MonoBehaviour
     float angle;
 
     bool isAiming;
+    bool hasPlayedAimSound;
 
     PlayerMovement playerMovement;
 
     LineRenderer lr;
+
+    private PlayerSounds playerSounds;
     // Start is called before the first frame update
     void Start()
     {
+        playerSounds = this.transform.parent.parent.GetComponentInChildren<PlayerSounds>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerMovement = player.GetComponent<PlayerMovement>();
         lr = GetComponent<LineRenderer>();
@@ -58,6 +62,12 @@ public class NailGun : MonoBehaviour
 
     private void Aim()
     {
+        if (!hasPlayedAimSound)
+        {
+            playerSounds.PlayNailGunAim();
+            hasPlayedAimSound = true;
+        }
+
         RotateToCursor();
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, distance);
@@ -79,6 +89,9 @@ public class NailGun : MonoBehaviour
 
     private void Shoot()
     {
+        playerSounds.PlayNailGunFire();
+        hasPlayedAimSound = false;
+
         Instantiate(nailPrefab, transform.position, transform.rotation);
         playerMovement.isInteracting = false;
         isAiming = false;

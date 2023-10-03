@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-
+    [SerializeField] private GameObject damageParticlePrefab;
     [SerializeField] private int maxHealth;
     [SerializeField] private int shieldAmount;
 
@@ -58,6 +58,16 @@ public class Health : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        if (this.gameObject.tag == "Player")
+        {
+            damageParticlePrefab.GetComponent<ParticleSystem>().Play();
+        }
+        else
+        {
+            GameObject damageParticle = Instantiate(damageParticlePrefab, transform.position, Quaternion.identity);
+            damageParticle.transform.parent = null;
+        }
+
         if (isInvulnerable)
         {
             return;
@@ -71,7 +81,7 @@ public class Health : MonoBehaviour
             }
 
             if (this.gameObject.tag == "EnemyBasic")
-            {
+            {               
                 this.gameObject.GetComponent<EnemyBasicAI>().Die();
             }
 
@@ -82,9 +92,10 @@ public class Health : MonoBehaviour
             }
         }
         else
-        {
+        {          
             health -= damage;
             SetHeartsUI();
+
         }
     }
 

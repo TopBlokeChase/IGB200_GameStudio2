@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator playerAnimator;
 
+    private bool isJumping;
     private bool isGrounded;
     private Rigidbody2D playerRigidbody;
     private float directionInput;
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isJumping);
         CheckAddedForce();
         CheckDirectionInput();
         CheckGrounded();
@@ -46,10 +48,11 @@ public class PlayerMovement : MonoBehaviour
     // Check player inputs other than 'axis' input. E.g., jump, interact etc.
     private void CheckPlayerInput()
     {
-        if (isGrounded)
+        if (isGrounded && !isJumping)
         {
             if (Input.GetButtonDown("Jump") && !isInteracting)
             {
+                isJumping = true;
                 playerSounds.PlayJumpGrunt();
                 GetComponent<Rigidbody2D>().velocity = new Vector2(playerRigidbody.velocity.x, jumpHeight);
             }
@@ -62,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, ground);
 
         if (hit.collider != null)
-        {
+        {         
             isGrounded = true;
             playerAnimator.SetBool("isJumping", false);
             coyoteTimer = 0;
@@ -77,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                isJumping = false;
                 isGrounded = false;
                 playerAnimator.SetBool("isJumping", true);
             }

@@ -10,6 +10,8 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioSource meleeAttackSoundSource;
     [SerializeField] private AudioSource hurtSoundSource;
     [SerializeField] private AudioSource jumpGruntSoundSource;
+    [SerializeField] private AudioSource nailGunAimSoundSource;
+    [SerializeField] private AudioSource nailGunFireSoundSource;
     [SerializeField] private List<AudioClip> footstepSounds = new List<AudioClip>();
     [SerializeField] private List<AudioClip> meleeAttackSounds = new List<AudioClip>();
     [SerializeField] private List<AudioClip> hurtSounds = new List<AudioClip>();
@@ -37,6 +39,16 @@ public class PlayerSounds : MonoBehaviour
     {
         meleeAttackSoundSource.clip = (PickSound(meleeAttackSounds));
         meleeAttackSoundSource.Play();
+    }
+
+    public void PlayNailGunAim()
+    {
+        nailGunAimSoundSource.Play();
+    }
+
+    public void PlayNailGunFire()
+    {
+        nailGunFireSoundSource.Play();
     }
 
     private AudioClip PickSound(List<AudioClip> audioClips)

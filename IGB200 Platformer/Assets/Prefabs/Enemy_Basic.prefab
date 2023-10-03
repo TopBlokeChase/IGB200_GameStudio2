@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633f8f8b1c7237346859755cb8ccc532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageParticlePrefab: {fileID: 3028236898574961808, guid: c81ea0cca550ca24ba9535ce82dc01fc, type: 3}
   maxHealth: 1
   shieldAmount: 0
   isBasicEnemy: 1

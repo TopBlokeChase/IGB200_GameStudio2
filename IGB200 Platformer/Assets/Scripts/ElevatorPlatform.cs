@@ -7,6 +7,7 @@ public class ElevatorPlatform : MonoBehaviour
 {
     [SerializeField] private AudioSource startStopSoundSource;
     [SerializeField] private AudioSource loopingSoundSource;
+    [SerializeField] private AudioSource errorSoundSource;
     [SerializeField] private bool movesAutomatically;
     [SerializeField] private float elevatorSpeed = 5f;
     [SerializeField] private GameObject endPoint;
@@ -15,6 +16,8 @@ public class ElevatorPlatform : MonoBehaviour
 
     private bool atEndPostion;
     private bool moving;
+
+    private bool hasPlayedInitialSound;
 
     private Transform playerCurrentParent;
 
@@ -39,6 +42,7 @@ public class ElevatorPlatform : MonoBehaviour
                 {
                     startStopSoundSource.Play();
                     loopingSoundSource.Stop();
+                    hasPlayedInitialSound = false;
 
                     if (!movesAutomatically)
                     {
@@ -47,7 +51,7 @@ public class ElevatorPlatform : MonoBehaviour
                     }
                     else
                     {
-                        atEndPostion = true;
+                        atEndPostion = true;                       
                     }
                 }
             }
@@ -61,6 +65,7 @@ public class ElevatorPlatform : MonoBehaviour
                 {
                     startStopSoundSource.Play();
                     loopingSoundSource.Stop();
+                    hasPlayedInitialSound = false;
 
                     if (!movesAutomatically)
                     {
@@ -74,6 +79,13 @@ public class ElevatorPlatform : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PlayerUnderneath()
+    {       
+        errorSoundSource.Play();
+        atEndPostion = false;
+        moving = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -95,8 +107,13 @@ public class ElevatorPlatform : MonoBehaviour
 
     public void MovePlatform()
     {
-        startStopSoundSource.Play();
-        loopingSoundSource.Play();
+        if (!hasPlayedInitialSound)
+        {
+            startStopSoundSource.Play();
+            loopingSoundSource.Play();
+            hasPlayedInitialSound = true;
+        }
+
         moving =  true;
     }
 

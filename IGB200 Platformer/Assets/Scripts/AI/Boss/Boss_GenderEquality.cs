@@ -15,6 +15,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
     [Header("BossType & References")]
     [SerializeField] private BossType bossType;
+    [SerializeField] private GameObject basicEnemyGroup;
     [SerializeField] private GameObject sprite;
     [SerializeField] private GameObject flyingDisc;
     [SerializeField] private GameObject brokenGround;
@@ -310,6 +311,8 @@ public class Boss_GenderEquality : MonoBehaviour
             bossFacingLeft = true;
             sprite.GetComponent<SpriteRenderer>().flipX = false;
         }
+
+        basicEnemyGroup.SetActive(false);
 
         StartCoroutine(MoveToOriginalHeight());
     }

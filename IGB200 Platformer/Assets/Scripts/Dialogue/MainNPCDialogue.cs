@@ -7,6 +7,7 @@ using System.Linq;
 
 public class MainNPCDialogue : MonoBehaviour
 {
+    [SerializeField] private GameObject victoryFanfareText;
     [SerializeField] private GameObject entryGate;
     public TMP_Text dialogueText;
     public GameObject mainDialoguePanel;
@@ -30,6 +31,7 @@ public class MainNPCDialogue : MonoBehaviour
         [TextArea]
         public string dialogue;
         public bool isPlayerDialogue;
+        public bool isLevelFinishedDialogue;
     }
 
     [SerializeField] private bool receivedIntroDialogue;
@@ -64,6 +66,8 @@ public class MainNPCDialogue : MonoBehaviour
     private bool needsDelay;
     private bool isInDialogue;
     private bool isRevealingText;
+
+    private bool playerCompletedSite;
 
     private Vector3 initialFrameScale = new Vector3(1, 1, 1);
     private Color initialFrameColor = new Color(255, 255, 255, 255);
@@ -162,6 +166,11 @@ public class MainNPCDialogue : MonoBehaviour
                     dialogueText.text = dialogueToRead[i].dialogue;
                     dialogueText.GetComponent<TeleType>().RevealText(dialogueToRead[i].dialogue.Length);
 
+                    if (dialogueToRead[i].isLevelFinishedDialogue)
+                    {
+                        playerCompletedSite = true;
+                    }
+
                     if (dialogueToRead[i].isPlayerDialogue)
                     {
                         // make player's UI frame bigger/highlighted && decrease NPC frame size
@@ -248,6 +257,11 @@ public class MainNPCDialogue : MonoBehaviour
         needsDelay = false;
         isDelaying = false;
         isInDialogue = false;
+
+        if (playerCompletedSite)
+        {
+            victoryFanfareText.SetActive(true);
+        }
     }
 
     IEnumerator DelayInput()

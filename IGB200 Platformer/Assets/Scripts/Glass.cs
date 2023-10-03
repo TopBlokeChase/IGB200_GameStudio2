@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Glass : MonoBehaviour
 {
+    [SerializeField] private AudioSource glassShatterSoundSource;
+    [SerializeField] private GameObject sprite;
     [SerializeField] private GameObject glassShatterParticle;
     [SerializeField] private float glassShatterVelocity = 5f;
 
@@ -32,6 +34,7 @@ public class Glass : MonoBehaviour
         {
             velModule.xMultiplier = -glassShatterVelocity;
         }
-        this.gameObject.SetActive(false);
+        sprite.SetActive(false);
+        glassShatterSoundSource.Play();
     }
 }

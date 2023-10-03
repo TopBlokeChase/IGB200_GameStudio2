@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Nail : MonoBehaviour
 {
+    [SerializeField] private AudioSource hitSound;
+    [SerializeField] private GameObject sprite;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float deathTimer = 10f;
 
@@ -38,6 +40,7 @@ public class Nail : MonoBehaviour
     {
         if (collision.tag == "Terrain")
         {
+            hitSound.Play();
             hasHit = true;       
         }
 
@@ -47,25 +50,38 @@ public class Nail : MonoBehaviour
             collision.gameObject.GetComponentInParent<MovingPlatform>().LockPlatform();
             //transform.parent = collision.transform.root;
             //transform.localScale = Vector3.one;
+            hitSound.Play();
             hasHit = true;
         }
 
         if (collision.tag == "Button")
         {
             collision.transform.parent.GetComponentInChildren<ElevatorPlatform>().MovePlatform();
+            hitSound.Play();
             hasHit = true;
         }
 
         if (collision.tag == "Glass")
         {
             collision.gameObject.GetComponent<GlassTrigger>().GlassShatter();
-            Destroy(this.gameObject);
+            hitSound.Play();
+            StartCoroutine(Delay(hitSound.clip.length));
         }
 
         if (collision.tag == "BrokenLadder")
         {
             collision.gameObject.GetComponent<BrokenLadder>().RemoveNailCount();
-            Destroy(this.gameObject);
+            hitSound.Play();
+            StartCoroutine(Delay(hitSound.clip.length));
         }
+    }
+
+    IEnumerator Delay(float sec)
+    {
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        sprite.SetActive(false);
+        yield return new WaitForSeconds(sec);
+
+        Destroy(this.gameObject);
     }
 }

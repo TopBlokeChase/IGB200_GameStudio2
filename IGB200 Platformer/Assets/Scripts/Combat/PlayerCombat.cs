@@ -12,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
 
     public bool canThrowHammer = true;
 
-    [SerializeField] private Health health;
+    [SerializeField] private Health health;   
     [SerializeField] private GameObject playerHealthPanel;
     [SerializeField] private GameObject retryMenuCanvas;
 
