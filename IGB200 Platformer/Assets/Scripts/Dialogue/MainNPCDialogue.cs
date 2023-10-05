@@ -7,6 +7,14 @@ using System.Linq;
 
 public class MainNPCDialogue : MonoBehaviour
 {
+    public enum Level
+    {
+        One,
+        Two,
+        Three
+    }
+
+    [SerializeField] private Level level;
     [SerializeField] private GameObject victoryFanfareText;
     [SerializeField] private GameObject entryGate;
     public TMP_Text dialogueText;
@@ -261,6 +269,21 @@ public class MainNPCDialogue : MonoBehaviour
         if (playerCompletedSite)
         {
             victoryFanfareText.SetActive(true);
+
+            if (level == Level.One)
+            {
+                ProgressTracker.hasPassedLevel1 = true;
+            }
+
+            if (level == Level.Two)
+            {
+                ProgressTracker.hasPassedLevel2 = true;
+            }
+
+            if (level == Level.Three)
+            {
+                ProgressTracker.hasPassedLevel3 = true;
+            }
         }
     }
 

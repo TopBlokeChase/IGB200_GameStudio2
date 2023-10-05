@@ -21,8 +21,11 @@ public class Health : MonoBehaviour
 
     private bool isInvulnerable;
 
+    private BossSounds bossSounds;
+
     private void Start()
     {
+        bossSounds = transform.parent.GetComponentInChildren<BossSounds>();
         health = maxHealth;
         numberOfHearts = health + shieldAmount;
     }
@@ -92,9 +95,15 @@ public class Health : MonoBehaviour
             }
         }
         else
-        {          
+        {
+            //is boss
             health -= damage;
             SetHeartsUI();
+
+            if (this.gameObject.tag == "Enemy")
+            {
+                bossSounds.PlayHurt();
+            }
 
         }
     }

@@ -10,6 +10,7 @@ public class FinalCutscene : MonoBehaviour
 {
     public TMP_Text dialogueText;
     public GameObject mainDialoguePanel;
+    [SerializeField] private GameObject babsCanvas;
     [SerializeField] private GameObject npcCanvas;
     [SerializeField] private GameObject bossCanvas;
     [SerializeField] private GameObject fadeOutCanvas;
@@ -116,13 +117,14 @@ public class FinalCutscene : MonoBehaviour
 
                     if (dialogueToRead[i].showNpcs == true)
                     {
-                        npcCanvas.SetActive(true);
+                        babsCanvas.GetComponent<Animator>().SetBool("fadeOut", true);
+                        StartCoroutine(DelayAnimation(npcCanvas));
                     }
 
                     if (dialogueToRead[i].showBosses == true)
                     {
                         npcCanvas.GetComponent<Animator>().SetBool("fadeOut", true);
-                        StartCoroutine(DelayAnimation());
+                        StartCoroutine(DelayAnimation(bossCanvas));
                     }
                 }                             
             }
@@ -203,11 +205,11 @@ public class FinalCutscene : MonoBehaviour
         isDelaying = false;
     }
 
-    IEnumerator DelayAnimation()
+    IEnumerator DelayAnimation(GameObject canvas)
     {
         yield return new WaitForSeconds(1.5f);
 
-        bossCanvas.SetActive(true);
+        canvas.SetActive(true);
     }
 
     IEnumerator DelayLoadScene()

@@ -15,6 +15,8 @@ public class Boss_GenderEquality : MonoBehaviour
 
     [Header("BossType & References")]
     [SerializeField] private BossType bossType;
+    [SerializeField] private MusicHandler musicHandler;
+    [SerializeField] private BossSounds bossSounds;
     [SerializeField] private GameObject basicEnemyGroup;
     [SerializeField] private GameObject sprite;
     [SerializeField] private GameObject flyingDisc;
@@ -82,6 +84,8 @@ public class Boss_GenderEquality : MonoBehaviour
     private bool isMovingAbovePlayer;
 
     private float stateChangeTimer;
+    private float laughTimer;
+    private float laughTime = 6f;
 
     private Vector3 originalPosition;
     private float originalHeight;
@@ -119,6 +123,14 @@ public class Boss_GenderEquality : MonoBehaviour
     {      
         if (!isBusy)
         {
+            Debug.Log(laughTimer);
+            laughTimer += Time.deltaTime;
+            if (laughTimer >= laughTime)
+            {
+                bossSounds.PlayLaugh();
+                laughTimer = 0;
+            }
+
             ChasePlayer();
             stateChangeTimer += Time.deltaTime;
             if (stateChangeTimer >= stateChangeTime)
@@ -244,6 +256,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
     public void SetNotBusy()
     {
+        musicHandler.PlayBossMusic();
         StopAllCoroutines();
         isBusy = false;
         //canIdle = true;
@@ -251,11 +264,14 @@ public class Boss_GenderEquality : MonoBehaviour
 
     public void ResetAll()
     {
+        musicHandler.PlayNormalMusic();
         StopAllCoroutines();
 
         isBusy = true;
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
         laserBeam.SetActive(false);
+
+        bossSounds.StopLaserLoop();
 
         animator.SetBool("LaserBeam", false);
         animator.SetBool("SlamAttack", false);
@@ -280,6 +296,7 @@ public class Boss_GenderEquality : MonoBehaviour
     // Moves boss to original height and idles animation again
     public void EndFight()
     {
+        musicHandler.PlayNormalMusic();
         StopAllCoroutines();
 
         isBusy = true;
@@ -288,6 +305,8 @@ public class Boss_GenderEquality : MonoBehaviour
 
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
         laserBeam.SetActive(false);
+
+        bossSounds.StopLaserLoop();
 
         if (bossType == BossType.Harassment)
         {
@@ -378,6 +397,8 @@ public class Boss_GenderEquality : MonoBehaviour
             yield return null;
         }
 
+        bossSounds.PlaySlamAttackSlam();
+
         timer = 0;
         bossCamera.GetComponent<CameraShake>().ShakeCamera(slamCameraShakeAmount, slamCameraShakeDuration);
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
@@ -438,6 +459,8 @@ public class Boss_GenderEquality : MonoBehaviour
 
         laserBeam.SetActive(true);
 
+        bossSounds.PlayLaserBurst();
+
         Vector3 beamEndPos = beamEndPos = new Vector3(laserAttackBeamLength, 0, 0); 
 
         if (bossFacingLeft)
@@ -455,6 +478,8 @@ public class Boss_GenderEquality : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+
+        bossSounds.PlayLaserLoop();
 
         timer = 0;
 
@@ -494,6 +519,9 @@ public class Boss_GenderEquality : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+
+        bossSounds.StopLaserLoop();
+        bossSounds.PlayLaserBurst();
 
         timer = 0;
         laserBeam.SetActive(false);
