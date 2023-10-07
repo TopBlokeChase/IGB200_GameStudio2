@@ -43,12 +43,12 @@ public class LadderTrigger : MonoBehaviour
             ladder.SetPoint(this.gameObject.transform);
         }
 
-        if (isPlayerPlacedLadder)
-        {
-            if (readyToClimb && Input.GetKeyDown(KeyCode.F))
-            {
-                player.GetComponent<LadderPlayer>().RemoveLadder();
-            }
-        }
+        //if (isPlayerPlacedLadder)
+        //{
+        //    if (readyToClimb && Input.GetKeyDown(KeyCode.F))
+        //    {
+        //        player.GetComponent<LadderPlayer_NEW>().RemoveLadder();
+        //    }
+        //}
     }
 }
