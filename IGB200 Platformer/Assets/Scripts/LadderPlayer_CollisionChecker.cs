@@ -14,7 +14,7 @@ public class LadderPlayer_CollisionChecker : MonoBehaviour
     {
         if (!isFloorChecker)
         {
-            if (collision.tag == "Terrain")
+            if (collision.tag != "Player")
             {
                 invalidPlacement = true;
             }
@@ -32,7 +32,7 @@ public class LadderPlayer_CollisionChecker : MonoBehaviour
     {
         if (!isFloorChecker)
         {
-            if (collision.tag == "Terrain")
+            if (collision.tag != "Player")
             {
                 invalidPlacement = false;
             }
