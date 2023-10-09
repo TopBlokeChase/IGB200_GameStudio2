@@ -14,6 +14,8 @@ public class FinalCutscene : MonoBehaviour
     [SerializeField] private GameObject npcCanvas;
     [SerializeField] private GameObject bossCanvas;
     [SerializeField] private GameObject fadeOutCanvas;
+    [SerializeField] private GameObject sceneBackgroundMusic;
+    [SerializeField] private PlayerMovement playerMovement;
 
     [System.Serializable]
     public struct dialogueNode
@@ -40,15 +42,26 @@ public class FinalCutscene : MonoBehaviour
 
     private bool readyToEnd;
 
+    private bool hasInitiated;
+
     // Start is called before the first frame update
     void Start()
     {
-        InitiateDialogue();
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!hasInitiated)
+        {
+            InitiateDialogue();
+            hasInitiated = true;
+            playerMovement.isInteracting = true;
+            sceneBackgroundMusic.SetActive(false);
+        }
+
         if (needsDelay)
         {
             if (!isDelaying)
@@ -134,8 +147,8 @@ public class FinalCutscene : MonoBehaviour
     public void InitiateDialogue()
     {
         isInDialogue = true;
-        needsDelay = true;
-        isDelaying = false;
+        //needsDelay = true;
+        //isDelaying = false;
         CollectDialogueChain();
         DisplayNewDialogue();
     }

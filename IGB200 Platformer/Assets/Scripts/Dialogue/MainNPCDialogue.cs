@@ -272,16 +272,19 @@ public class MainNPCDialogue : MonoBehaviour
 
             if (level == Level.One)
             {
+                ProgressTracker.currentLevel = 1;
                 ProgressTracker.hasPassedLevel1 = true;
             }
 
             if (level == Level.Two)
             {
+                ProgressTracker.currentLevel = 2;
                 ProgressTracker.hasPassedLevel2 = true;
             }
 
             if (level == Level.Three)
             {
+                ProgressTracker.currentLevel = 3;
                 ProgressTracker.hasPassedLevel3 = true;
             }
         }
