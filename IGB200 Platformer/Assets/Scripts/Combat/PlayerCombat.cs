@@ -24,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private GameObject hammerPrefab;
     [SerializeField] private GameObject hammerThrowPoint;
 
-    [SerializeField] private Animator playerAnimator;
+    [SerializeField] public Animator playerAnimator;
     [SerializeField] private GameObject attackPoint;
     [SerializeField] private float attackRadius;
 
@@ -44,6 +44,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
+        this.gameObject.transform.localScale = new Vector3(0.52f, 0.52f, 0.52f);
         playerSounds = this.gameObject.GetComponent<PlayerSounds>();
         playerMovement = this.gameObject.GetComponentInParent<PlayerMovement>();
         player = playerMovement.gameObject;
@@ -74,7 +75,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         if (Input.GetButtonDown("Fire2"))
-        {
+        {          
             HammerThrow();
         }
     }
@@ -83,6 +84,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (canThrowHammer)
         {
+            playerAnimator.SetTrigger("RangedAttack");
             canThrowHammer = false;
             GameObject hammer = Instantiate(hammerPrefab, this.gameObject.transform.position, this.gameObject.transform.rotation);
 

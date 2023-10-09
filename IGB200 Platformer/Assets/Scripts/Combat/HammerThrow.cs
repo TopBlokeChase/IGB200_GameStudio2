@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -39,6 +40,8 @@ public class HammerThrow : MonoBehaviour
     private bool currentlyReturning;
 
     private bool reachedMidPoint;
+
+    bool hasPlayedReturnAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -132,7 +135,7 @@ public class HammerThrow : MonoBehaviour
     }
 
     private void ReturnHammerToPlayer()
-    {
+    {    
         if (endPositionCollected)
         {
             currentlyReturning = true;
@@ -148,10 +151,19 @@ public class HammerThrow : MonoBehaviour
             //transform.position = Vector3.Lerp(endPosition, player.transform.position, returnTimer / hammerReturnTime);
             returnTimer += Time.deltaTime;
 
+            //if (!hasPlayedReturnAnim)
+            //{
+            //    if (returnTimer / hammerReturnTime >= 0.8f)
+            //    {
+            //        playerCombat.playerAnimator.SetTrigger("RangedReturn");
+            //        hasPlayedReturnAnim = true;
+            //    }
+            //}
+
             if (returnTimer >= hammerReturnTime)
             {
                 //hammers been returned to the player
-                playerCombat.canThrowHammer = true;
+                playerCombat.canThrowHammer = true;              
                 Destroy(this.gameObject);
             }
         }
