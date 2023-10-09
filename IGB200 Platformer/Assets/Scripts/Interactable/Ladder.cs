@@ -6,6 +6,14 @@ using UnityEngine;
 
 public class Ladder : MonoBehaviour
 {
+    [Header("--ONLY TO BE USED IF PLAYER LADDER--")]
+    public int ladderHeight = 1;
+    [SerializeField] private float ladderPieceOffset;
+    [SerializeField] private float floorOffset;
+    [SerializeField] private GameObject ladderPieceSprite;
+    [SerializeField] private BoxCollider2D ladderCollisionBody;
+
+    [Header("References & Settings")]
     [SerializeField] private bool isPlayerPlacedLadder;
     [SerializeField] private GameObject playerLadderFloor;
     [SerializeField] private float climbSpeed = 5f;
@@ -22,11 +30,49 @@ public class Ladder : MonoBehaviour
     private bool hasReachedPointB;
     private bool isClimbing;
 
+    //vars only used if player ladder
+    
+    private float initialLadderPiecePosY;
+    private float initialLadderFloorPosY;
+
+    private float floorHeight;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (isPlayerPlacedLadder)
+        {
+            initialLadderPiecePosY = ladderPieceSprite.transform.position.y;
+            initialLadderFloorPosY = playerLadderFloor.transform.position.y;
+        }
+
         player = GameObject.FindGameObjectWithTag("Player");
         playerRB = player.GetComponent<Rigidbody2D>();
+
+        if (isPlayerPlacedLadder)
+        {
+            if (ladderHeight != 1)
+            {
+                floorHeight = 1 + ((ladderHeight - 1) * floorOffset);
+                playerLadderFloor.transform.localPosition = new Vector3(0, floorHeight, 0);
+
+                pointB.transform.localPosition = new Vector3(0, 2.16f * ladderHeight, 0);
+
+                ladderCollisionBody.size = new Vector2(ladderCollisionBody.size.x, 2.84f * ladderHeight);
+
+                ladderCollisionBody.gameObject.transform.localPosition = new Vector3(0, 1.42f * (ladderHeight - 1) + 0.44f);
+
+
+                for (int i = 1; i < ladderHeight; i++)
+                {
+                    float height = i * ladderPieceOffset;
+                    
+
+                    GameObject newLadderPiece = Instantiate(ladderPieceSprite, Vector3.zero, ladderPieceSprite.transform.rotation, this.gameObject.transform);
+                    newLadderPiece.transform.localPosition = new Vector3(0, height, 0);
+                }                                           
+            }
+        }
     }
 
     // Update is called once per frame
