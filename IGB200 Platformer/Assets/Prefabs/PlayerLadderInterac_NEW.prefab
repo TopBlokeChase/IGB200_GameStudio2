@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7789547086076023592}
   m_Layer: 0
   m_Name: PointA
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 5873710283651403599}
   m_Layer: 0
   m_Name: PointB
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
