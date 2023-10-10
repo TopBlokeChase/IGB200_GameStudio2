@@ -182,10 +182,10 @@ public class PlayerCombat : MonoBehaviour
 
     public void CannotAttackDuration(float time)
     {
-        if (hasNoAttackStatus)
+        if (!hasNoAttackStatus)
         {
+            hasNoAttackStatus = true;
             StartCoroutine(DelayAttackCoroutine(time));
-            hasNoAttackStatus = false;
         }
     }
 
@@ -194,6 +194,6 @@ public class PlayerCombat : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(time);
         canAttack = true;
-        hasNoAttackStatus = true;
+        hasNoAttackStatus = false;
     }
 }

@@ -199,6 +199,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public bool IsSlowed()
+    {
+        return isSlowed;
+    }
+
     IEnumerator SlowStatusCoroutine(float time)
     {
         float originalMoveSpeed = movementSpeed;

@@ -20,6 +20,7 @@ public class Boss_GenderEquality : MonoBehaviour
     [SerializeField] private GameObject basicEnemyGroup;
     [SerializeField] private GameObject sprite;
     [SerializeField] private GameObject flyingDisc;
+    [SerializeField] private GameObject wordAttackPrefab;
     [SerializeField] private GameObject brokenGround;
     [SerializeField] private GameObject hotFloor;
     [SerializeField] private GameObject slamCollider;
@@ -161,7 +162,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         if (bossType == BossType.MentalHealth)
         {
-            randomNumber = Random.Range(1, 5);
+            randomNumber = Random.Range(1, 6);
         }
         
 
@@ -194,6 +195,13 @@ public class Boss_GenderEquality : MonoBehaviour
             //canIdle = false;
             HotGroundAttack();
         }
+
+        if (randomNumber == 5)
+        {
+            isBusy = true;
+            //canIdle = false;
+            ShootWordAttack();
+        }
     }
 
     //void IdleAnimation()
@@ -212,6 +220,13 @@ public class Boss_GenderEquality : MonoBehaviour
     void ShootAttack()
     {
         Instantiate(flyingDisc, transform.position, transform.rotation);
+        stateChangeTimer = 0;
+        isBusy = false;
+    }
+
+    void ShootWordAttack()
+    {
+        Instantiate(wordAttackPrefab, transform.position, transform.rotation);
         stateChangeTimer = 0;
         isBusy = false;
     }
@@ -280,7 +295,7 @@ public class Boss_GenderEquality : MonoBehaviour
         sprite.transform.localScale = spriteOriginalSize;
         sprite.GetComponent<SpriteRenderer>().flipX = false;
 
-        if (bossType == BossType.Harassment)
+        if (bossType == BossType.Harassment || bossType == BossType.MentalHealth)
         {
             this.gameObject.GetComponent<Enemy>().Bloom(bloomAmount, false);
             hotFloor.GetComponent<Boss_HotFloor>().DeActivate();
@@ -308,7 +323,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         bossSounds.StopLaserLoop();
 
-        if (bossType == BossType.Harassment)
+        if (bossType == BossType.Harassment || bossType == BossType.MentalHealth)
         {
             this.gameObject.GetComponent<Enemy>().Bloom(bloomAmount, false);
             hotFloor.GetComponent<Boss_HotFloor>().DeActivate();

@@ -52,24 +52,36 @@ public class LadderPlayer_NEW : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (!inPlacementMode && !hasPlacedLadder)
+            if (playerMovement.isInteracting != true)
             {
-                inPlacementMode = true;
-                playerLadderOutline.SetActive(true);
-            }
-            else if (inPlacementMode && !hasPlacedLadder)
-            {
-                inPlacementMode = false;
-                playerLadderOutline.SetActive(false);
-            }
-            else if (!inPlacementMode && hasPlacedLadder)
-            {
-                RemoveLadder();
+                if (!inPlacementMode && !hasPlacedLadder)
+                {
+                    inPlacementMode = true;
+                    playerLadderOutline.SetActive(true);
+                }
+                else if (inPlacementMode && !hasPlacedLadder)
+                {
+                    inPlacementMode = false;
+                    playerLadderOutline.SetActive(false);
+                }
+                else if (!inPlacementMode && hasPlacedLadder)
+                {
+                    if (playerMovement.isInteracting != true)
+                    {
+                        RemoveLadder();
+                    }
+                }
             }
         }
 
         if (inPlacementMode)
         {
+            if (playerMovement.isInteracting == true)
+            {
+                inPlacementMode = false;
+                playerLadderOutline.SetActive(false);
+            }
+
             if (playerMovement.isLookingLeft)
             {
                 playerLadderOutline.transform.rotation = Quaternion.Euler(0, -this.transform.rotation.y, 0);
