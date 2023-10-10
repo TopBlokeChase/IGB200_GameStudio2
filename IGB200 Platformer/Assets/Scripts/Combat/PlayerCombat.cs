@@ -47,7 +47,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.transform.localScale = new Vector3(0.52f, 0.52f, 0.52f);
+        this.gameObject.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
         playerSounds = this.gameObject.GetComponent<PlayerSounds>();
         playerMovement = this.gameObject.GetComponentInParent<PlayerMovement>();
         player = playerMovement.gameObject;
