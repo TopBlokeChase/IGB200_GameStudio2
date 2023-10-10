@@ -2203,38 +2203,32 @@ MonoBehaviour:
   - dialogue: Hi!
     isPlayerDialogue: 1
     isLevelFinishedDialogue: 0
-  - dialogue: Oh hey...
+  - dialogue: Ah!
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
-  - dialogue: You seem down. What's up?
+  - dialogue: Are you okay?
     isPlayerDialogue: 1
     isLevelFinishedDialogue: 0
-  - dialogue: Well, construction isn't turning out the way I thought it would.
+  - dialogue: "If you\u2019re here to make fun of me just leave!!!"
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
-  - dialogue: Oh, why's that? Are you behind schedule or something?
+  - dialogue: "What? No, I\u2019m here to help! Who\u2019s been making fun of you? "
     isPlayerDialogue: 1
     isLevelFinishedDialogue: 0
-  - dialogue: 'Well not exactly. '
+  - dialogue: "Oh. It\u2019s just some of the people on my team have been making
+      mean comments about my work!!! I\u2019m debating whether to go into work today
+      or not, but I\u2019ve used up all my sick leave and am running low on money. "
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
-  - dialogue: 'I''m only being given tasks that a ''woman can do'', to quote my coworkers.
-      All I''ve done so far is fetch lunches!!! '
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: I didn't spend months working on my skills to finally get full time
-      work and be stuck doing nothing!
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: Jeez...that sounds horrible! Have you spoken to higher ups about this?
+  - dialogue: "Aw man I\u2019m so sorry that\u2019s happening to you. Don\u2019t
+      worry I\u2019ll go check it out. "
     isPlayerDialogue: 1
     isLevelFinishedDialogue: 0
-  - dialogue: Yeah, I have. Nothing's come from it...
+  - dialogue: "Thank you! Just be careful their words really hurt. Before you go,
+      take this ladder you\u2019ll need it for this site. Press F to use it. Left
+      Click to place it down, or click F again to cancel. If the ladder is placed
+      down, you can destroy it anytime by pressing F again"
     isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: Well don't fear, I'm going to help! I'll help you get to the bottom
-      of this.
-    isPlayerDialogue: 1
     isLevelFinishedDialogue: 0
   - dialogue: Wow you mean it? Thanks so much!
     isPlayerDialogue: 0
@@ -2242,85 +2236,52 @@ MonoBehaviour:
   - dialogue: You may find what you're looking for at the very top of this building...
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
-  - dialogue: You can use your Melee Ability with Left Click and your Ranged Ability
-      with Right Click!
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: These abilities may come in handy to deal with those pesky moving orbs....they
-      may try to push you off, be careful.
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
   - dialogue: Come back and speak to me if you manage to change something!
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
   afterIntroDialogue:
-  - dialogue: You're back already? Nothing has changed.
+  - dialogue: "You\u2019re back already? Can I go into work without any issues now?"
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
-  - dialogue: Maybe all hope is lost for me...
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: Don't fret, I'm still working on it!
+  - dialogue: 'Not just yet! '
     isPlayerDialogue: 1
     isLevelFinishedDialogue: 0
-  - dialogue: Okay. Remember, you may find what you're looking for at the very top
-      of this building...
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: You can use your Melee Ability with Left Click and your Ranged Ability
-      with Right Click!
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: These abilities may come in handy to deal with those pesky moving orbs....they
-      may try to push you off, be careful.
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: Come back and speak to me if you manage to change something!
+  - dialogue: Oh okay. Come back later when you have some news. Remember, you may
+      find what you're looking for at the very top of this building...
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
   bossDefeatDialogue:
-  - dialogue: Good news!! I've worked my magic and helped sort your issue out!
+  - dialogue: "Good news!! I\u2019ve worked my magic and sorted your issue out!!
+      You should be all good to work without having to worry about people making
+      mean comments. "
     isPlayerDialogue: 1
     isLevelFinishedDialogue: 0
-  - dialogue: Go back in and ask for something to work on now. Hopefully you should
-      get a better response.
-    isPlayerDialogue: 1
-    isLevelFinishedDialogue: 0
-  - dialogue: 'Oh, ok! I''ll try! '
+  - dialogue: 'Are you serious? This is great news thanks so much. Time to rebuild
+      my savings account. '
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
-  - dialogue: Thank you!
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 1
   afterBossDefeatDialogue:
-  - dialogue: Hey you're back! Guess what?
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: I just got asked to work on the interior finishes for the building!
-    isPlayerDialogue: 0
-    isLevelFinishedDialogue: 0
-  - dialogue: Wow that's awesome! I'm glad I could help you out.
-    isPlayerDialogue: 1
-    isLevelFinishedDialogue: 0
-  - dialogue: I can't thank you enough for everything!
+  - dialogue: Thanks again!
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
   sideNPCDialogueBeforeBossMEN:
-  - Hmph. These ladies aren't even cut out for this work...
-  - '*laughs* let''s see how long these women last here'
-  - Why are they even here? This is a man's job!
+  - "Jessica\u2019s floor plan was so bad. "
+  - 'I wish Jessica would just leave. Her work brings us down. I hate her. '
+  - 'I heard a rumour that Jessica only got this job because of her fathers money. '
   sideNPCDialogueAfterBossMEN:
-  - I should get her opinion on this, she's quite good at this!
-  - I appreciate how hard she works here. We'd be lost without her...
-  - We should hire more female workers here. They really are an asset here.
+  - Huh, I guess I was wrong about Jessica her work over here looks good.
+  - "I feel bad for spreading false rumours about Jessica she\u2019s actually so
+    sweet and always puts 100% into her work. "
+  - Jessica is actually so sweet when you talk to her!
   sideNPCDialogueBeforeBossWOMEN:
-  - ...maybe I should have got into nursing instead...
-  - I work just as hard as them. Why can't they see that?
-  - I can do so much more...if they just gave me the chance.
+  - "Jessica\u2019s floor plan was so bad. "
+  - 'I wish Jessica would just leave. Her work brings us down. I hate her. '
+  - 'I heard a rumour that Jessica only got this job because of her fathers money. '
   sideNPCDialogueAfterBossWOMEN:
-  - I'm happy my value is recognised here!
-  - They care about my input. Finally, I can contribute more!
-  - I'm so glad things have gotten better here. I love working here!
+  - Huh, I guess I was wrong about Jessica her work over here looks good.
+  - "I feel bad for spreading false rumours about Jessica she\u2019s actually so
+    sweet and always puts 100% into her work."
+  - Jessica is actually so sweet when you talk to her!
 --- !u!212 &518330983
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -21983,73 +21944,34 @@ MonoBehaviour:
   frameColorWhenNotTalking: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
   hasDefeatedBoss: 0
   introDialogue:
-  - dialogue: Huh, so I guess you're the big guy causing all the trouble around these
-      parts.
-    isPlayerDialogue: 1
-    bossLeavesAtThisPoint: 0
-  - dialogue: Well well well...another person which I can manipulate. How exciting!
+  - dialogue: Huh, who are you?
     isPlayerDialogue: 0
     bossLeavesAtThisPoint: 0
-  - dialogue: '!?'
+  - dialogue: "You need to stop picking on Jessica!! She\u2019s a great girl with
+      lots of talent. "
     isPlayerDialogue: 1
     bossLeavesAtThisPoint: 0
-  - dialogue: What are you talking about?
+  - dialogue: "Haha, you\u2019re seriously siding with her. She\u2019s going down
+      and then it\u2019s time to pick another person. All this negativity is so yummy,
+      I will not be stopped! "
     isPlayerDialogue: 1
     bossLeavesAtThisPoint: 0
-  - dialogue: 'Hehehe...these silly humans are so easy to manipulate! Soon I will
-      force inequality throughout all workplaces. '
-    isPlayerDialogue: 0
-    bossLeavesAtThisPoint: 0
-  - dialogue: Not if I can help it! Your ways are unfair and hurtful to everyone
-      at this workplace!
-    isPlayerDialogue: 1
-    bossLeavesAtThisPoint: 0
-  - dialogue: And you think you can stop me? Hahahaha!
-    isPlayerDialogue: 0
-    bossLeavesAtThisPoint: 0
-  - dialogue: ' You will not defeat me!!!'
-    isPlayerDialogue: 0
-    bossLeavesAtThisPoint: 0
-  - dialogue: Yeah? Well I've dealt with your lackies, now it's your turn!
+  - dialogue: "Ha, you wish! I\u2019m taking you down!! "
     isPlayerDialogue: 1
     bossLeavesAtThisPoint: 0
   bossDefeatDialogue:
-  - dialogue: Aggghhh!
+  - dialogue: "Noooo!!! I have been defeated\u2026\u2026 my yummy food\u2026. "
     isPlayerDialogue: 0
     bossLeavesAtThisPoint: 0
-  - dialogue: I....I've been defeated....
-    isPlayerDialogue: 0
-    bossLeavesAtThisPoint: 0
-  - dialogue: How is this possible?
-    isPlayerDialogue: 0
-    bossLeavesAtThisPoint: 0
-  - dialogue: Look, what you're doing here isn't right. Everyone, including you could
-      be so much happier if you stopped this behaviour.
+  - dialogue: 'You need to find something else to feed on. Bringing people down is
+      cruel and plain disrespectful. '
     isPlayerDialogue: 1
     bossLeavesAtThisPoint: 0
-  - dialogue: I...
+  - dialogue: "Mmm I guess I could feed on something else\u2026. I\u2019ve heard
+      positivity is just as nice. "
     isPlayerDialogue: 0
     bossLeavesAtThisPoint: 0
-  - dialogue: "You\u2019ve made your point\u2026 I guess forcing inequality between
-      men and women in the workplace isn\u2019t the right way to go about things. "
-    isPlayerDialogue: 0
-    bossLeavesAtThisPoint: 0
-  - dialogue: "Exactly! Everyone on this worksite is just as capable as each other.
-      Working together in a safe and fun environment is the best way to do things.
-      I\u2019m glad you learnt your lesson."
-    isPlayerDialogue: 1
-    bossLeavesAtThisPoint: 0
-  - dialogue: Very well. I shall release my hold upon this workplace. You've given
-      me much to think about.
-    isPlayerDialogue: 0
-    bossLeavesAtThisPoint: 0
-  - dialogue: ...
-    isPlayerDialogue: 1
-    bossLeavesAtThisPoint: 1
-  - dialogue: That thing is gone now.
-    isPlayerDialogue: 1
-    bossLeavesAtThisPoint: 0
-  - dialogue: Guess I should go back and speak with Aya.
+  - dialogue: 'Good. I better get back to Jessica. '
     isPlayerDialogue: 1
     bossLeavesAtThisPoint: 0
 --- !u!1 &1506878674 stripped
