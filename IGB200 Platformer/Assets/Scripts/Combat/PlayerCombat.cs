@@ -42,6 +42,9 @@ public class PlayerCombat : MonoBehaviour
 
     private PlayerSounds playerSounds;
 
+    private bool canAttack = true;
+    private bool hasNoAttackStatus = false;
+
     private void Start()
     {
         this.gameObject.transform.localScale = new Vector3(0.52f, 0.52f, 0.52f);
@@ -65,18 +68,21 @@ public class PlayerCombat : MonoBehaviour
     {
         meleeAttackTimer += Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (canAttack)
         {
-            if (meleeAttackTimer > meleeAttackCooldown)
+            if (Input.GetButtonDown("Fire1"))
             {
-                playerAnimator.SetTrigger("Attack");
-                meleeAttackTimer = 0f;
+                if (meleeAttackTimer > meleeAttackCooldown)
+                {
+                    playerAnimator.SetTrigger("Attack");
+                    meleeAttackTimer = 0f;
+                }
             }
-        }
 
-        if (Input.GetButtonDown("Fire2"))
-        {          
-            HammerThrow();
+            if (Input.GetButtonDown("Fire2"))
+            {
+                HammerThrow();
+            }
         }
     }
 
@@ -172,5 +178,22 @@ public class PlayerCombat : MonoBehaviour
     {
         this.hasNoteOfCourage = hasNoteOfCourage;
         health.SetShield(shieldAmount);
+    }
+
+    public void CannotAttackDuration(float time)
+    {
+        if (hasNoAttackStatus)
+        {
+            StartCoroutine(DelayAttackCoroutine(time));
+            hasNoAttackStatus = false;
+        }
+    }
+
+    IEnumerator DelayAttackCoroutine(float time)
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(time);
+        canAttack = true;
+        hasNoAttackStatus = true;
     }
 }

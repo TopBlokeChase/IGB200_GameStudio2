@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerSounds playerSounds;
 
+    private bool isSlowed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -186,5 +188,29 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody.velocity += new Vector2(forceToAddX, forceToAdd / 2);
 
         playerSounds.PlayHurt();
+    }
+
+    public void GiveSlowStatusEffect(float time)
+    {
+        if (!isSlowed)
+        {
+            StartCoroutine(SlowStatusCoroutine(time));
+            isSlowed = true;
+        }
+    }
+
+    IEnumerator SlowStatusCoroutine(float time)
+    {
+        float originalMoveSpeed = movementSpeed;
+        float originalAnimatorSpeed = playerAnimator.speed;
+
+        movementSpeed = movementSpeed / 2;
+        playerAnimator.speed = playerAnimator.speed / 2;
+
+        yield return new WaitForSeconds(time);
+
+        movementSpeed = originalMoveSpeed;
+        playerAnimator.speed = originalAnimatorSpeed;
+        isSlowed = false;
     }
 }
