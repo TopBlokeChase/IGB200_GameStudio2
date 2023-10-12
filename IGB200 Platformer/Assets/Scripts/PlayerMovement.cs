@@ -204,6 +204,11 @@ public class PlayerMovement : MonoBehaviour
         return isSlowed;
     }
 
+    public bool IsGrounded()
+    {
+        return isGrounded;
+    }
+
     IEnumerator SlowStatusCoroutine(float time)
     {
         float originalMoveSpeed = movementSpeed;

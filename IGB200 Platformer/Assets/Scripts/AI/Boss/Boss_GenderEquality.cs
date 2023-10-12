@@ -220,6 +220,7 @@ public class Boss_GenderEquality : MonoBehaviour
     void ShootAttack()
     {
         Instantiate(flyingDisc, transform.position, transform.rotation);
+        bossSounds.PlayFlyingDisc();
         stateChangeTimer = 0;
         isBusy = false;
     }
@@ -227,6 +228,7 @@ public class Boss_GenderEquality : MonoBehaviour
     void ShootWordAttack()
     {
         Instantiate(wordAttackPrefab, transform.position, transform.rotation);
+        bossSounds.PlayWordAttack();
         stateChangeTimer = 0;
         isBusy = false;
     }
@@ -286,7 +288,7 @@ public class Boss_GenderEquality : MonoBehaviour
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
         laserBeam.SetActive(false);
 
-        bossSounds.StopLaserLoop();
+        bossSounds.StopAllSounds(false);
 
         animator.SetBool("LaserBeam", false);
         animator.SetBool("SlamAttack", false);
@@ -321,7 +323,7 @@ public class Boss_GenderEquality : MonoBehaviour
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
         laserBeam.SetActive(false);
 
-        bossSounds.StopLaserLoop();
+        bossSounds.StopAllSounds(true);
 
         if (bossType == BossType.Harassment || bossType == BossType.MentalHealth)
         {
@@ -377,6 +379,8 @@ public class Boss_GenderEquality : MonoBehaviour
         Vector3 abovePlayerPos = player.transform.position;
 
         Vector3 startingScale = sprite.transform.localScale;
+
+        bossSounds.PlaySlamAttackWhoosh();
 
         while (timer < moveAbovePlayerSpeed)
         {
@@ -570,6 +574,8 @@ public class Boss_GenderEquality : MonoBehaviour
 
         bossCamera.GetComponent<CameraShake>().ShakeCamera(hotCameraShakeAmount, hotCameraShakeDuration);
 
+        bossSounds.PlayHotFloorRumble();
+
         while (timer < hotAttackDownDuration)
         {
             transform.position = Vector2.Lerp(startingPosition, slamPosition, timer / hotAttackDownDuration);
@@ -578,6 +584,7 @@ public class Boss_GenderEquality : MonoBehaviour
         }
 
         brokenFloor = Instantiate(brokenGround, transform.position, Quaternion.identity);
+        bossSounds.PlayPlatformAppear();
         
         timer = 0;
 
@@ -591,6 +598,8 @@ public class Boss_GenderEquality : MonoBehaviour
 
         this.gameObject.GetComponent<Enemy>().Bloom(bloomAmount, true);
         hotFloor.GetComponent<Boss_HotFloor>().Activate();
+
+        bossSounds.PlayHotFloorBubble();
 
         while (timer < hotSizeChangeDuration)
         {
@@ -606,6 +615,8 @@ public class Boss_GenderEquality : MonoBehaviour
         hotFloor.GetComponent<Boss_HotFloor>().DeActivate();
 
 
+        bossSounds.StopHotFloorBubble();
+
 
         while (timer < hotAttackAfterSizeRestDuration)
         {
@@ -619,6 +630,9 @@ public class Boss_GenderEquality : MonoBehaviour
         {
             child.gameObject.GetComponentInChildren<Platform_BrokenFloor>().Finish();
         }
+
+        bossSounds.PlayPlatformDisappear();
+        bossSounds.StopHotFloorRumble();
 
         Vector3 currentScale = sprite.transform.localScale;
         Vector3 currentPos = transform.position;

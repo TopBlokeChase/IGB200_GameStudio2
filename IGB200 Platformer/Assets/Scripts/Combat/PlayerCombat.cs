@@ -45,6 +45,8 @@ public class PlayerCombat : MonoBehaviour
     private bool canAttack = true;
     private bool hasNoAttackStatus = false;
 
+    private bool enemyExists = false;
+
     private void Start()
     {
         this.gameObject.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
@@ -109,7 +111,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     private void Attack()
-    {
+    {       
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, enemyLayerMask);
 
         playerSounds.PlayAttackGrunt();
@@ -118,8 +120,25 @@ public class PlayerCombat : MonoBehaviour
         {
             if (enemy.TryGetComponent<Health>(out  Health health))
             {
-                health.DealDamage(attackDamage);
+                health.DealDamage(attackDamage);            
             }
+        } 
+        
+        if (enemies.Length == 0)
+        {
+            enemyExists = false;
+        }
+        else
+        {
+            enemyExists = true;
+        }
+    }
+
+    public void PlayHammerHitGroundIfNoTarget()
+    {
+        if (playerMovement.IsGrounded() && !enemyExists)
+        {
+            playerSounds.PlayAttackHitGround();
         }
     }
 

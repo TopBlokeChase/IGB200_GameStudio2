@@ -202,7 +202,7 @@ Transform:
   - {fileID: 2123913933}
   - {fileID: 181009721}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &35170899 stripped
 GameObject:
@@ -411,7 +411,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1857349078935333685, guid: 9c4e603f365e4ac42a17cbf1988c03a5, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 1857349078935333685, guid: 9c4e603f365e4ac42a17cbf1988c03a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -475,6 +475,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c4e603f365e4ac42a17cbf1988c03a5, type: 3}
+--- !u!82 &83339986 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5209298492990371451, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+  m_PrefabInstance: {fileID: 5292491849552244826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &105685610 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 979737784556747935, guid: f684292bb2a76ad40b9a5c52c4b15597, type: 3}
@@ -842,7 +847,7 @@ Transform:
   - {fileID: 2011728148}
   - {fileID: 1799810068}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &178053871
 MonoBehaviour:
@@ -1235,6 +1240,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4705292968188887418, guid: 2cea13607eb03604182a283836bc8a7f, type: 3}
   m_PrefabInstance: {fileID: 1389126367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &230224159 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8402208976924663178, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+  m_PrefabInstance: {fileID: 5292491849552244826}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &243487580
 PrefabInstance:
@@ -1834,7 +1844,7 @@ Transform:
   m_Children:
   - {fileID: 730468826}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &405968236
 PrefabInstance:
@@ -2165,7 +2175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7839576492042384735, guid: 529828c5f7ce13a45afc203411279361, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 7839576492042384735, guid: 529828c5f7ce13a45afc203411279361, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3463,6 +3473,11 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 810125181880767664, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
   m_PrefabInstance: {fileID: 5292491849552244826}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &747949433 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7361916978549061255, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+  m_PrefabInstance: {fileID: 5292491849552244826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &760207717 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6078368855196826890, guid: a3e1938321341cb4b887ecd126678f19, type: 3}
@@ -4238,7 +4253,7 @@ Transform:
   - {fileID: 1585752379}
   - {fileID: 1926573789}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &974887710 stripped
 MonoBehaviour:
@@ -5073,7 +5088,7 @@ Transform:
   m_Children:
   - {fileID: 1914362512}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1208526714 stripped
 Transform:
@@ -21919,7 +21934,7 @@ MonoBehaviour:
   bossType: 2
   musicHandler: {fileID: 1229695943}
   bossSounds: {fileID: 2024833919}
-  basicEnemyGroup: {fileID: 1817026406}
+  basicEnemyGroup: {fileID: 27919980}
   sprite: {fileID: 1741770041}
   flyingDisc: {fileID: 2679886360509345032, guid: 09d441078db6a0c47aeaca5067de8502, type: 3}
   wordAttackPrefab: {fileID: 6847894078504816451, guid: d6aaa019e60f1934883ee91a52f0db9b, type: 3}
@@ -22029,7 +22044,7 @@ MonoBehaviour:
   - dialogue: "Haha, you\u2019re seriously siding with her. She\u2019s going down
       and then it\u2019s time to pick another person. All this negativity is so yummy,
       I will not be stopped! "
-    isPlayerDialogue: 1
+    isPlayerDialogue: 0
     bossLeavesAtThisPoint: 0
   - dialogue: "Ha, you wish! I\u2019m taking you down!! "
     isPlayerDialogue: 1
@@ -22046,6 +22061,9 @@ MonoBehaviour:
       positivity is just as nice. "
     isPlayerDialogue: 0
     bossLeavesAtThisPoint: 0
+  - dialogue: ...
+    isPlayerDialogue: 1
+    bossLeavesAtThisPoint: 1
   - dialogue: 'Good. I better get back to Jessica. '
     isPlayerDialogue: 1
     bossLeavesAtThisPoint: 0
@@ -22735,7 +22753,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1570449848 stripped
 MonoBehaviour:
@@ -22876,6 +22894,11 @@ Transform:
   m_Father: {fileID: 178053870}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1666847777 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8041208845991461124, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+  m_PrefabInstance: {fileID: 5292491849552244826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1674498997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6189938176709663937, guid: b63cef34fa3fbbf49a6ae886a00c859d, type: 3}
@@ -23172,7 +23195,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footstepSoundSource: {fileID: 1437063772}
   meleeAttackSoundSource: {fileID: 658325055}
+  meleeAttackWhooshSoundSource: {fileID: 1773798751}
+  meleeAttackHitGroundSoundSource: {fileID: 1666847777}
   hurtSoundSource: {fileID: 746796044}
+  hitFlyingDiscSoundSource: {fileID: 230224159}
+  slowedSoundSource: {fileID: 747949433}
+  slowedEndSoundSource: {fileID: 83339986}
   jumpGruntSoundSource: {fileID: 1700921640}
   nailGunAimSoundSource: {fileID: 5292491849552244828}
   nailGunFireSoundSource: {fileID: 5292491849552244827}
@@ -23183,6 +23211,9 @@ MonoBehaviour:
   meleeAttackSounds:
   - {fileID: 8300000, guid: ab28363bd271ce84e96e5a469fef9004, type: 3}
   - {fileID: 8300000, guid: 8a661dfb683e7574e88d7dea0d24b37b, type: 3}
+  meleeAttackHitGroundSounds:
+  - {fileID: 8300000, guid: 0abb45ca2115806479107be02f964aec, type: 3}
+  - {fileID: 8300000, guid: efbdfbe3c92dfa3498d5c6d21ab5372d, type: 3}
   hurtSounds:
   - {fileID: 8300000, guid: a0698b24089d71c47989d9a1d7fd5077, type: 3}
   - {fileID: 8300000, guid: 69546e01d04e4ba4796af848100ea657, type: 3}
@@ -23384,6 +23415,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b63cef34fa3fbbf49a6ae886a00c859d, type: 3}
+--- !u!82 &1773798751 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4847905137302332096, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+  m_PrefabInstance: {fileID: 5292491849552244826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1781080305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23632,37 +23668,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b63cef34fa3fbbf49a6ae886a00c859d, type: 3}
---- !u!1 &1817026406
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1817026407}
-  m_Layer: 0
-  m_Name: BasicEnemies
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1817026407
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817026406}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 122.5, y: 48, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1824811194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25185,7 +25190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3130847296293218246, guid: 5db89156814314748adf85b9601a768e, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3130847296293218246, guid: 5db89156814314748adf85b9601a768e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25472,7 +25477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7129743125301757644, guid: 350c51b4c5960684eb449461cdada284, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7129743125301757644, guid: 350c51b4c5960684eb449461cdada284, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25755,7 +25760,7 @@ PrefabInstance:
       objectReference: {fileID: 1886721432}
     - target: {fileID: 7624950193364012295, guid: edd7702c238d547448b19f53d8a6d76a, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7624950193364012295, guid: edd7702c238d547448b19f53d8a6d76a, type: 3}
       propertyPath: m_LocalPosition.x

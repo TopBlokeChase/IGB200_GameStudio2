@@ -48,6 +48,8 @@ public class FlyingDisc : MonoBehaviour
         {
             player.GetComponent<PlayerMovement>().AddForce(15, this.gameObject);
             player.GetComponentInChildren<Health>().DealDamage(1);
+            player.GetComponentInChildren<PlayerSounds>().PlayHitFlyingDisc();
+
             Destroy(this.gameObject);
         }
         else

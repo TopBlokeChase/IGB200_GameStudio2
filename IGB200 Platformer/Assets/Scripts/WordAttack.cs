@@ -56,16 +56,14 @@ public class WordAttack : MonoBehaviour
 
                 player.GetComponent<PlayerMovement>().GiveSlowStatusEffect(playerSlowTime);
                 player.GetComponentInChildren<PlayerCombat>().CannotAttackDuration(playerSlowTime);
+                player.GetComponentInChildren<PlayerSounds>().PlaySlowedBegin(playerSlowTime);
+
                 player.GetComponentInChildren<PlayerStatusParticleEffect>().StartParticles(playerSlowTime);
 
                 //player.GetComponentInChildren<Health>().DealDamage(1);
 
                 Destroy(this.gameObject);
             }
-        }
-        else
-        {
-            Destroy(this.gameObject);
         }
     }
 }

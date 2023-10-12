@@ -2725,6 +2725,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footstepSoundSource: {fileID: 834716542}
   meleeAttackSoundSource: {fileID: 1647991997}
+  meleeAttackWhooshSoundSource: {fileID: 759200744}
+  meleeAttackHitGroundSoundSource: {fileID: 759200743}
   hurtSoundSource: {fileID: 1465117931}
   jumpGruntSoundSource: {fileID: 1715928837}
   nailGunAimSoundSource: {fileID: 1062278207}
@@ -2736,6 +2738,9 @@ MonoBehaviour:
   meleeAttackSounds:
   - {fileID: 8300000, guid: ab28363bd271ce84e96e5a469fef9004, type: 3}
   - {fileID: 8300000, guid: 8a661dfb683e7574e88d7dea0d24b37b, type: 3}
+  meleeAttackHitGroundSounds:
+  - {fileID: 8300000, guid: 0abb45ca2115806479107be02f964aec, type: 3}
+  - {fileID: 8300000, guid: efbdfbe3c92dfa3498d5c6d21ab5372d, type: 3}
   hurtSounds:
   - {fileID: 8300000, guid: a0698b24089d71c47989d9a1d7fd5077, type: 3}
   - {fileID: 8300000, guid: 69546e01d04e4ba4796af848100ea657, type: 3}
@@ -4490,6 +4495,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+--- !u!82 &759200743 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8041208845991461124, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+  m_PrefabInstance: {fileID: 759200742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &759200744 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4847905137302332096, guid: fe5df14cba2173441838143df7ea8cd2, type: 3}
+  m_PrefabInstance: {fileID: 759200742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &787697026
 GameObject:
   m_ObjectHideFlags: 0
