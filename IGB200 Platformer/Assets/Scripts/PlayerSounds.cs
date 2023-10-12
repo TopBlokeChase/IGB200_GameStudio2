@@ -10,13 +10,25 @@ public class PlayerSounds : MonoBehaviour
     [SerializeField] private AudioSource meleeAttackSoundSource;
     [SerializeField] private AudioSource meleeAttackWhooshSoundSource;
     [SerializeField] private AudioSource meleeAttackHitGroundSoundSource;
+
     [SerializeField] private AudioSource hurtSoundSource;
+
     [SerializeField] private AudioSource hitFlyingDiscSoundSource;
+
     [SerializeField] private AudioSource slowedSoundSource;
     [SerializeField] private AudioSource slowedEndSoundSource;
+
     [SerializeField] private AudioSource jumpGruntSoundSource;
+
     [SerializeField] private AudioSource nailGunAimSoundSource;
     [SerializeField] private AudioSource nailGunFireSoundSource;
+
+    [SerializeField] private AudioSource ladderActivateSoundSource;
+    [SerializeField] private AudioSource ladderDeactivateSoundSource;
+    [SerializeField] private AudioSource ladderPlaceeSoundSource;
+    [SerializeField] private AudioSource ladderDestroySoundSource;
+    [SerializeField] private AudioSource ladderInvalidPlaceSoundSource;
+
     [SerializeField] private List<AudioClip> footstepSounds = new List<AudioClip>();
     [SerializeField] private List<AudioClip> meleeAttackSounds = new List<AudioClip>();
     [SerializeField] private List<AudioClip> meleeAttackHitGroundSounds = new List<AudioClip>();
@@ -81,6 +93,31 @@ public class PlayerSounds : MonoBehaviour
     public void PlayNailGunFire()
     {
         nailGunFireSoundSource.Play();
+    }
+
+    public void PlayLadderActivate()
+    {
+        ladderActivateSoundSource.Play();
+    }
+
+    public void PlayLadderDeactivate()
+    {
+        ladderDeactivateSoundSource.Play();
+    }
+
+    public void PlayLadderPlace()
+    {
+        ladderPlaceeSoundSource.Play();
+    }
+
+    public void PlayLadderDestroy()
+    {
+        ladderDestroySoundSource.Play();
+    }
+
+    public void PlayLadderInvalidPlace()
+    {
+        ladderInvalidPlaceSoundSource.Play();
     }
 
     private AudioClip PickSound(List<AudioClip> audioClips)

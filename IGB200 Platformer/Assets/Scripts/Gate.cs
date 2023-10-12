@@ -9,6 +9,7 @@ public class Gate : MonoBehaviour
     [SerializeField] private float gateOpenSpeed;
     [SerializeField] private float gateCloseSpeed;
     [SerializeField] private float gateOpenHeight;
+    [SerializeField] private AudioSource gateOpenAudioSource;
 
     private bool opening;
     private bool closing;
@@ -33,7 +34,7 @@ public class Gate : MonoBehaviour
     void Update()
     {
         if (opening)
-        {
+        {          
             if (timer * gateOpenSpeed < 1)
             {
                 transform.position = Vector3.Lerp(startPosition, endPosition, timer / gateOpenSpeed);
@@ -67,6 +68,7 @@ public class Gate : MonoBehaviour
 
     public void OpenGate()
     {
+        gateOpenAudioSource.Play();
         timer = 0;
         opening = true;
     }

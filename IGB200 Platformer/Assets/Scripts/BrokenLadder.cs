@@ -17,6 +17,8 @@ public class BrokenLadder : MonoBehaviour
     [SerializeField] private Tile ladderHalfRepaired;
     [SerializeField] private Tile ladderFullyRepaired;
     [SerializeField] private GameObject ladderObject;
+    [SerializeField] private AudioSource ladderHammerHitAudioSource;
+    [SerializeField] private AudioSource ladderFullyRepairedAudioSource;
 
     private TileBase[] allTiles;
     private BoundsInt bounds;
@@ -48,6 +50,8 @@ public class BrokenLadder : MonoBehaviour
         {
             RepairLadder(ladderFullyRepaired);
             ladderObject.transform.parent = null;
+            ladderFullyRepairedAudioSource.transform.parent = null;
+            ladderFullyRepairedAudioSource.Play();
             ladderObject.SetActive(true);
             transform.root.gameObject.SetActive(false);
         }
@@ -71,6 +75,7 @@ public class BrokenLadder : MonoBehaviour
 
     public void RemoveHammerCount()
     {
+        ladderHammerHitAudioSource.Play();
         amountOfHammers -= 1;
 
         if (amountOfHammers <= 0)
@@ -86,7 +91,7 @@ public class BrokenLadder : MonoBehaviour
     }
 
     void RepairLadder(Tile tileToChangeTo)
-    {
+    {      
         for (int i = 0; i < bounds.size.x; i++)
         {
             for (int j = 0; j < bounds.size.y; j++)

@@ -24,6 +24,8 @@ public class LadderPlayer_NEW : MonoBehaviour
     private string invalidPlacementText = "Invalid Placement!";
 
     private PlayerMovement playerMovement;
+    private PlayerCombat playerCombat;
+    private PlayerSounds playerSounds;
 
     public void RemoveLadder()
     {
@@ -37,6 +39,8 @@ public class LadderPlayer_NEW : MonoBehaviour
         {
             inPlacementMode = false;
             playerLadderOutline.SetActive(false);
+            playerCombat.CannotAttackToggle(true);
+            playerSounds.PlayLadderDeactivate();
         }
     }
 
@@ -45,6 +49,8 @@ public class LadderPlayer_NEW : MonoBehaviour
     {
         initialPlacementText = placementText.text;
         playerMovement = GetComponent<PlayerMovement>();
+        playerCombat = GetComponentInChildren<PlayerCombat>();
+        playerSounds = GetComponentInChildren<PlayerSounds>();
     }
 
     // Update is called once per frame
@@ -58,28 +64,35 @@ public class LadderPlayer_NEW : MonoBehaviour
                 {
                     inPlacementMode = true;
                     playerLadderOutline.SetActive(true);
+                    playerCombat.CannotAttackToggle(false);
+                    playerSounds.PlayLadderActivate();
                 }
                 else if (inPlacementMode && !hasPlacedLadder)
                 {
                     inPlacementMode = false;
                     playerLadderOutline.SetActive(false);
+                    playerCombat.CannotAttackToggle(true);
+                    playerSounds.PlayLadderDeactivate();
                 }
                 else if (!inPlacementMode && hasPlacedLadder)
                 {
                     if (playerMovement.isInteracting != true)
                     {
                         RemoveLadder();
+                        playerSounds.PlayLadderDestroy();
                     }
                 }
             }
         }
 
         if (inPlacementMode)
-        {
+        {           
             if (playerMovement.isInteracting == true)
             {
-                inPlacementMode = false;
+                playerCombat.CannotAttackToggle(true);
                 playerLadderOutline.SetActive(false);
+                playerSounds.PlayLadderDeactivate();
+                inPlacementMode = false;
             }
 
             if (playerMovement.isLookingLeft)
@@ -114,6 +127,8 @@ public class LadderPlayer_NEW : MonoBehaviour
                     inPlacementMode = false;
                     playerLadderOutline.SetActive(false);
                     placedLadder = Instantiate(playerLadderPrefab, playerLadderOutline.transform.position, Quaternion.Euler(Vector3.zero));
+                    StartCoroutine(DelayAllowAttack());
+                    playerSounds.PlayLadderPlace();
                 }
             }
             else
@@ -130,7 +145,18 @@ public class LadderPlayer_NEW : MonoBehaviour
                 }
 
                 placementText.text = invalidPlacementText;
+
+                if (!hasPlacedLadder && Input.GetMouseButtonDown(0))
+                {
+                    playerSounds.PlayLadderInvalidPlace();
+                }
             }
         }
+    }
+
+    IEnumerator DelayAllowAttack()
+    {
+        yield return new WaitForSeconds(1);
+        playerCombat.CannotAttackToggle(true);
     }
 }

@@ -21,6 +21,9 @@ public class Ladder : MonoBehaviour
     [SerializeField] private GameObject pointB;
     //[SerializeField] private GameObject pointC;
     [SerializeField] private GameObject UIInteractCanvas;
+    [SerializeField] private float footStepSpeed = 0.1f;
+    [SerializeField] private AudioSource ladderClimbFoot1;
+    [SerializeField] private AudioSource ladderClimbFoot2;
 
     private GameObject pointToMoveTo;
     private GameObject player;
@@ -29,6 +32,9 @@ public class Ladder : MonoBehaviour
     private bool hasSnappedToInitialPoint;
     private bool hasReachedPointB;
     private bool isClimbing;
+
+    private float footStepTimer;
+    private bool playedFootstep1;
 
     //vars only used if player ladder
     
@@ -85,6 +91,24 @@ public class Ladder : MonoBehaviour
     {
         if (isClimbing)
         {
+            footStepTimer += Time.deltaTime;
+
+            if (footStepTimer >= footStepSpeed)
+            {
+                if (!playedFootstep1)
+                {
+                    ladderClimbFoot1.Play();
+                    playedFootstep1 = true;
+                    footStepTimer = 0;
+                }
+                else
+                {
+                    ladderClimbFoot2.Play();
+                    playedFootstep1 = false;
+                    footStepTimer = 0;
+                }
+            }
+
             if (pointToMoveTo == pointA)
             {
                 Vector3 dir = (pointToMoveTo.transform.position - player.transform.position).normalized;
@@ -171,6 +195,7 @@ public class Ladder : MonoBehaviour
             pointToMoveTo = pointA;
         }
 
+        footStepTimer = footStepSpeed;
         isClimbing = true;
     }
 

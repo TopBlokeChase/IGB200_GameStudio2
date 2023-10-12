@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Glass : MonoBehaviour
 {
+    [SerializeField] private bool isHoriztonal;
     [SerializeField] private AudioSource glassShatterSoundSource;
     [SerializeField] private GameObject sprite;
     [SerializeField] private GameObject glassShatterParticle;
@@ -26,13 +27,33 @@ public class Glass : MonoBehaviour
         GameObject particleEffectObj = Instantiate(glassShatterParticle, transform.position, transform.rotation);
         ParticleSystem particleEffect = particleEffectObj.GetComponent<ParticleSystem>();
         ParticleSystem.VelocityOverLifetimeModule velModule = particleEffect.velocityOverLifetime;
+        ParticleSystem.ForceOverLifetimeModule forceModule = particleEffect.forceOverLifetime;
+
         if (isLeftTrigger)
         {
-            velModule.xMultiplier = glassShatterVelocity;
+            if (!isHoriztonal)
+            {
+                velModule.xMultiplier = glassShatterVelocity;
+            }
+            else
+            {
+                velModule.xMultiplier = glassShatterVelocity;
+                forceModule.y = 0f;
+                forceModule.x = -10f;
+            }
         }
         else
         {
-            velModule.xMultiplier = -glassShatterVelocity;
+            if (!isHoriztonal)
+            {
+                velModule.xMultiplier = -glassShatterVelocity;
+            }
+            else
+            {
+                velModule.xMultiplier = -glassShatterVelocity;
+                forceModule.y = 0f;
+                forceModule.x = -10f;
+            }
         }
         sprite.SetActive(false);
         glassShatterSoundSource.Play();

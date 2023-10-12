@@ -208,6 +208,11 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void CannotAttackToggle(bool value)
+    {
+        canAttack = value;
+    }
+
     IEnumerator DelayAttackCoroutine(float time)
     {
         canAttack = false;
