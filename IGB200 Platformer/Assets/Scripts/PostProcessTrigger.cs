@@ -15,7 +15,6 @@ public class PostProcessTrigger : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("ENTER");
             handler.StartEnterEffect();
         }
     }
@@ -24,7 +23,6 @@ public class PostProcessTrigger : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("EXIT");
             handler.StartExitEffect();
         }
     }

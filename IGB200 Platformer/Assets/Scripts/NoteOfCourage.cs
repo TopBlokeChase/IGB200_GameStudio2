@@ -70,6 +70,7 @@ public class NoteOfCourage : MonoBehaviour
     {
         Vector3 UIStatusPos = new Vector3(player.transform.position.x, player.transform.position.y - statusEffectUIPosOffset, player.transform.position.z);
         player.GetComponentInChildren<PlayerCombat>().SetHasNoteOfCourage(true, shieldAmount);
+        player.GetComponentInChildren<PlayerCombat>().PlayNotePickupParticle();
         GameObject note = Instantiate(statusEffectUI, UIStatusPos, Quaternion.identity);
         note.GetComponent<PlayerStatusUI>().InitiateText(buffName, shieldAmount);
         note.GetComponent<PlayerStatusUI>().InitialisePosition(player, statusEffectUIPosOffset);

@@ -2371,9 +2371,9 @@ MonoBehaviour:
       take this ladder you\u2019ll need it for this site. "
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
-  - dialogue: Press F to use it then Left Click to place it down, or press F again
+  - dialogue: Press T to use it then Left Click to place it down, or press T again
       to cancel. If the ladder is placed down, you can destroy it anytime by pressing
-      F again.
+      T again.
     isPlayerDialogue: 0
     isLevelFinishedDialogue: 0
   - dialogue: You may find what you're looking for at the very top of this building...
@@ -23417,6 +23417,7 @@ MonoBehaviour:
   canThrowHammer: 1
   particleCourageNote: {fileID: 1083436830}
   health: {fileID: 1714172563}
+  deathScreenDelayTime: 2.5
   playerHealthPanel: {fileID: 1879660031}
   retryMenuCanvas: {fileID: 2119336596}
   attackDamage: 1

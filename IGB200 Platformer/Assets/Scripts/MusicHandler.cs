@@ -6,6 +6,7 @@ public class MusicHandler : MonoBehaviour
 {
     [SerializeField] private AudioSource normal;
     [SerializeField] private AudioSource bossFight;
+    [SerializeField] private AudioSource gameOver;
 
     public void PlayBossMusic()
     {
@@ -17,5 +18,12 @@ public class MusicHandler : MonoBehaviour
     {
         normal.Play();
         bossFight.Stop();
+    }
+
+    public void PlayGameOver()
+    {
+        normal.Stop();
+        bossFight.Stop();
+        gameOver.Play();
     }
 }

@@ -35,8 +35,6 @@ public class CameraClamp : MonoBehaviour
                                 cameraTrigger.transform.position.x + (ortho * ratio));
         yClamp = new Vector2(cameraTrigger.transform.position.y - (ortho+4),
                                 cameraTrigger.transform.position.y + (ortho + 4));
-        Debug.Log(xClamp);
-        Debug.Log(yClamp);
     }
 
     // Update is called once per frame

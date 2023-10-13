@@ -57,7 +57,7 @@ public class LadderPlayer_NEW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             if (playerMovement.isInteracting != true)
             {
@@ -109,8 +109,6 @@ public class LadderPlayer_NEW : MonoBehaviour
                 playerLadderOutline.transform.rotation = Quaternion.Euler(Vector3.zero);
             }
 
-            Debug.Log("Ladder placement Invalid? = " + collisionChecker.InvalidPlacement());
-            Debug.Log("Ladder floor Invalid? = " + collisionChecker.InvalidFloorPlacement());
             if (collisionChecker.InvalidPlacement() == false && floorCollisionChecker.InvalidFloorPlacement() == false)
             {
                 foreach(Transform child in playerLadderOutline.transform)

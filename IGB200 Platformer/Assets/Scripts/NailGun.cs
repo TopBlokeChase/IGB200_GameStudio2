@@ -75,7 +75,6 @@ public class NailGun : MonoBehaviour
         if (hit.collider != null)
         {
             lr.useWorldSpace = true;
-            Debug.Log("Hitting");
             lr.SetPosition(0, transform.position);
             lr.SetPosition(1, hit.point);
         }

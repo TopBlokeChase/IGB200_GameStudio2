@@ -14,7 +14,8 @@ public class PlayerCombat : MonoBehaviour
 
     [SerializeField] private GameObject particleCourageNote;
 
-    [SerializeField] private Health health;   
+    [SerializeField] private Health health;
+    [SerializeField] private float deathScreenDelayTime = 2.5f;
     [SerializeField] private GameObject playerHealthPanel;
     [SerializeField] private GameObject retryMenuCanvas;
 
@@ -49,6 +50,9 @@ public class PlayerCombat : MonoBehaviour
 
     private bool enemyExists = false;
 
+    private bool playerIsDead;
+    private bool hasSetDeadStatus;
+
     private void Start()
     {
         this.gameObject.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
@@ -62,7 +66,9 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!playerMovement.isInteracting)
+        Debug.Log("playerisDead " + playerIsDead);
+        Debug.Log("Dead status "+hasSetDeadStatus);
+        if (!playerMovement.isInteracting && !playerIsDead)
         {
             CheckInput();
         }
@@ -144,6 +150,18 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void SetPlayerDead(bool value)
+    {
+        playerMovement.isInteracting = value;
+        playerIsDead = value;
+        playerAnimator.SetBool("isDead", value);
+    }
+
+    public bool ReturnPlayerDead()
+    {
+        return playerIsDead;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -170,12 +188,17 @@ public class PlayerCombat : MonoBehaviour
 
     public void Die()
     {
-        retryMenuCanvas.SetActive(true);
-        Time.timeScale = 0;
+        if (!hasSetDeadStatus)
+        {
+            StartCoroutine(DelayDeathScreen(deathScreenDelayTime));
+            hasSetDeadStatus = true;
+        }
     }
 
     public void RetryBossFight()
     {
+        SetPlayerDead(false);
+        hasSetDeadStatus = false;
         //reset timescale
         Time.timeScale = 1;
         //disable retryMenu
@@ -198,7 +221,11 @@ public class PlayerCombat : MonoBehaviour
     public void SetHasNoteOfCourage(bool hasNoteOfCourage, int shieldAmount = 0)
     {
         this.hasNoteOfCourage = hasNoteOfCourage;
-        health.SetShield(shieldAmount);
+        health.SetShield(shieldAmount);     
+    }
+
+    public void PlayNotePickupParticle()
+    {
         particleCourageNote.GetComponent<ParticleSystem>().Play();
     }
 
@@ -222,5 +249,15 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(time);
         canAttack = true;
         hasNoAttackStatus = false;
+    }
+
+    IEnumerator DelayDeathScreen(float time)
+    {
+        SetPlayerDead(true);
+        MusicHandler musicHandler = GameObject.FindGameObjectWithTag("MusicHandler").GetComponent<MusicHandler>();
+        musicHandler.PlayGameOver();
+        yield return new WaitForSeconds(time);
+        retryMenuCanvas.SetActive(true);
+        Time.timeScale = 0;       
     }
 }
