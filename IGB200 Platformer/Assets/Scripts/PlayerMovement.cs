@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isGrounded);
         CheckAddedForce();
         CheckDirectionInput();
         CheckGrounded();
@@ -171,23 +170,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void AddForce(float forceToAdd, GameObject forceObject)
     {
-        float forceToAddX;
-
-        if (forceObject.transform.position.x < this.transform.position.x)
+        if (GetComponentInChildren<PlayerCombat>().ReturnPlayerDead() == false)
         {
-            forceToAddX = forceToAdd;
-        }
-        else
-        {           
-            forceToAddX = forceToAdd * -1;
-        }
+            float forceToAddX;
 
-        playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        hasAddedForce = true;
-        playerRigidbody.velocity = Vector3.zero;
-        playerRigidbody.velocity += new Vector2(forceToAddX, forceToAdd / 2);
+            if (forceObject.transform.position.x < this.transform.position.x)
+            {
+                forceToAddX = forceToAdd;
+            }
+            else
+            {
+                forceToAddX = forceToAdd * -1;
+            }
 
-        playerSounds.PlayHurt();
+            playerRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            hasAddedForce = true;
+            playerRigidbody.velocity = Vector3.zero;
+            playerRigidbody.velocity += new Vector2(forceToAddX, forceToAdd / 2);
+
+            playerSounds.PlayHurt();
+        }
     }
 
     public void GiveSlowStatusEffect(float time)

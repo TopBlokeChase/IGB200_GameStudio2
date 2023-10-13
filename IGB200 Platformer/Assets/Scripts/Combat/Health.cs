@@ -63,7 +63,10 @@ public class Health : MonoBehaviour
     {
         if (this.gameObject.tag == "Player")
         {
-            damageParticlePrefab.GetComponent<ParticleSystem>().Play();
+            if (this.gameObject.GetComponent<PlayerCombat>().ReturnPlayerDead() == false)
+            {
+                damageParticlePrefab.GetComponent<ParticleSystem>().Play();
+            }
         }
         else
         {
@@ -80,7 +83,12 @@ public class Health : MonoBehaviour
         {
             if (this.gameObject.tag == "Player")
             {
-                this.gameObject.GetComponent<PlayerCombat>().Die();
+                if (this.gameObject.GetComponent<PlayerCombat>().ReturnPlayerDead() == false)
+                {
+                    this.gameObject.GetComponent<PlayerCombat>().Die();
+                    health -= damage;
+                    SetHeartsUI();
+                }
             }
 
             if (this.gameObject.tag == "EnemyBasic")
@@ -97,8 +105,19 @@ public class Health : MonoBehaviour
         else
         {
             //is boss
-            health -= damage;
-            SetHeartsUI();
+            if (this.gameObject.tag == "Player")
+            {
+                if (this.gameObject.GetComponent<PlayerCombat>().ReturnPlayerDead() == false)
+                {
+                    health -= damage;
+                    SetHeartsUI();
+                }
+            }
+            else
+            {
+                health -= damage;
+                SetHeartsUI();
+            }
 
             if (this.gameObject.tag == "Enemy")
             {

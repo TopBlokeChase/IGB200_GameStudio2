@@ -175,7 +175,6 @@ public class HammerThrow : MonoBehaviour
         {
             if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBasic")
             {
-                Debug.Log("enemy hit!");
                 collision.gameObject.GetComponent<Health>().DealDamage(damageAmount);
                 hasHitSomething = true;
             }

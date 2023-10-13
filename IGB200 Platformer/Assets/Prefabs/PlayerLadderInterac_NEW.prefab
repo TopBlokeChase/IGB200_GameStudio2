@@ -882,7 +882,7 @@ PrefabInstance:
       propertyPath: m_text
       value: '[Left Click] Place
 
-        [F] Cancel'
+        [T] Cancel'
       objectReference: {fileID: 0}
     - target: {fileID: 7048399207869426426, guid: 3de882bbe7b2f0f49951d580ec7cc569, type: 3}
       propertyPath: m_HorizontalAlignment

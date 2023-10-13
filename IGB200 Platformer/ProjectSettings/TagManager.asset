@@ -13,6 +13,7 @@ TagManager:
   - Button
   - Glass
   - BrokenLadder
+  - MusicHandler
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using TMPro;
 
 public class LadderPlayer_NEW : MonoBehaviour
 {
+    public GameObject ladderDustParticle;
     public GameObject ladderInteract;
     public GameObject playerLadderOutline;
     public GameObject playerLadderPrefab;
@@ -56,7 +57,7 @@ public class LadderPlayer_NEW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             if (playerMovement.isInteracting != true)
             {
@@ -78,8 +79,12 @@ public class LadderPlayer_NEW : MonoBehaviour
                 {
                     if (playerMovement.isInteracting != true)
                     {
+                        GameObject particle = Instantiate(ladderDustParticle, 
+                            new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
+                        particle.transform.parent = null;
                         RemoveLadder();
                         playerSounds.PlayLadderDestroy();
+
                     }
                 }
             }
@@ -104,8 +109,6 @@ public class LadderPlayer_NEW : MonoBehaviour
                 playerLadderOutline.transform.rotation = Quaternion.Euler(Vector3.zero);
             }
 
-            Debug.Log("Ladder placement Invalid? = " + collisionChecker.InvalidPlacement());
-            Debug.Log("Ladder floor Invalid? = " + collisionChecker.InvalidFloorPlacement());
             if (collisionChecker.InvalidPlacement() == false && floorCollisionChecker.InvalidFloorPlacement() == false)
             {
                 foreach(Transform child in playerLadderOutline.transform)
@@ -129,6 +132,10 @@ public class LadderPlayer_NEW : MonoBehaviour
                     placedLadder = Instantiate(playerLadderPrefab, playerLadderOutline.transform.position, Quaternion.Euler(Vector3.zero));
                     StartCoroutine(DelayAllowAttack());
                     playerSounds.PlayLadderPlace();
+
+                    GameObject particle = Instantiate(ladderDustParticle,
+                        new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
+                    particle.transform.parent = null;
                 }
             }
             else
