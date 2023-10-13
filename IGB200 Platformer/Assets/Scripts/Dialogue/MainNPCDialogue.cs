@@ -102,7 +102,10 @@ public class MainNPCDialogue : MonoBehaviour
         {
             if (isInDialogue)
             {
-                CheckInput();
+                if (playerMovement.isInMenu == false)
+                {
+                    CheckInput();
+                }
             }
         }
     }
@@ -206,6 +209,14 @@ public class MainNPCDialogue : MonoBehaviour
 
     public void InitiateDialogue()
     {
+        playerMovement.canUseTools = false;
+
+        if(playerMovement.gameObject.TryGetComponent<LadderPlayer_NEW>(out LadderPlayer_NEW ladder))
+        {
+            ladder.StopPlacementMode();
+        }
+
+        playerMovement.gameObject.GetComponent<LadderPlayer_NEW>().StopPlacementMode();
         isInDialogue = true;
         needsDelay = true;
         isDelaying = false;
@@ -257,6 +268,7 @@ public class MainNPCDialogue : MonoBehaviour
 
     private void ExitDialogue()
     {
+        playerMovement.canUseTools = true;
         mainDialoguePanel.SetActive(false);
         dialogueCounter = 0;
         readFirstDialogueNode = false;

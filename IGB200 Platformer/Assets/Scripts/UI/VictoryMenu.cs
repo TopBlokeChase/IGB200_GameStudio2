@@ -10,9 +10,12 @@ public class VictoryMenu : MonoBehaviour
 
     [Header("Only fill this ref if level 3")]
     [SerializeField] GameObject finalCutscenePrefab;
+
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");   
         StartCoroutine(DelayMenu(victorySoundSource.clip.length));
     }
 
@@ -38,6 +41,8 @@ public class VictoryMenu : MonoBehaviour
         else
         {
             Time.timeScale = 0;
+            player.GetComponent<PlayerMovement>().isInMenu = true;
+            player.GetComponent<PlayerMovement>().isInteracting = true;
             victoryUI.SetActive(true);
         }
     }

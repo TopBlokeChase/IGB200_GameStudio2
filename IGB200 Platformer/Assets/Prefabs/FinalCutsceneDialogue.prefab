@@ -1768,6 +1768,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5581505646916432342, guid: 70c9d350c68d5874bb6f89be80edc8d4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5581505646916432360, guid: 70c9d350c68d5874bb6f89be80edc8d4, type: 3}
       propertyPath: m_Name
       value: FinalCutscene_UI_Dialogue

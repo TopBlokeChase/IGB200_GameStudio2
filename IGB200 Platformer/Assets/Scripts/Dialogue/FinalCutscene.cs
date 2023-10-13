@@ -47,8 +47,8 @@ public class FinalCutscene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-
+        playerMovement.isInMenu = true;
+        playerMovement.isInteracting = true;
     }
 
     // Update is called once per frame

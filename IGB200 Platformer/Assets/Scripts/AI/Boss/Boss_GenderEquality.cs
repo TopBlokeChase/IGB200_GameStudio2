@@ -108,11 +108,14 @@ public class Boss_GenderEquality : MonoBehaviour
 
     private GameObject brokenFloor;
 
+    private CircleCollider2D circleCollider2D;
+
     //private bool canIdle;
 
     // Start is called before the first frame update
     void Start()
     {
+        circleCollider2D = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         originalPosition = transform.position;
         originalHeight = transform.position.y;
@@ -287,6 +290,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
     public void ResetAll()
     {
+        player.GetComponent<PlayerMovement>().canUseTools = true;
         musicHandler.PlayNormalMusic();
         StopAllCoroutines();
 
@@ -322,6 +326,7 @@ public class Boss_GenderEquality : MonoBehaviour
     // Moves boss to original height and idles animation again
     public void EndFight()
     {
+        player.GetComponent<PlayerMovement>().canUseTools = true;
         musicHandler.PlayNormalMusic();
         StopAllCoroutines();
 
@@ -412,6 +417,8 @@ public class Boss_GenderEquality : MonoBehaviour
             yield return null;
         }
 
+        circleCollider2D.enabled = false;
+
         timer = 0;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, ground);
         Debug.DrawRay(transform.position, Vector2.down, Color.yellow);
@@ -434,15 +441,15 @@ public class Boss_GenderEquality : MonoBehaviour
 
         timer = 0;
         bossCamera.GetComponent<CameraShake>().ShakeCamera(slamCameraShakeAmount, slamCameraShakeDuration);
-        slamCollider.GetComponent<BoxCollider2D>().enabled = false;
-
-
+        slamCollider.GetComponent<BoxCollider2D>().enabled = false;     
 
         while (timer < slamAttackRestDuration)
         {
             timer += Time.deltaTime;
             yield return null;
         }
+
+        circleCollider2D.enabled = true;
 
         timer = 0;
 

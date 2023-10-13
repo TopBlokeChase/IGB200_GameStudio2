@@ -118,11 +118,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf20ff16b5b9c0744ab55947540f517b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterExitEffectTime: 1
-  enterExitEffectIntensityMultiplier: 2.35
+  enterExitEffectTime: 2
+  enterExitEffectIntensityMultiplier: 2.6
   saturationIntensity: -40
   lensDistortionIntensity: 15
   lensDistortionTime: 8
+  bloomLerpTime: 0
 --- !u!65 &3130847296293218245
 BoxCollider:
   m_ObjectHideFlags: 0

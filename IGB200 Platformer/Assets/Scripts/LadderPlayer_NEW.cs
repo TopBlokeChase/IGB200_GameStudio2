@@ -57,105 +57,108 @@ public class LadderPlayer_NEW : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (playerMovement.canUseTools)
         {
-            if (playerMovement.isInteracting != true)
+            if (Input.GetKeyDown(KeyCode.T))
             {
-                if (!inPlacementMode && !hasPlacedLadder)
+                if (playerMovement.isInteracting != true)
                 {
-                    inPlacementMode = true;
-                    playerLadderOutline.SetActive(true);
-                    playerCombat.CannotAttackToggle(false);
-                    playerSounds.PlayLadderActivate();
-                }
-                else if (inPlacementMode && !hasPlacedLadder)
-                {
-                    inPlacementMode = false;
-                    playerLadderOutline.SetActive(false);
-                    playerCombat.CannotAttackToggle(true);
-                    playerSounds.PlayLadderDeactivate();
-                }
-                else if (!inPlacementMode && hasPlacedLadder)
-                {
-                    if (playerMovement.isInteracting != true)
+                    if (!inPlacementMode && !hasPlacedLadder)
                     {
-                        GameObject particle = Instantiate(ladderDustParticle, 
+                        inPlacementMode = true;
+                        playerLadderOutline.SetActive(true);
+                        playerCombat.CannotAttackToggle(false);
+                        playerSounds.PlayLadderActivate();
+                    }
+                    else if (inPlacementMode && !hasPlacedLadder)
+                    {
+                        inPlacementMode = false;
+                        playerLadderOutline.SetActive(false);
+                        playerCombat.CannotAttackToggle(true);
+                        playerSounds.PlayLadderDeactivate();
+                    }
+                    else if (!inPlacementMode && hasPlacedLadder)
+                    {
+                        if (playerMovement.isInteracting != true)
+                        {
+                            GameObject particle = Instantiate(ladderDustParticle,
+                                new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
+                            particle.transform.parent = null;
+                            RemoveLadder();
+                            playerSounds.PlayLadderDestroy();
+
+                        }
+                    }
+                }
+            }
+
+            if (inPlacementMode)
+            {
+                if (playerMovement.isInteracting == true)
+                {
+                    playerCombat.CannotAttackToggle(true);
+                    playerLadderOutline.SetActive(false);
+                    playerSounds.PlayLadderDeactivate();
+                    inPlacementMode = false;
+                }
+
+                if (playerMovement.isLookingLeft)
+                {
+                    playerLadderOutline.transform.rotation = Quaternion.Euler(0, -this.transform.rotation.y, 0);
+                }
+                else
+                {
+                    playerLadderOutline.transform.rotation = Quaternion.Euler(Vector3.zero);
+                }
+
+                if (collisionChecker.InvalidPlacement() == false && floorCollisionChecker.InvalidFloorPlacement() == false)
+                {
+                    foreach (Transform child in playerLadderOutline.transform)
+                    {
+                        SpriteRenderer renderer;
+                        child.TryGetComponent<SpriteRenderer>(out renderer);
+
+                        if (renderer != null)
+                        {
+                            renderer.color = Color.green;
+                        }
+                    }
+
+                    placementText.text = initialPlacementText;
+
+                    if (!hasPlacedLadder && Input.GetMouseButtonDown(0))
+                    {
+                        hasPlacedLadder = true;
+                        inPlacementMode = false;
+                        playerLadderOutline.SetActive(false);
+                        placedLadder = Instantiate(playerLadderPrefab, playerLadderOutline.transform.position, Quaternion.Euler(Vector3.zero));
+                        StartCoroutine(DelayAllowAttack());
+                        playerSounds.PlayLadderPlace();
+
+                        GameObject particle = Instantiate(ladderDustParticle,
                             new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
                         particle.transform.parent = null;
-                        RemoveLadder();
-                        playerSounds.PlayLadderDestroy();
-
                     }
                 }
-            }
-        }
-
-        if (inPlacementMode)
-        {           
-            if (playerMovement.isInteracting == true)
-            {
-                playerCombat.CannotAttackToggle(true);
-                playerLadderOutline.SetActive(false);
-                playerSounds.PlayLadderDeactivate();
-                inPlacementMode = false;
-            }
-
-            if (playerMovement.isLookingLeft)
-            {
-                playerLadderOutline.transform.rotation = Quaternion.Euler(0, -this.transform.rotation.y, 0);
-            }
-            else
-            {
-                playerLadderOutline.transform.rotation = Quaternion.Euler(Vector3.zero);
-            }
-
-            if (collisionChecker.InvalidPlacement() == false && floorCollisionChecker.InvalidFloorPlacement() == false)
-            {
-                foreach(Transform child in playerLadderOutline.transform)
+                else
                 {
-                    SpriteRenderer renderer;
-                    child.TryGetComponent<SpriteRenderer>(out renderer);
-
-                    if (renderer != null)
+                    foreach (Transform child in playerLadderOutline.transform)
                     {
-                        renderer.color = Color.green;
+                        SpriteRenderer renderer;
+                        child.TryGetComponent<SpriteRenderer>(out renderer);
+
+                        if (renderer != null)
+                        {
+                            renderer.color = Color.red;
+                        }
                     }
-                }
 
-                placementText.text = initialPlacementText;
+                    placementText.text = invalidPlacementText;
 
-                if (!hasPlacedLadder && Input.GetMouseButtonDown(0))
-                {
-                    hasPlacedLadder = true;
-                    inPlacementMode = false;
-                    playerLadderOutline.SetActive(false);
-                    placedLadder = Instantiate(playerLadderPrefab, playerLadderOutline.transform.position, Quaternion.Euler(Vector3.zero));
-                    StartCoroutine(DelayAllowAttack());
-                    playerSounds.PlayLadderPlace();
-
-                    GameObject particle = Instantiate(ladderDustParticle,
-                        new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
-                    particle.transform.parent = null;
-                }
-            }
-            else
-            {
-                foreach (Transform child in playerLadderOutline.transform)
-                {
-                    SpriteRenderer renderer;
-                    child.TryGetComponent<SpriteRenderer>(out renderer);
-
-                    if (renderer != null)
+                    if (!hasPlacedLadder && Input.GetMouseButtonDown(0))
                     {
-                        renderer.color = Color.red;
-                    }                   
-                }
-
-                placementText.text = invalidPlacementText;
-
-                if (!hasPlacedLadder && Input.GetMouseButtonDown(0))
-                {
-                    playerSounds.PlayLadderInvalidPlace();
+                        playerSounds.PlayLadderInvalidPlace();
+                    }
                 }
             }
         }

@@ -33,30 +33,33 @@ public class NailGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (playerMovement.canUseTools)
         {
-            if (!playerMovement.isInteracting)
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                playerMovement.isInteracting = true;
-                isAiming = true;              
-            }    
-        }
+                if (!playerMovement.isInteracting)
+                {
+                    playerMovement.isInteracting = true;
+                    isAiming = true;
+                }
+            }
 
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            playerMovement.isInteracting = false;
-            isAiming = false;
-            Shoot();
-        }
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                playerMovement.isInteracting = false;
+                isAiming = false;
+                Shoot();
+            }
 
-        if (isAiming)
-        {
-            lr.enabled = true;
-            Aim();
-        }
-        else
-        {
-            lr.enabled = false;
+            if (isAiming)
+            {
+                lr.enabled = true;
+                Aim();
+            }
+            else
+            {
+                lr.enabled = false;
+            }
         }
     }
 

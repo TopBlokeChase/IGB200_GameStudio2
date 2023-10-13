@@ -1254,7 +1254,7 @@ MonoBehaviour:
     You
     are stronger than you know.'
   buffName: You feel more couragous!
-  shieldAmount: 3
+  shieldAmount: 1
   noteSprite: {fileID: 7729216989672466032}
   noteInteractUI: {fileID: 74041828262136721}
   noteTextUI: {fileID: 7749954615940386542}

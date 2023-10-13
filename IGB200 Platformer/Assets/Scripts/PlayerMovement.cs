@@ -6,6 +6,8 @@ using UnityEngine.Playables;
 public class PlayerMovement : MonoBehaviour
 {
     public bool isInteracting;
+    public bool isInMenu;
+    public bool canUseTools = true;
     public bool isLookingLeft;
 
     [SerializeField] private LayerMask ground;

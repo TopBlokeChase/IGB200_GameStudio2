@@ -23,10 +23,14 @@ public class NoteOfCourage : MonoBehaviour
 
     [SerializeField] private AudioSource soundLooping;
     [SerializeField] private AudioSource soundPickup;
+    [SerializeField] private float loopSoundFadeTime = 0.5f;
 
     private GameObject player;
 
     private bool isReadyToRead;
+    private float timer;
+
+    private bool fadeAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +45,21 @@ public class NoteOfCourage : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 noteTextUI.SetActive(true);
+                fadeAudio = true;
+
+                player.GetComponentInChildren<PlayerCombat>().CannotAttackToggle(false);
+                player.GetComponent<PlayerMovement>().isInteracting = true;
+            }
+        }
+
+        if (fadeAudio)
+        {
+            if (timer < loopSoundFadeTime)
+            {
+                soundLooping.volume = Mathf.Lerp(1, 0, timer / loopSoundFadeTime);
+                timer += Time.deltaTime;
             }
         }
     }
@@ -76,9 +93,9 @@ public class NoteOfCourage : MonoBehaviour
         note.GetComponent<PlayerStatusUI>().InitialisePosition(player, statusEffectUIPosOffset);
         Time.timeScale = 1;
 
-        soundLooping.Stop();
+        player.GetComponentInChildren<PlayerCombat>().CannotAttackToggle(true);
+        player.GetComponent<PlayerMovement>().isInteracting = false;
 
-        
         soundPickup.Play();
         noteInteractUI.SetActive(false);
         noteTextUI.SetActive(false);

@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void InitiateBossFight(GameObject bossTrigger)
-    {
+    {      
         entryGate.GetComponent<Gate>().CloseGate();
         bossScript.Invoke("SetNotBusy", 0);  
         this.bossTrigger = bossTrigger;

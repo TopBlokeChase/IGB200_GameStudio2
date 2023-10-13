@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' <color=#47FCFF>Shield</color> in your next major encounter
+  m_text: '<color=#47FCFF>Shield</color> in your next major encounter
 
 '
   m_isRightToLeft: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '+3
+  m_text: '+1
 
 '
   m_isRightToLeft: 0
@@ -313,7 +313,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0.5}
-  m_SizeDelta: {x: 45, y: 3}
+  m_SizeDelta: {x: 42.95, y: 3}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1281983254699099115
 CanvasRenderer:
@@ -371,7 +371,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -4
+  m_Spacing: -1
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -418,7 +418,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 45, y: 7.91}
+  m_SizeDelta: {x: 44.1, y: 7.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4960037790826716212
 CanvasRenderer:
@@ -646,7 +646,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 55.65, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7385028705728975052
 Canvas:
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7385028705728975058
 MonoBehaviour:
   m_ObjectHideFlags: 0

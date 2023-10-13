@@ -56,7 +56,7 @@ public class Health : MonoBehaviour
 
     public void SetShield(int ShieldAmount)
     {
-        this.shieldAmount = ShieldAmount;
+        this.shieldAmount += ShieldAmount;
     }
 
     public void DealDamage(int damage)

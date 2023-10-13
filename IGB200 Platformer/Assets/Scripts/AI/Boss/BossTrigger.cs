@@ -11,6 +11,8 @@ public class BossTrigger : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             bossGameObject.GetComponent<BossDialogue>().InitiateDialogue();
+            collision.gameObject.GetComponent<LadderPlayer_NEW>().StopPlacementMode();
+            collision.GetComponent<PlayerMovement>().canUseTools = false;
         }
     }
 

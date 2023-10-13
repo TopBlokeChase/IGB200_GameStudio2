@@ -72,7 +72,10 @@ public class BossDialogue : MonoBehaviour
         {
             if (isInDialogue)
             {
-                CheckInput();
+                if (playerMovement.isInMenu == false)
+                {
+                    CheckInput();
+                }
             }
         }
     }
