@@ -12,6 +12,8 @@ public class PlayerCombat : MonoBehaviour
 
     public bool canThrowHammer = true;
 
+    [SerializeField] private GameObject particleCourageNote;
+
     [SerializeField] private Health health;   
     [SerializeField] private GameObject playerHealthPanel;
     [SerializeField] private GameObject retryMenuCanvas;
@@ -197,6 +199,7 @@ public class PlayerCombat : MonoBehaviour
     {
         this.hasNoteOfCourage = hasNoteOfCourage;
         health.SetShield(shieldAmount);
+        particleCourageNote.GetComponent<ParticleSystem>().Play();
     }
 
     public void CannotAttackDuration(float time)

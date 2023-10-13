@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class BrokenLadder : MonoBehaviour
 {
+    public GameObject ladderDustParticle;
     [SerializeField] private int amountOfNails;
     [SerializeField] private int amountOfHammers;
     [SerializeField] private TMP_Text amountOfNailsTxt;
@@ -53,6 +54,11 @@ public class BrokenLadder : MonoBehaviour
             ladderFullyRepairedAudioSource.transform.parent = null;
             ladderFullyRepairedAudioSource.Play();
             ladderObject.SetActive(true);
+
+            GameObject particle = Instantiate(ladderDustParticle, transform.position, Quaternion.identity);
+            particle.transform.parent = null;
+
+
             transform.root.gameObject.SetActive(false);
         }
     }

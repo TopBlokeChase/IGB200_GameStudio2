@@ -27,6 +27,11 @@ public class Boss_GenderEquality : MonoBehaviour
     [SerializeField] private GameObject laserBeam;
     [SerializeField] private GameObject bossCamera;
 
+    [Header("ParticleFX")]
+    [SerializeField] private GameObject particleSlamDust;
+    [SerializeField] private GameObject particleLaserRadial;
+    [SerializeField] private GameObject particleLaserLine;
+
     [Header("Slam Camera Shake Settings")]
     [SerializeField] private float slamCameraShakeAmount;
     [SerializeField] private float slamCameraShakeDuration;
@@ -418,6 +423,8 @@ public class Boss_GenderEquality : MonoBehaviour
 
         bossSounds.PlaySlamAttackSlam();
 
+        particleSlamDust.GetComponent<ParticleSystem>().Play();
+
         timer = 0;
         bossCamera.GetComponent<CameraShake>().ShakeCamera(slamCameraShakeAmount, slamCameraShakeDuration);
         slamCollider.GetComponent<BoxCollider2D>().enabled = false;
@@ -460,10 +467,16 @@ public class Boss_GenderEquality : MonoBehaviour
         if (bossFacingLeft)
         {
             angleToRotateTo = new Vector3(startAngle.x, startAngle.y, startAngle.z + -20);
+
+            particleLaserLine.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            particleLaserRadial.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
         else
         {
             angleToRotateTo = new Vector3(startAngle.x, startAngle.y, startAngle.z + 20);
+
+            particleLaserLine.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            particleLaserRadial.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         }
 
         while (timer < laserAttackMoveIntoPosSpeed)
@@ -477,6 +490,8 @@ public class Boss_GenderEquality : MonoBehaviour
         timer = 0;
 
         laserBeam.SetActive(true);
+
+        particleLaserRadial.GetComponent<ParticleSystem>().Play();
 
         bossSounds.PlayLaserBurst();
 
@@ -499,6 +514,8 @@ public class Boss_GenderEquality : MonoBehaviour
         }
 
         bossSounds.PlayLaserLoop();
+
+        particleLaserLine.GetComponent<ParticleSystem>().Play();
 
         timer = 0;
 
@@ -531,6 +548,9 @@ public class Boss_GenderEquality : MonoBehaviour
         }
 
         timer = 0;
+        particleLaserLine.GetComponent<ParticleSystem>().Stop();
+        particleLaserRadial.GetComponent<ParticleSystem>().Stop();
+        
 
         while (timer < laserAttackBeamRetractSpeed)
         {
@@ -538,6 +558,7 @@ public class Boss_GenderEquality : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+
 
         bossSounds.StopLaserLoop();
         bossSounds.PlayLaserBurst();

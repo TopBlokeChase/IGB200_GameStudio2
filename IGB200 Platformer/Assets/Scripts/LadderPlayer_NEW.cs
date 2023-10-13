@@ -5,6 +5,7 @@ using TMPro;
 
 public class LadderPlayer_NEW : MonoBehaviour
 {
+    public GameObject ladderDustParticle;
     public GameObject ladderInteract;
     public GameObject playerLadderOutline;
     public GameObject playerLadderPrefab;
@@ -78,8 +79,12 @@ public class LadderPlayer_NEW : MonoBehaviour
                 {
                     if (playerMovement.isInteracting != true)
                     {
+                        GameObject particle = Instantiate(ladderDustParticle, 
+                            new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
+                        particle.transform.parent = null;
                         RemoveLadder();
                         playerSounds.PlayLadderDestroy();
+
                     }
                 }
             }
@@ -129,6 +134,10 @@ public class LadderPlayer_NEW : MonoBehaviour
                     placedLadder = Instantiate(playerLadderPrefab, playerLadderOutline.transform.position, Quaternion.Euler(Vector3.zero));
                     StartCoroutine(DelayAllowAttack());
                     playerSounds.PlayLadderPlace();
+
+                    GameObject particle = Instantiate(ladderDustParticle,
+                        new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
+                    particle.transform.parent = null;
                 }
             }
             else
