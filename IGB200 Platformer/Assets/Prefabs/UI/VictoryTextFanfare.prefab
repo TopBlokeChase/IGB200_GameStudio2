@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 7624950192406720790}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8482608707951661696, guid: 26de59e485b4e164985f03db6e168331, type: 2}
   m_audioClip: {fileID: 8300000, guid: 44d5b56aeef45c84781a45e9c0936e67, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -434,6 +434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   victorySoundSource: {fileID: 7624950192406720776}
   victoryUI: {fileID: 704535718126486266}
+  finalCutscenePrefab: {fileID: 0}
 --- !u!1001 &5227426303531795328
 PrefabInstance:
   m_ObjectHideFlags: 0
