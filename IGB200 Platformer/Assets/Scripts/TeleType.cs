@@ -14,6 +14,7 @@ public class TeleType : MonoBehaviour
 
     IEnumerator RevelTextCoroutine(int textCount)
     {
+        GetComponent<AudioSource>().Play();
         textMeshPro.ForceMeshUpdate();
 
         hasFinished = false;
@@ -30,6 +31,7 @@ public class TeleType : MonoBehaviour
             if (visibleCount >= totalVisCharacters)
             {
                 hasFinished = true;
+                GetComponent<AudioSource>().Stop();
             }
 
             counter += 1;
@@ -53,5 +55,6 @@ public class TeleType : MonoBehaviour
         hasFinished = true;
         StopAllCoroutines();
         textMeshPro.maxVisibleCharacters = textMeshPro.textInfo.characterCount;
+        GetComponent<AudioSource>().Stop();
     }
 }

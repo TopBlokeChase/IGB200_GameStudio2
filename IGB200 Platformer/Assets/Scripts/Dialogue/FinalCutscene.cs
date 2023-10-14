@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class FinalCutscene : MonoBehaviour
 {
+    public bool isIntroSequence = false;
     public TMP_Text dialogueText;
     public GameObject mainDialoguePanel;
     [SerializeField] private GameObject babsCanvas;
@@ -59,7 +60,11 @@ public class FinalCutscene : MonoBehaviour
             InitiateDialogue();
             hasInitiated = true;
             playerMovement.isInteracting = true;
-            sceneBackgroundMusic.SetActive(false);
+
+            if (!isIntroSequence)
+            {
+                sceneBackgroundMusic.SetActive(false);
+            }
         }
 
         if (needsDelay)
@@ -90,8 +95,17 @@ public class FinalCutscene : MonoBehaviour
         {
             if (readyToEnd)
             {
-                fadeOutCanvas.SetActive(true);
-                StartCoroutine(DelayLoadScene());
+                if (!isIntroSequence)
+                {
+                    fadeOutCanvas.SetActive(true);
+                    StartCoroutine(DelayLoadScene());
+                }
+                else
+                {
+                    GameObject fadeCanvas = Instantiate(fadeOutCanvas);
+                    fadeCanvas.SetActive(true);
+                    StartCoroutine(DelayIntroScene());
+                }
             }
             else
             {
@@ -231,4 +245,12 @@ public class FinalCutscene : MonoBehaviour
 
         SceneManager.LoadScene(0);
     }
+
+    IEnumerator DelayIntroScene()
+    {
+        yield return new WaitForSeconds(1f);
+        playerMovement.isInteracting = false;
+        playerMovement.isInMenu = false;
+        this.gameObject.SetActive(false);
+    }   
 }

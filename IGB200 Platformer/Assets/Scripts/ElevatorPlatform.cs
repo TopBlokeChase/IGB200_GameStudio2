@@ -92,7 +92,6 @@ public class ElevatorPlatform : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            playerCurrentParent = collision.transform.parent;
             collision.transform.parent = transform;
         }
     }
@@ -102,6 +101,7 @@ public class ElevatorPlatform : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             collision.transform.parent = playerCurrentParent;
+            collision.transform.parent = null;
         }
     }
 
