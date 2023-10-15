@@ -16,7 +16,23 @@ public class LadderPlayer_CollisionChecker : MonoBehaviour
         {
             if (collision.tag != "Player")
             {
-                invalidPlacement = true;
+                if (collision.tag == "NPC")
+                {
+                    if (TryGetComponent<SideNPCDialogue>(out SideNPCDialogue dialogue))
+                    {
+                        if (dialogue != null)
+                        {
+                            if (collision == dialogue.ReturnBoxCollider())
+                            {
+                                invalidPlacement = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    invalidPlacement = true;
+                }          
             }
         }
         else

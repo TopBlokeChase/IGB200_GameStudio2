@@ -26122,6 +26122,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4460779427449575296, guid: 47bd196389396334fb327c3415190196, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5539490611087191083, guid: 47bd196389396334fb327c3415190196, type: 3}
       propertyPath: m_LocalPosition.y
       value: -1.34
@@ -26136,7 +26140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8991863129324087570, guid: 47bd196389396334fb327c3415190196, type: 3}
       propertyPath: m_Size.x
-      value: 2.36
+      value: 1.56
       objectReference: {fileID: 0}
     - target: {fileID: 8991863129324087570, guid: 47bd196389396334fb327c3415190196, type: 3}
       propertyPath: m_IsTrigger

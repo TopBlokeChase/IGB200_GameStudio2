@@ -64,9 +64,9 @@ public class Ladder : MonoBehaviour
 
                 pointB.transform.localPosition = new Vector3(0, 2.16f * ladderHeight, 0);
 
-                ladderCollisionBody.size = new Vector2(ladderCollisionBody.size.x, 2.84f * ladderHeight);
+                ladderCollisionBody.size = new Vector2(ladderCollisionBody.size.x, 2.73f * ladderHeight);
 
-                ladderCollisionBody.gameObject.transform.localPosition = new Vector3(0, 1.42f * (ladderHeight - 1) + 0.44f);
+                ladderCollisionBody.gameObject.transform.localPosition = new Vector3(0, 1.33f * (ladderHeight - 1) + 0.44f);
 
 
                 for (int i = 1; i < ladderHeight; i++)

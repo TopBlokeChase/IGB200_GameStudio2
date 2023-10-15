@@ -243,6 +243,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3130847296293218244, guid: 5db89156814314748adf85b9601a768e, type: 3}
+      propertyPath: bloomLerpTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3130847296293218246, guid: 5db89156814314748adf85b9601a768e, type: 3}
       propertyPath: m_RootOrder
       value: 0

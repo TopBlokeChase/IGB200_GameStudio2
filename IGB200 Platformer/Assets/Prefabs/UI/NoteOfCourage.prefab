@@ -1198,7 +1198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9076691295167296725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.43, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1264,6 +1264,7 @@ MonoBehaviour:
   statusEffectUIPosOffset: 1.88
   soundLooping: {fileID: 1373592918203608430}
   soundPickup: {fileID: 6349061181532728397}
+  loopSoundFadeTime: 0.5
 --- !u!1001 &7456809641731431233
 PrefabInstance:
   m_ObjectHideFlags: 0

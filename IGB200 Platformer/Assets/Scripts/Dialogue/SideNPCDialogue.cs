@@ -74,6 +74,11 @@ public class SideNPCDialogue : MonoBehaviour
         }
     }
 
+    public Collider2D ReturnBoxCollider()
+    {
+        return triggerCollider;
+    }
+
     private void GetDialogueToDisplay()
     {
             speechText.text = mainNPCDialogue.GetSideDialogueToDisplay(isFemale);
