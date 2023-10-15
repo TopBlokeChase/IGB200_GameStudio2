@@ -27080,7 +27080,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067837933}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -55.59, y: -43.7, z: 0}
+  m_LocalPosition: {x: -28.1, y: -1.3, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27857,6 +27857,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7018595502162596880, guid: 529828c5f7ce13a45afc203411279361, type: 3}
+      propertyPath: m_Size.x
+      value: 53.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7018595502162596880, guid: 529828c5f7ce13a45afc203411279361, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7839576492042384721, guid: 529828c5f7ce13a45afc203411279361, type: 3}
       propertyPath: m_Name
       value: HotFloor

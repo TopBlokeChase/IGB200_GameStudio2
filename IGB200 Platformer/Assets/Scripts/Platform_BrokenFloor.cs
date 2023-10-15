@@ -72,4 +72,12 @@ public class Platform_BrokenFloor : MonoBehaviour
         finished = true;
         polygonCollider.enabled = false;
     }
+
+    public void CheckEndPositionValid(Collider2D allowedArea)
+    {
+        if (!allowedArea.bounds.Contains(endPosition.transform.position))
+        {
+            Destroy(this.gameObject.transform.parent.gameObject);
+        }
+    }
 }

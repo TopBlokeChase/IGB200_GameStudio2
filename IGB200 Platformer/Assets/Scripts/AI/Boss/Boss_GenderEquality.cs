@@ -619,6 +619,11 @@ public class Boss_GenderEquality : MonoBehaviour
         }
 
         brokenFloor = Instantiate(brokenGround, transform.position, Quaternion.identity);
+        foreach (Transform child in brokenFloor.transform)
+        {
+            child.gameObject.GetComponentInChildren<Platform_BrokenFloor>().CheckEndPositionValid(hotFloor.GetComponent<Boss_HotFloor>().ReturnAllowedArea());
+        }
+
         bossSounds.PlayPlatformAppear();
         
         timer = 0;
