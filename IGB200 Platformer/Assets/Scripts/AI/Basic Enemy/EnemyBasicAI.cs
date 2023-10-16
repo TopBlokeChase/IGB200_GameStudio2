@@ -5,10 +5,25 @@ using UnityEngine;
 
 public class EnemyBasicAI : MonoBehaviour
 {
+    public enum EnemyType
+    {
+        Slime,
+        Tornado,
+        MentalHealth
+    }
+
+    [Header("Enemy Type Settings")]
+    [SerializeField] EnemyType enemyType;
+    [SerializeField] private Sprite slimeSprite;
+    [SerializeField] private Sprite tornadoSprite;
+    [SerializeField] private Sprite mentalHealthSprite;
+    [SerializeField] private Animator animator;
+
     [Header("Sounds")]
     [SerializeField] private AudioSource deathSoundSource;
 
     [Header("References & Settings")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private float forceOnTouch = 10f;
@@ -22,6 +37,25 @@ public class EnemyBasicAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (enemyType == EnemyType.Slime)
+        {
+            spriteRenderer.sprite = slimeSprite;
+            animator.SetBool("isSlime", true);
+        }
+
+        if (enemyType == EnemyType.Tornado)
+        {
+            spriteRenderer.sprite = tornadoSprite;
+            animator.SetBool("isTornado", true);
+        }
+
+        if (enemyType == EnemyType.MentalHealth)
+        {
+            spriteRenderer.sprite = mentalHealthSprite;
+            animator.SetBool("isMentalHealth", true);
+        }
+
+
         pointToMoveTo = pointA;
     }
 
@@ -36,6 +70,7 @@ public class EnemyBasicAI : MonoBehaviour
         if (transform.position != pointToMoveTo.transform.position)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointToMoveTo.transform.position, movementSpeed * Time.deltaTime);
+            animator.SetBool("isMoving", true);
         }
         else
         {
