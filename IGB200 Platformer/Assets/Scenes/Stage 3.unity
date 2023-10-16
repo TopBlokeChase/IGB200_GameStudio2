@@ -22542,10 +22542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1004202373544770898, guid: 10c433a516412df4a96eee48c24bbc19, type: 3}
       propertyPath: m_text
-      value: 'You can only place 1 ladder at a time
-
-        Press ''T'' to remove
-        your placed ladder'
+      value: You can press 'T' to remove your ladder
       objectReference: {fileID: 0}
     - target: {fileID: 1004202373544770898, guid: 10c433a516412df4a96eee48c24bbc19, type: 3}
       propertyPath: m_fontStyle
@@ -22617,11 +22614,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1454716989610726827, guid: 10c433a516412df4a96eee48c24bbc19, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 30.722767
+      value: 59.1
       objectReference: {fileID: 0}
     - target: {fileID: 1454716989610726827, guid: 10c433a516412df4a96eee48c24bbc19, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 10.588119
+      value: 40.85
       objectReference: {fileID: 0}
     - target: {fileID: 1454716989610726827, guid: 10c433a516412df4a96eee48c24bbc19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
