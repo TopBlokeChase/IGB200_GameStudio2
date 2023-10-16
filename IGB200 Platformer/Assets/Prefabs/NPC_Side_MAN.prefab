@@ -49,8 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3c335e5150eae4791ffb8b8910e701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
+  levelOneParticleMaterial: {fileID: 2100000, guid: 9bc7e538a753ec14cb8f08e02e2e01ea, type: 2}
+  levelTwoParticleMaterial: {fileID: 2100000, guid: cb33e927602c5494fa79289b1850094f, type: 2}
+  levelThreeParticleMaterial: {fileID: 2100000, guid: 4cb6e23bc7e285f4fb87e58babb27512, type: 2}
   activateParticleSwirl: 1
-  swirlingParticleMaterial: {fileID: 0}
   spriteEffected: {fileID: 0}
   spriteNotEffected: {fileID: 0}
   spriteObject: {fileID: 8321474632661623565}
@@ -844,15 +847,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1543571865089134680, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1543571865089134680, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1543571865089134680, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1543571865089134680, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -902,6 +905,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7587937149475695609, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9bc7e538a753ec14cb8f08e02e2e01ea, type: 2}
     - target: {fileID: 7785067886266269773, guid: 89c45b9729f76d445ad1a2f64d63d61e, type: 3}
       propertyPath: m_Name
       value: NPCParticleSwirl

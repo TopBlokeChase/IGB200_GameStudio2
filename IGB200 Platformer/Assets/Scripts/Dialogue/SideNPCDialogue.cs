@@ -6,8 +6,18 @@ using Unity.VisualScripting;
 
 public class SideNPCDialogue : MonoBehaviour
 {
+    public enum Level
+    {
+        One,
+        Two,
+        Three
+    }
+
+    [SerializeField] private Level level;
+    [SerializeField] private Material levelOneParticleMaterial;
+    [SerializeField] private Material levelTwoParticleMaterial;
+    [SerializeField] private Material levelThreeParticleMaterial;
     [SerializeField] private bool activateParticleSwirl;
-    [SerializeField] private Material swirlingParticleMaterial;
     [SerializeField] private Sprite spriteEffected;
     [SerializeField] private Sprite spriteNotEffected;
     [SerializeField] private GameObject spriteObject;
@@ -30,10 +40,22 @@ public class SideNPCDialogue : MonoBehaviour
         mainNPCDialogue = linkedNPC.GetComponent<MainNPCDialogue>();
         spriteObject.GetComponent<SpriteRenderer>().sprite = spriteEffected;
 
-        if (swirlingParticleMaterial != null)
+        if (level == Level.One)
         {
             ParticleSystemRenderer rend = sideNPCParticleSwirl.GetComponent<ParticleSystemRenderer>();
-            rend.material = swirlingParticleMaterial;
+            rend.material = levelOneParticleMaterial;
+        }
+
+        if (level == Level.Two)
+        {
+            ParticleSystemRenderer rend = sideNPCParticleSwirl.GetComponent<ParticleSystemRenderer>();
+            rend.material = levelTwoParticleMaterial;
+        }
+
+        if (level == Level.Three)
+        {
+            ParticleSystemRenderer rend = sideNPCParticleSwirl.GetComponent<ParticleSystemRenderer>();
+            rend.material = levelThreeParticleMaterial;
         }
 
         if (activateParticleSwirl)

@@ -3768,6 +3768,10 @@ PrefabInstance:
       value: NPC_Side_WOMAN (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8086256511769542752, guid: 50cd42caeae07af409ef758c8c5e5264, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086256511769542752, guid: 50cd42caeae07af409ef758c8c5e5264, type: 3}
       propertyPath: linkedNPC
       value: 
       objectReference: {fileID: 518330981}
@@ -4272,6 +4276,7 @@ MonoBehaviour:
   placementText: {fileID: 1369197969}
   collisionChecker: {fileID: 1523902092}
   floorCollisionChecker: {fileID: 1980472873}
+  distanceCheckerPrefab: {fileID: 0}
 --- !u!1 &379095484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4808,6 +4813,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 965852706}
     m_Modifications:
+    - target: {fileID: 5705019533411371050, guid: 8bd79709ddd42f5469c65eddd4b88c17, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5705019533411371050, guid: 8bd79709ddd42f5469c65eddd4b88c17, type: 3}
       propertyPath: linkedNPC
       value: 
@@ -24324,6 +24333,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 965852706}
     m_Modifications:
     - target: {fileID: 5705019533411371050, guid: 8bd79709ddd42f5469c65eddd4b88c17, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705019533411371050, guid: 8bd79709ddd42f5469c65eddd4b88c17, type: 3}
       propertyPath: linkedNPC
       value: 
       objectReference: {fileID: 518330981}
@@ -25891,6 +25904,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5705019533411371050, guid: 8bd79709ddd42f5469c65eddd4b88c17, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5705019533411371050, guid: 8bd79709ddd42f5469c65eddd4b88c17, type: 3}
       propertyPath: linkedNPC
       value: 
       objectReference: {fileID: 518330981}
@@ -26170,6 +26187,10 @@ PrefabInstance:
     - target: {fileID: 6198902773618378022, guid: 50cd42caeae07af409ef758c8c5e5264, type: 3}
       propertyPath: m_Name
       value: NPC_Side_WOMAN (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8086256511769542752, guid: 50cd42caeae07af409ef758c8c5e5264, type: 3}
+      propertyPath: level
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8086256511769542752, guid: 50cd42caeae07af409ef758c8c5e5264, type: 3}
       propertyPath: linkedNPC
