@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 357254728297751918}
   m_Layer: 0
   m_Name: Tutorial Trigger
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
