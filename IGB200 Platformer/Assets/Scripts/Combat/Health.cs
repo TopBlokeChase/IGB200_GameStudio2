@@ -23,6 +23,9 @@ public class Health : MonoBehaviour
 
     private BossSounds bossSounds;
 
+    private float bossIFramesTime = 0.5f;
+    private float bossIFrameTimer = 0.5f;
+
     private void Start()
     {
         bossSounds = transform.parent.GetComponentInChildren<BossSounds>();
@@ -33,6 +36,10 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (this.gameObject.tag == "Enemy")
+        {
+            bossIFrameTimer += Time.deltaTime;
+        }
     }
 
     public void SetInvulnerable(bool isInvulnerable)
@@ -68,7 +75,7 @@ public class Health : MonoBehaviour
                 damageParticlePrefab.GetComponent<ParticleSystem>().Play();
             }
         }
-        else
+        else if (this.gameObject.tag == "EnemyBasic")
         {
             GameObject damageParticle = Instantiate(damageParticlePrefab, transform.position, Quaternion.identity);
             damageParticle.transform.parent = null;
@@ -115,15 +122,24 @@ public class Health : MonoBehaviour
             }
             else
             {
-                health -= damage;
-                SetHeartsUI();
+                if (this.gameObject.tag == "Enemy")
+                {
+                    if (bossIFrameTimer >= bossIFramesTime)
+                    {
+                        bossIFrameTimer = 0f;
+                        GameObject damageParticle = Instantiate(damageParticlePrefab, transform.position, Quaternion.identity);
+                        damageParticle.transform.parent = null;
+                        bossSounds.PlayHurt();
+                        health -= damage;
+                        SetHeartsUI();
+                    }
+                }
+                else
+                {
+                    health -= damage;
+                    SetHeartsUI();
+                }
             }
-
-            if (this.gameObject.tag == "Enemy")
-            {
-                bossSounds.PlayHurt();
-            }
-
         }
     }
 

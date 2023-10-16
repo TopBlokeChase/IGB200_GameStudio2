@@ -19059,7 +19059,7 @@ MonoBehaviour:
   stateChangeTime: 1.5
   moveAbovePlayerSpeed: 1.5
   slamSizeChangeDuration: 1.8
-  slamSizeChangeEndAmount: 0.19
+  slamSizeChangeEndMultiplier: 1.26
   slamAttackDownDuration: 0.2
   slamAttackRestDuration: 1
   slamAttackReturnDuration: 1
@@ -19073,7 +19073,7 @@ MonoBehaviour:
   laserAttackRotateBackSpeed: 0.5
   bloomAmount: 25
   hotSizeChangeDuration: 0
-  hotSizeChangeEndAmount: 0
+  hotSizeChangeEndMultiplier: 1.33
   hotAttackDownDuration: 0
   hotAttackRestDuration: 0
   hotAttackAfterSizeRestDuration: 0
@@ -19110,6 +19110,7 @@ MonoBehaviour:
   - {fileID: 710162490}
   - {fileID: 1145488179}
   - {fileID: 1340203333}
+  - {fileID: 979737784527150838}
   fullHeart: {fileID: 21300000, guid: bf70efaa3b199ae42b176b1cec226106, type: 3}
   shieldHeart: {fileID: 21300000, guid: 5f9db77f77024dc4399c5242d63615bb, type: 3}
   emptyHeart: {fileID: 21300000, guid: 2481d7a453898a94d84950ec87d146f2, type: 3}
@@ -22458,8 +22459,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_Health_Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 979737783022516775, guid: f684292bb2a76ad40b9a5c52c4b15597, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f684292bb2a76ad40b9a5c52c4b15597, type: 3}
+--- !u!114 &979737784527150838 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7501061517195914715, guid: f684292bb2a76ad40b9a5c52c4b15597, type: 3}
+  m_PrefabInstance: {fileID: 979737784527150837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1621597847275604452
 PrefabInstance:
   m_ObjectHideFlags: 0

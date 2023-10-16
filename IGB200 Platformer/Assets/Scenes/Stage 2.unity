@@ -4487,6 +4487,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f684292bb2a76ad40b9a5c52c4b15597, type: 3}
+--- !u!114 &390272867 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7501061517195914715, guid: f684292bb2a76ad40b9a5c52c4b15597, type: 3}
+  m_PrefabInstance: {fileID: 390272866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &396435865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24099,7 +24110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageParticlePrefab: {fileID: 3028236898574961808, guid: 1a4f5ddd1dd68174fb27d22212cdb5d5, type: 3}
-  maxHealth: 10
+  maxHealth: 12
   shieldAmount: 0
   isBasicEnemy: 0
   hearts:
@@ -24117,6 +24128,7 @@ MonoBehaviour:
   - {fileID: 1771009450}
   - {fileID: 636813173}
   - {fileID: 970700212}
+  - {fileID: 390272867}
   fullHeart: {fileID: 21300000, guid: bf70efaa3b199ae42b176b1cec226106, type: 3}
   shieldHeart: {fileID: 21300000, guid: 5f9db77f77024dc4399c5242d63615bb, type: 3}
   emptyHeart: {fileID: 21300000, guid: 2481d7a453898a94d84950ec87d146f2, type: 3}

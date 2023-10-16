@@ -18,8 +18,10 @@ public class LadderPlayer_NEW : MonoBehaviour
 
     public LadderPlayer_CollisionChecker collisionChecker;
     public LadderPlayer_CollisionChecker floorCollisionChecker;
+    public GameObject distanceCheckerPrefab;
 
     private GameObject placedLadder;
+    private GameObject distanceChecker;
 
     private string initialPlacementText;
     private string invalidPlacementText = "Invalid Placement!";
@@ -30,8 +32,13 @@ public class LadderPlayer_NEW : MonoBehaviour
 
     public void RemoveLadder()
     {
-        Destroy(placedLadder);
+        Destroy(placedLadder);       
+        Destroy(distanceChecker);
         hasPlacedLadder = false;
+        GameObject particle = Instantiate(ladderDustParticle,
+                                new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
+        particle.transform.parent = null;
+        playerSounds.PlayLadderDestroy();
     }
 
     public void StopPlacementMode()
@@ -81,12 +88,7 @@ public class LadderPlayer_NEW : MonoBehaviour
                     {
                         if (playerMovement.isInteracting != true)
                         {
-                            GameObject particle = Instantiate(ladderDustParticle,
-                                new Vector3(placedLadder.transform.position.x, placedLadder.transform.position.y + 1.89f, placedLadder.transform.position.z), Quaternion.identity);
-                            particle.transform.parent = null;
-                            RemoveLadder();
-                            playerSounds.PlayLadderDestroy();
-
+                            RemoveLadder();                           
                         }
                     }
                 }
@@ -132,6 +134,7 @@ public class LadderPlayer_NEW : MonoBehaviour
                         inPlacementMode = false;
                         playerLadderOutline.SetActive(false);
                         placedLadder = Instantiate(playerLadderPrefab, playerLadderOutline.transform.position, Quaternion.Euler(Vector3.zero));
+                        distanceChecker = Instantiate(distanceCheckerPrefab, placedLadder.transform.position, Quaternion.identity);
                         StartCoroutine(DelayAllowAttack());
                         playerSounds.PlayLadderPlace();
 
@@ -162,6 +165,11 @@ public class LadderPlayer_NEW : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool ReturnHasPlaced()
+    {
+        return hasPlacedLadder;
     }
 
     IEnumerator DelayAllowAttack()
