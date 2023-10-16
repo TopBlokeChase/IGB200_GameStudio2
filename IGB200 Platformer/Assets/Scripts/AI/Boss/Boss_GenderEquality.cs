@@ -57,7 +57,7 @@ public class Boss_GenderEquality : MonoBehaviour
     [Header("Slam Attack Settings")]
     [SerializeField] private float moveAbovePlayerSpeed;
     [SerializeField] private float slamSizeChangeDuration;
-    [SerializeField] private float slamSizeChangeEndAmount;
+    [SerializeField] private float slamSizeChangeEndMultiplier = 1.26f;
     [SerializeField] private float slamAttackDownDuration;
     [SerializeField] private float slamAttackRestDuration;
     [SerializeField] private float slamAttackReturnDuration;
@@ -75,7 +75,7 @@ public class Boss_GenderEquality : MonoBehaviour
     [Header("Hot Ground Attack Settings")]
     [SerializeField] private float bloomAmount = 25f;
     [SerializeField] private float hotSizeChangeDuration;
-    [SerializeField] private float hotSizeChangeEndAmount;
+    [SerializeField] private float hotSizeChangeEndMultiplier = 1.33f;
     [SerializeField] private float hotAttackDownDuration;
     [SerializeField] private float hotAttackRestDuration;
     [SerializeField] private float hotAttackAfterSizeRestDuration;
@@ -108,14 +108,14 @@ public class Boss_GenderEquality : MonoBehaviour
 
     private GameObject brokenFloor;
 
-    private CircleCollider2D circleCollider2D;
+    private Collider2D circleCollider2D;
 
     //private bool canIdle;
 
     // Start is called before the first frame update
     void Start()
     {
-        circleCollider2D = GetComponent<CircleCollider2D>();
+        circleCollider2D = GetComponent<Collider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         originalPosition = transform.position;
         originalHeight = transform.position.y;
@@ -230,6 +230,7 @@ public class Boss_GenderEquality : MonoBehaviour
     {
         Instantiate(flyingDisc, transform.position, transform.rotation);
         bossSounds.PlayFlyingDisc();
+        animator.SetTrigger("Shoot");
         stateChangeTimer = 0;
         isBusy = false;
     }
@@ -238,6 +239,7 @@ public class Boss_GenderEquality : MonoBehaviour
     {
         Instantiate(wordAttackPrefab, transform.position, transform.rotation);
         bossSounds.PlayWordAttack();
+        animator.SetTrigger("Shoot");
         stateChangeTimer = 0;
         isBusy = false;
     }
@@ -250,7 +252,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
     void HotGroundAttack()
     {
-        animator.SetBool("LaserBeam", true);
+        animator.SetBool("HotFloor", true);
         StartCoroutine(HotGroundAttackCoroutine());
     }
 
@@ -303,6 +305,7 @@ public class Boss_GenderEquality : MonoBehaviour
         bossSounds.StopAllSounds(false);
 
         animator.SetBool("LaserBeam", false);
+        animator.SetBool("HotFloor", false);
         animator.SetBool("SlamAttack", false);
 
         transform.position = originalPosition;
@@ -332,6 +335,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         isBusy = true;
         animator.SetBool("LaserBeam", false);
+        animator.SetBool("HotFloor", false);
         animator.SetBool("SlamAttack", false);
 
         transform.rotation = originalRotation;
@@ -412,7 +416,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         while (timer < slamSizeChangeDuration)
         {
-            sprite.transform.localScale = Vector2.Lerp(startingScale, new Vector3 (slamSizeChangeEndAmount, slamSizeChangeEndAmount, slamSizeChangeEndAmount), timer / slamSizeChangeDuration);
+            sprite.transform.localScale = Vector2.Lerp(startingScale, new Vector3 (slamSizeChangeEndMultiplier * startingScale.x, slamSizeChangeEndMultiplier * startingScale.x, slamSizeChangeEndMultiplier * startingScale.x), timer / slamSizeChangeDuration);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -430,7 +434,7 @@ public class Boss_GenderEquality : MonoBehaviour
         while (timer < slamAttackDownDuration)
         {
             transform.position = Vector2.Lerp(startingPosition, slamPosition, timer / slamAttackDownDuration);
-            sprite.transform.localScale = Vector2.Lerp(new Vector3(slamSizeChangeEndAmount, slamSizeChangeEndAmount, slamSizeChangeEndAmount), startingScale, timer / slamAttackDownDuration);
+            sprite.transform.localScale = Vector2.Lerp(new Vector3(slamSizeChangeEndMultiplier * startingScale.x, slamSizeChangeEndMultiplier * startingScale.x, slamSizeChangeEndMultiplier * startingScale.x), startingScale, timer / slamAttackDownDuration);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -609,7 +613,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         bossCamera.GetComponent<CameraShake>().ShakeCamera(hotCameraShakeAmount, hotCameraShakeDuration);
 
-        bossSounds.PlayHotFloorRumble();
+        bossSounds.PlayHotFloorRumble();     
 
         while (timer < hotAttackDownDuration)
         {
@@ -643,7 +647,7 @@ public class Boss_GenderEquality : MonoBehaviour
 
         while (timer < hotSizeChangeDuration)
         {
-            sprite.transform.localScale = Vector2.Lerp(startingScale, new Vector3(hotSizeChangeEndAmount, hotSizeChangeEndAmount, hotSizeChangeEndAmount), timer / hotSizeChangeDuration);
+            sprite.transform.localScale = Vector2.Lerp(startingScale, new Vector3(hotSizeChangeEndMultiplier * startingScale.x, hotSizeChangeEndMultiplier * startingScale.x, hotSizeChangeEndMultiplier * startingScale.x), timer / hotSizeChangeDuration);
             transform.position = Vector2.Lerp(slamPosition, new Vector2(slamPosition.x, slamPosition.y + hotAttackPivotOffset), timer / hotSizeChangeDuration);
             timer += Time.deltaTime;
             yield return null;
@@ -689,7 +693,7 @@ public class Boss_GenderEquality : MonoBehaviour
         isBusy = false;
         //canIdle = true;
 
-        animator.SetBool("SlamAttack", false);
+        animator.SetBool("HotFloor", false);
         yield return null;
     }
 }

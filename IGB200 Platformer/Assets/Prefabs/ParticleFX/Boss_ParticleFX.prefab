@@ -45,6 +45,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossSlamDust
       objectReference: {fileID: 0}
+    - target: {fileID: 1017111438631651632, guid: 9a387c2e46720394a9f191b1ed0d9571, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3046025569826517652, guid: 9a387c2e46720394a9f191b1ed0d9571, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3954655443018260099, guid: 9a387c2e46720394a9f191b1ed0d9571, type: 3}
       propertyPath: m_RootOrder
       value: 2

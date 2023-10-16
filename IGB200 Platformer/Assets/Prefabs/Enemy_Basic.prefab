@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3909949192997745148}
   - component: {fileID: 6022487080580216710}
+  - component: {fileID: 7724410546985677020}
   m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7724410546985677020
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014414108103457895}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f3c7179223f07b549b2c5104f9b35957, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1513158889626475584
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +181,6 @@ GameObject:
   - component: {fileID: 6189938176088562335}
   - component: {fileID: 6189938176088562329}
   - component: {fileID: 6189938176088562330}
-  - component: {fileID: 812315307517265992}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: EnemyBasic
@@ -200,6 +220,7 @@ MonoBehaviour:
   slimeSprite: {fileID: 21300000, guid: 5da3a257ec9d3d842899e43918ba935b, type: 3}
   tornadoSprite: {fileID: 21300000, guid: 717d97bb3079f4d46a423f3694a2ef33, type: 3}
   mentalHealthSprite: {fileID: 0}
+  animator: {fileID: 7724410546985677020}
   deathSoundSource: {fileID: 3076338649461501669}
   spriteRenderer: {fileID: 6022487080580216710}
   movementSpeed: 5
@@ -305,26 +326,6 @@ MonoBehaviour:
   fullHeart: {fileID: 0}
   shieldHeart: {fileID: 0}
   emptyHeart: {fileID: 0}
---- !u!95 &812315307517265992
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6189938176088562333}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3c7179223f07b549b2c5104f9b35957, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6189938176709663942
 GameObject:
   m_ObjectHideFlags: 0

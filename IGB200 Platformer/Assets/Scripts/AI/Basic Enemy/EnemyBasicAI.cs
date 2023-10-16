@@ -75,6 +75,7 @@ public class EnemyBasicAI : MonoBehaviour
         else
         {
             waitTimer += Time.deltaTime;
+            animator.SetBool("isMoving", false);
 
             if (waitTimer >= waitTime)
             {
@@ -83,11 +84,12 @@ public class EnemyBasicAI : MonoBehaviour
                 if (pointToMoveTo == pointA)
                 {
                     pointToMoveTo = pointB;
+                    spriteRenderer.flipX = true;
                 }
                 else
                 {
                     pointToMoveTo = pointA;
-
+                    spriteRenderer.flipX = false;
                 }       
             }
         }     
@@ -105,7 +107,7 @@ public class EnemyBasicAI : MonoBehaviour
     {
         deathSoundSource.Play();
 
-        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        spriteRenderer.enabled = false;
         this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
         StartCoroutine(Delay(deathSoundSource.clip.length));      
     }
