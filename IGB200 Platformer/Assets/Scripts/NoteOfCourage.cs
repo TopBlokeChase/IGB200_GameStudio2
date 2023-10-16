@@ -23,6 +23,7 @@ public class NoteOfCourage : MonoBehaviour
 
     [SerializeField] private AudioSource soundLooping;
     [SerializeField] private AudioSource soundPickup;
+    [SerializeField] private AudioSource readAudioSource;
     [SerializeField] private float loopSoundFadeTime = 0.5f;
 
     private GameObject player;
@@ -48,6 +49,7 @@ public class NoteOfCourage : MonoBehaviour
                 //Time.timeScale = 0;
                 noteTextUI.SetActive(true);
                 fadeAudio = true;
+                readAudioSource.Play();
 
                 player.GetComponentInChildren<PlayerCombat>().CannotAttackToggle(false);
                 player.GetComponent<PlayerMovement>().isInteracting = true;
