@@ -4095,7 +4095,7 @@ Transform:
   - {fileID: 316479238}
   - {fileID: 1909149246}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &362234930
 BoxCollider2D:
@@ -5726,7 +5726,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -8040,12 +8040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1004202373544770898, guid: 10c433a516412df4a96eee48c24bbc19, type: 3}
       propertyPath: m_text
-      value: 'Hold ''R'' to aim your nail gun
-
-        Release to fire
-
-        or
-        ''RIGHT CLICK'' to cancel'
+      value: Hold 'R' to aim your nail gun
       objectReference: {fileID: 0}
     - target: {fileID: 1004202373544770898, guid: 10c433a516412df4a96eee48c24bbc19, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -8436,7 +8431,7 @@ Transform:
   - {fileID: 7016256}
   - {fileID: 215687368}
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &921906885 stripped
 MonoBehaviour:
