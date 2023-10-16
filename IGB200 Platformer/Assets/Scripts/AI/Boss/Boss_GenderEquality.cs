@@ -450,10 +450,15 @@ public class Boss_GenderEquality : MonoBehaviour
         while (timer < slamAttackRestDuration)
         {
             timer += Time.deltaTime;
+
+            if (timer > slamAttackRestDuration / 2)
+            {
+                circleCollider2D.enabled = true;
+            }
             yield return null;
         }
 
-        circleCollider2D.enabled = true;
+        
 
         timer = 0;
 

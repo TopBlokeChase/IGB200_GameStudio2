@@ -34,6 +34,8 @@ public class EnemyBasicAI : MonoBehaviour
     private float waitTimer;
     private bool isWaiting;
 
+    private bool hasSetAnimBool;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,12 +72,22 @@ public class EnemyBasicAI : MonoBehaviour
         if (transform.position != pointToMoveTo.transform.position)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointToMoveTo.transform.position, movementSpeed * Time.deltaTime);
-            animator.SetBool("isMoving", true);
+
+            if (!hasSetAnimBool)
+            {
+                animator.SetBool("isMoving", true);
+                hasSetAnimBool = true;
+            }
         }
         else
         {
             waitTimer += Time.deltaTime;
-            animator.SetBool("isMoving", false);
+
+            if (hasSetAnimBool)
+            {
+                animator.SetBool("isMoving", false);
+                hasSetAnimBool = false;
+            }
 
             if (waitTimer >= waitTime)
             {
