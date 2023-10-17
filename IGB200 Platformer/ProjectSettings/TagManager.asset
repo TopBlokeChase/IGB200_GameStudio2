@@ -25,8 +25,8 @@ TagManager:
   - Ground
   - Terrain
   - post process
-  - 
-  - 
+  - Hammer
+  - BG
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 4268599945
+    locked: 0
   - name: Background
     uniqueID: 62653991
     locked: 0
