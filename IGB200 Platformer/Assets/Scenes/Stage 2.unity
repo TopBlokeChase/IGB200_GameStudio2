@@ -5531,9 +5531,10 @@ MonoBehaviour:
   - '*whistles* Hey Georgie, lookin'' beautiful today!'
   - Heh, workin' with all these women sure gives plenty of eye candy...hehe
   sideNPCDialogueAfterBossMEN:
-  - Hmm, I should double check my work and make sure it's okay for the boss.
-  - '*phew* what a day! Can''t wait ''till knock off time.'
-  - Maybe I should check these plans again.
+  - 'I need to apologise to Georgie; my behaviour was unacceptable. I hope she can
+    forgive me. '
+  - "I wonder if Georgie will ever forgive me for what I\u2019ve done to her. "
+  - 'I wonder how I can make it up to Georgie. '
   sideNPCDialogueBeforeBossWOMEN:
   - I wish I could just be left alone; I want to work on this construction site!
     Not be harassed all the time.
