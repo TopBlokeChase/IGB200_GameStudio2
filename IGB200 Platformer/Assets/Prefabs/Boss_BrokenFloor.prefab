@@ -358,11 +358,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 235725856762282316, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.69
+      value: -2.62
       objectReference: {fileID: 0}
     - target: {fileID: 235725856762282316, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.59
+      value: 5.77
       objectReference: {fileID: 0}
     - target: {fileID: 3448755615950884690, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -398,19 +398,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6086160620094859693, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97666115
+      value: 0.99910074
       objectReference: {fileID: 0}
     - target: {fileID: 6086160620094859693, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6086160620094859693, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6086160620094859693, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.21478587
+      value: -0.04239871
       objectReference: {fileID: 0}
     - target: {fileID: 6086160620094859693, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -422,10 +422,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6086160620094859693, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 24.806
+      value: -4.86
       objectReference: {fileID: 0}
     - target: {fileID: 7534273007870366436, guid: 59d284214624806449b1da511dfc16d1, type: 3}
       propertyPath: flipRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534273007870366436, guid: 59d284214624806449b1da511dfc16d1, type: 3}
+      propertyPath: rotationSpeed
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

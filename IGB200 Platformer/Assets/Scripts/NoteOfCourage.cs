@@ -2,14 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoteOfCourage : MonoBehaviour
 {
+    public enum Level
+    {
+        One,
+        Two,
+        Three
+    }
+
+    [SerializeField] private Level level;
     [SerializeField] private string noteTitle;
 
-    [TextArea(10, 15)]
-    [SerializeField] private string noteText;
+    [Header("Note Text")]
 
+    [TextArea(10, 15)]
+    [SerializeField] private string noteTextPage2Level1;
+
+    [TextArea(10, 15)]
+    [SerializeField] private string noteTextPage2Level2;
+
+    [TextArea(10, 15)]
+    [SerializeField] private string noteTextPage2Level3;
+
+    [Header("QR Code Images")]
+    [SerializeField] private Sprite qrCodeLevel1;
+    [SerializeField] private Sprite qrCodeLevel2;
+    [SerializeField] private Sprite qrCodeLevel3;
+
+    [Header("Settings & References")]
     [SerializeField] private string buffName;
     [SerializeField] private int shieldAmount;
 
@@ -18,8 +41,10 @@ public class NoteOfCourage : MonoBehaviour
     [SerializeField] private GameObject noteTextUI;
     [SerializeField] private TMP_Text noteTitleText;
     [SerializeField] private TMP_Text noteBodyText;
+    [SerializeField] private TMP_Text noteBodyTextPage2;
     [SerializeField] private GameObject statusEffectUI;
     [SerializeField] private float statusEffectUIPosOffset;
+    [SerializeField] private Image qrCodeImage;
 
     [SerializeField] private AudioSource soundLooping;
     [SerializeField] private AudioSource soundPickup;
@@ -36,7 +61,24 @@ public class NoteOfCourage : MonoBehaviour
     void Start()
     {
         noteTitleText.text = noteTitle;
-        noteBodyText.text = noteText;
+
+        if (level == Level.One)
+        {
+            qrCodeImage.sprite = qrCodeLevel1;
+            noteBodyTextPage2.text = noteTextPage2Level1;
+        }
+
+        if (level == Level.Two)
+        {
+            qrCodeImage.sprite = qrCodeLevel2;
+            noteBodyTextPage2.text = noteTextPage2Level2;
+        }
+
+        if (level == Level.Three)
+        {
+            qrCodeImage.sprite = qrCodeLevel3;
+            noteBodyTextPage2.text = noteTextPage2Level3;
+        }
     }
 
     // Update is called once per frame

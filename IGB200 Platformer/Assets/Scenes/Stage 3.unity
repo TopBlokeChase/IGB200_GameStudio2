@@ -4118,6 +4118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoteOfCourage (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 174489377417834213, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
+      propertyPath: level
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3884296824917072633, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4849,6 +4853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoteOfCourage (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 174489377417834213, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
+      propertyPath: level
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3884296824917072633, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -5277,6 +5285,10 @@ PrefabInstance:
     - target: {fileID: 4785987307298926, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_Name
       value: NoteOfCourage
+      objectReference: {fileID: 0}
+    - target: {fileID: 174489377417834213, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
+      propertyPath: level
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3884296824917072633, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_RootOrder
@@ -22528,7 +22540,7 @@ MonoBehaviour:
   laserAttackRotateSpeed: 3
   laserAttackBeamRetractSpeed: 0.25
   laserAttackRotateBackSpeed: 0.5
-  bloomAmount: 25
+  bloomAmount: 7
   hotSizeChangeDuration: 5
   hotSizeChangeEndMultiplier: 1.33
   hotAttackDownDuration: 3
@@ -23925,6 +23937,7 @@ MonoBehaviour:
   NOTE: This script was attached to the sprite object rather than the parent due
     to needing access to the public method for animation events.
   canThrowHammer: 1
+  canUseMeleeRepair: 0
   particleCourageNote: {fileID: 1083436830}
   health: {fileID: 1714172563}
   deathScreenDelayTime: 2.5
@@ -25889,13 +25902,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.8
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.056756757
+        value: 0.9999999
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -25929,7 +25951,7 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 5
     alignment: 0
     textureMode: 0
     shadowBias: 0.5

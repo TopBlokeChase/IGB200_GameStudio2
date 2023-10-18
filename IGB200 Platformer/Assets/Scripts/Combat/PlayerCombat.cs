@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerCombat : MonoBehaviour
         "animation events, which cannot be accessed from the parent.";
 
     public bool canThrowHammer = true;
+    [SerializeField] bool canUseMeleeRepair;
 
     [SerializeField] private GameObject particleCourageNote;
 
@@ -52,6 +54,8 @@ public class PlayerCombat : MonoBehaviour
 
     private bool playerIsDead;
     private bool hasSetDeadStatus;
+
+    
 
     private void Start()
     {
@@ -122,13 +126,29 @@ public class PlayerCombat : MonoBehaviour
     {       
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius, enemyLayerMask);
 
+        if (canUseMeleeRepair)
+        {
+            Collider2D ladder = Physics2D.OverlapCircle(attackPoint.transform.position, attackRadius);
+
+            if (ladder != null)
+            {
+                if(ladder.gameObject.tag == "BrokenLadder")
+                {
+                        ladder.GetComponent<BrokenLadder>().RemoveHammerCount();
+                }
+            }
+        }
+
         playerSounds.PlayAttackGrunt();
 
         foreach(Collider2D enemy in enemies)
         {
             if (enemy.TryGetComponent<Health>(out  Health health))
             {
-                health.DealDamage(attackDamage);            
+                if (health != null)
+                {
+                    health.DealDamage(attackDamage);            
+                }
             }
         } 
         

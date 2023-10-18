@@ -18926,7 +18926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1857349078935333687, guid: 9c4e603f365e4ac42a17cbf1988c03a5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1857349079094481808, guid: 9c4e603f365e4ac42a17cbf1988c03a5, type: 3}
       propertyPath: m_LocalRotation.x
@@ -20650,6 +20650,7 @@ MonoBehaviour:
   NOTE: This script was attached to the sprite object rather than the parent due
     to needing access to the public method for animation events.
   canThrowHammer: 1
+  canUseMeleeRepair: 0
   particleCourageNote: {fileID: 1784068032}
   health: {fileID: 1714172563}
   deathScreenDelayTime: 2.5
@@ -22654,13 +22655,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.8
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.05135135
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -22694,7 +22704,7 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 5
     alignment: 0
     textureMode: 0
     shadowBias: 0.5

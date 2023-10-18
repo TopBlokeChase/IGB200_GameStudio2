@@ -466,12 +466,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7840360772759560101}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -25}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1093337985102018062
 CanvasRenderer:
@@ -502,6 +502,82 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2750225389792023972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7819292983123765933}
+  - component: {fileID: 6740276639710004868}
+  - component: {fileID: 2060820499834183407}
+  m_Layer: 0
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7819292983123765933
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750225389792023972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7840360772759560101}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -15}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &6740276639710004868
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750225389792023972}
+  m_CullTransparentMesh: 1
+--- !u!114 &2060820499834183407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750225389792023972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5, g: 0.4868202, b: 0.4551887, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2b4d68f0ec3784b46b8f8d535ae92b1d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -674,7 +750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -7.48}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 275, y: 167.4}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &7433202493371164783
@@ -705,8 +781,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This QR code goes to: [some website]. It is very helpful and provides
-    all sorts of resources for your wellbeing!'
+  m_text: "This QR code will take you to the website \u2018How can the industry reduce
+    the poor mental health of women in construction.\u2019 It goes into detail about
+    how to help women\u2019s mental health while working in construction."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -733,8 +810,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -837,15 +914,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3773585, g: 0.36483362, b: 0.31149876, a: 1}
+  m_Color: {r: 0.6698113, g: 0.6489766, b: 0.6034621, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 2b4d68f0ec3784b46b8f8d535ae92b1d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -888,6 +965,7 @@ RectTransform:
   m_Children:
   - {fileID: 5563379652884241844}
   - {fileID: 7684939498261028519}
+  - {fileID: 7819292983123765933}
   - {fileID: 6966017641815048486}
   m_Father: {fileID: 5752705353938226065}
   m_RootOrder: 1
@@ -918,15 +996,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3773585, g: 0.36483362, b: 0.31149876, a: 1}
+  m_Color: {r: 0.67058825, g: 0.6509804, b: 0.6039216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 2b4d68f0ec3784b46b8f8d535ae92b1d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1327,7 +1405,7 @@ Transform:
   m_GameObject: {fileID: 7729216989672466032}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3884296824917072633}
@@ -1374,7 +1452,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5d4fa2fdecdadcb468baaedc792cc439, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0c04f99c1af0b641b7e9dc6cf3284fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1558,16 +1636,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7b606dab9c84d42bdc40cd93a0b645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   noteTitle: Note Of Courage
-  noteText: 'Whoever finds this note, just remember that you are not alone.
-
-
-    The
-    challenges that lay before you may seem too great to face, but they can be overcome!
-
-
-    You
-    are stronger than you know.'
+  noteTextPage2Level1: "This QR code will take you to the website \u2018How to fix
+    the construction sector's gender equality problem.\u2019 It goes into detail
+    about how to make the construction sector equal for women. "
+  noteTextPage2Level2: "This QR code will take you to the website \u2018Demolishing
+    the barriers that stop women from working in construction.\u2019 It goes into
+    detail about why women don\u2019t want to go into construction and ways to fix
+    it. "
+  noteTextPage2Level3: "This QR code will take you to the website \u2018How can the
+    industry reduce the poor mental health of women in construction.\u2019 It goes
+    into detail about how to help women\u2019s mental health while working in construction."
+  qrCodeLevel1: {fileID: 21300000, guid: 03ff1da3caf009d4b967d9054af2a2d7, type: 3}
+  qrCodeLevel2: {fileID: 21300000, guid: aa408c769b7308942852267a13be7d4d, type: 3}
+  qrCodeLevel3: {fileID: 21300000, guid: 92eebf4cacfde30478a2ddc1d8a8537f, type: 3}
   buffName: You feel more couragous!
   shieldAmount: 1
   noteSprite: {fileID: 7729216989672466032}
@@ -1575,8 +1658,10 @@ MonoBehaviour:
   noteTextUI: {fileID: 7749954615940386542}
   noteTitleText: {fileID: 3773499482470410456}
   noteBodyText: {fileID: 5562619972565605197}
+  noteBodyTextPage2: {fileID: 1584653210730974725}
   statusEffectUI: {fileID: 7385028705728975056, guid: f0a8c0f7d2ddd574d96f191628cbc4e7, type: 3}
   statusEffectUIPosOffset: 1.88
+  qrCodeImage: {fileID: 5763972963566772919}
   soundLooping: {fileID: 1373592918203608430}
   soundPickup: {fileID: 6349061181532728397}
   readAudioSource: {fileID: 7162857023526017502}

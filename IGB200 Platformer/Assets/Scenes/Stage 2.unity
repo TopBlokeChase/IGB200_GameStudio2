@@ -413,7 +413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72843901}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11, y: -0.65, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -512,13 +512,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.8
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.048648648
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -552,7 +561,7 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 0
+    numCapVertices: 5
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
@@ -718,9 +727,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3240454423615915269, guid: 084a6e86d863fc14eb21d9441254d799, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.22000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240454423615915269, guid: 084a6e86d863fc14eb21d9441254d799, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.049999237
+      objectReference: {fileID: 0}
     - target: {fileID: 4073579348569802327, guid: 084a6e86d863fc14eb21d9441254d799, type: 3}
       propertyPath: m_Name
       value: Boss_ParticleFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307031800309374708, guid: 084a6e86d863fc14eb21d9441254d799, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.22000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 6307031800309374708, guid: 084a6e86d863fc14eb21d9441254d799, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.049999237
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 084a6e86d863fc14eb21d9441254d799, type: 3}
@@ -4991,6 +5016,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 5.938091
       objectReference: {fileID: 0}
+    - target: {fileID: 3998389360936374470, guid: e3cea7b70b227c144bd656e14886a401, type: 3}
+      propertyPath: parallaxEffectMultiplier.x
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6806293011911189146, guid: e3cea7b70b227c144bd656e14886a401, type: 3}
       propertyPath: m_Size.x
       value: 210
@@ -5336,6 +5365,7 @@ MonoBehaviour:
   NOTE: This script was attached to the sprite object rather than the parent due
     to needing access to the public method for animation events.
   canThrowHammer: 1
+  canUseMeleeRepair: 1
   particleCourageNote: {fileID: 1909149245}
   health: {fileID: 501859772}
   deathScreenDelayTime: 2.5
@@ -9308,6 +9338,10 @@ PrefabInstance:
     - target: {fileID: 4785987307298926, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_Name
       value: NoteOfCourage
+      objectReference: {fileID: 0}
+    - target: {fileID: 174489377417834213, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
+      propertyPath: level
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3884296824917072633, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_RootOrder
@@ -23979,7 +24013,7 @@ MonoBehaviour:
   laserAttackRotateSpeed: 3
   laserAttackBeamRetractSpeed: 0.25
   laserAttackRotateBackSpeed: 0.5
-  bloomAmount: 25
+  bloomAmount: 7
   hotSizeChangeDuration: 5
   hotSizeChangeEndMultiplier: 1.33
   hotAttackDownDuration: 3
@@ -24159,6 +24193,10 @@ PrefabInstance:
     - target: {fileID: 4785987307298926, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_Name
       value: NoteOfCourage (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 174489377417834213, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
+      propertyPath: level
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3884296824917072633, guid: 56b2a31495dd1c74fa1ef3e4c515b192, type: 3}
       propertyPath: m_RootOrder
@@ -27634,6 +27672,10 @@ PrefabInstance:
     - target: {fileID: 3124575402158390833, guid: e17aabe31a364bf409d47baede9ba7a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6156211181467286514, guid: e17aabe31a364bf409d47baede9ba7a0, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7294118
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e17aabe31a364bf409d47baede9ba7a0, type: 3}
