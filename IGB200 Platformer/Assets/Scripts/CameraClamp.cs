@@ -40,7 +40,9 @@ public class CameraClamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 position = new Vector3(cameraTrigger.transform.position.x, cameraTrigger.transform.position.x, -10);
+        Vector3 position = new Vector3(cameraTrigger.transform.position.x,
+                                        cameraTrigger.transform.position.y,
+                                        -10);
         if (followX)
         {
             position.x = Mathf.Clamp(player.transform.position.x + xOffset,

@@ -70,8 +70,8 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("playerisDead " + playerIsDead);
-        Debug.Log("Dead status "+hasSetDeadStatus);
+        //Debug.Log("playerisDead " + playerIsDead);
+        //Debug.Log("Dead status "+hasSetDeadStatus);
         if (!playerMovement.isInteracting && !playerIsDead)
         {
             CheckInput();

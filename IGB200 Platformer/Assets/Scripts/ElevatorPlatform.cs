@@ -117,6 +117,19 @@ public class ElevatorPlatform : MonoBehaviour
         moving =  true;
     }
 
+    public void Reset()
+    {
+        if (!hasPlayedInitialSound)
+        {
+            startStopSoundSource.Play();
+            loopingSoundSource.Play();
+            hasPlayedInitialSound = true;
+        }
+
+        atEndPostion = true;
+        moving = true;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
